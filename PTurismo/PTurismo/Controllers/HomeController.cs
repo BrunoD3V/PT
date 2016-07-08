@@ -3,14 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PTurismo.Models;
+using PTurismo.DAL;
+
 
 namespace PTurismo.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+
+        private PastoralContext db = new PastoralContext();
+        public ActionResult Index(bool? fitToMarkersBounds)
         {
-            return View();
+
+          
+
+            var data = from p in db.Poi
+                select p;
+            this.ViewData["FitToMarkersBounds"] = fitToMarkersBounds ?? true;
+            ViewData["Pois"] = data;
+            return View(data.ToList());
         }
 
         public ActionResult About()
@@ -26,5 +38,7 @@ namespace PTurismo.Controllers
 
             return View();
         }
+
+       
     }
 }
