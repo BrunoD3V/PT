@@ -22,10 +22,13 @@
 <table class="table">
     <tr>
         <th>
+            Elemento
+        </th>
+        <th>
             @Html.ActionLink("Tipo de Media", "Index", new { sortOrder = ViewBag.TipoMediaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Legenda
+            @Html.ActionLink("Legenda", "Index", new { sortOrder = ViewBag.LegendaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             Diretório do Ficheiro
@@ -36,6 +39,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Elemento.nome)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.tipoMedia)
         </td>
         <td>
@@ -45,8 +51,8 @@
             @Html.DisplayFor(modelItem => item.media)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.GaleriaElementoID }) |
-            @Html.ActionLink("Detalhes", "Details", new { id=item.GaleriaElementoID }) |
+            @Html.ActionLink("Editar", "Edit", new { id=item.GaleriaElementoID }) <br />
+            @Html.ActionLink("Detalhes", "Details", new { id=item.GaleriaElementoID }) <br />
             @Html.ActionLink("Eliminar", "Delete", new { id=item.GaleriaElementoID })
         </td>
     </tr>
