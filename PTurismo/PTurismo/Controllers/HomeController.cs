@@ -13,7 +13,7 @@ namespace PTurismo.Controllers
     {
 
         private PastoralContext db = new PastoralContext();
-        public ActionResult Index(bool? fitToMarkersBounds)
+        public ActionResult Index(bool? fitToMarkersBounds, bool? clickable, bool? draggable)
         {
 
           
@@ -21,6 +21,8 @@ namespace PTurismo.Controllers
             var data = from p in db.Poi
                 select p;
             this.ViewData["FitToMarkersBounds"] = fitToMarkersBounds ?? true;
+            this.ViewData["clickable"] = clickable ?? true;
+            this.ViewData["draggable"] = draggable ?? true;
             ViewData["Pois"] = data;
             return View(data.ToList());
         }
