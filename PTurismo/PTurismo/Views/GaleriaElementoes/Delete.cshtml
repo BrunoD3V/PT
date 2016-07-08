@@ -1,18 +1,18 @@
 ﻿@model PTurismo.Models.GaleriaElemento
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Apagar";
 }
 
-<h2>Delete</h2>
+<h2>Apagar</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Têm a certeza que pretende eliminar?</h3>
 <div>
     <h4>GaleriaElemento</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Elemento.nome)
+            Nome:
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.media)
+            Media:
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.legenda)
+            Legenda:
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.tipoMedia)
+            Tipo media:
         </dt>
 
         <dd>
@@ -49,8 +49,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Apagar" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar à lista", "Index")
         </div>
     }
 </div>

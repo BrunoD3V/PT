@@ -1,17 +1,17 @@
 ﻿@model PTurismo.Models.Elemento
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes";
 }
 
-<h2>Details</h2>
+<h2>Detalhes</h2>
 
 <div>
     <h4>Elemento</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.poi)
+            Poi:
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.nome)
+            Nome:
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.descricao)
+            Descrição:
         </dt>
 
         <dd>
@@ -35,14 +35,14 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.imagem)
+            Imagem:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.imagem)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.galeriaElemento)
+            Galeria elemento:
         </dt>
         <dd>
             <table class="table">
@@ -63,6 +63,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ElementoID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ElementoID }) |
+    @Html.ActionLink("Voltar à lista", "Index")
 </p>
