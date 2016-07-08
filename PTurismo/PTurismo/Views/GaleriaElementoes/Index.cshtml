@@ -18,6 +18,7 @@
         Procurar por Tipo de Media/Legenda: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Procurar" class="btn btn-danger" />
     </p>
+    <hr />
 }
 <table class="table">
     <tr>
@@ -25,10 +26,10 @@
             Elemento
         </th>
         <th>
-            @Html.ActionLink("Tipo Media:", "Index", new { sortOrder = ViewBag.TipoMediaSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Tipo Media", "Index", new { sortOrder = ViewBag.TipoMediaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Legenda:", "Index", new { sortOrder = ViewBag.LegendaSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Legenda", "Index", new { sortOrder = ViewBag.LegendaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             Diretório do Ficheiro

@@ -1,28 +1,39 @@
-﻿@model IEnumerable<PTurismo.Models.GaleriaPoi>
+﻿@model PagedList.IPagedList<PTurismo.Models.GaleriaPoi>
+@using PagedList.Mvc;
 
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Galeria do Poi";
 }
 
-<h2>Index</h2>
+<h2>Galeria do Poi</h2>
 
 <p>
     @Html.ActionLink("Criar novo", "Create")
 </p>
+@using (Html.BeginForm("Index", "GaleriaPois", FormMethod.Get))
+{
+    <p>
+        Procurar por Tipo de Media/Legenda: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Procurar" class="btn btn-danger" />
+    </p>
+    <hr />
+}
 <table class="table">
     <tr>
         <th>
             Poi
         </th>
         <th>
-            Media
+            @Html.ActionLink("Tipo Media", "Index", new { sortOrder = ViewBag.TipoMediaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Legenda
+            @Html.ActionLink("Legenda", "Index", new { sortOrder = ViewBag.LegendaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Tipo media
+            Diretório do Ficheiro
         </th>
+        
         <th></th>
     </tr>
 
@@ -32,13 +43,13 @@
             @Html.DisplayFor(modelItem => item.Poi.nome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.media)
+            @Html.DisplayFor(modelItem => item.tipoMedia)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.legenda)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.tipoMedia)
+            @Html.DisplayFor(modelItem => item.media)
         </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.GaleriaPoiID }) <br />
@@ -49,3 +60,6 @@
 }
 
 </table>
+<br />
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
