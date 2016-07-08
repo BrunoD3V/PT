@@ -21,6 +21,7 @@ namespace PTurismo.Controllers
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.TipoMediaSortParm = String.IsNullOrEmpty(sortOrder) ? "tipoMedia_desc" : "";
+            ViewBag.LegendaSortParm = sortOrder == "Legenda" ? "legenda_desc" : "Legenda";
 
             if (searchString != null)
             {
@@ -46,6 +47,12 @@ namespace PTurismo.Controllers
                 case "tipoMedia_desc":
                     galeriasElementos = galeriasElementos.OrderByDescending(g => g.tipoMedia);
                     break;
+                case "Legenda":
+                    galeriasElementos = galeriasElementos.OrderBy(c => c.legenda);
+                    break;
+                case "legenda_desc":
+                    galeriasElementos = galeriasElementos.OrderByDescending(c => c.legenda);
+                    break;
                 default:
                     galeriasElementos = galeriasElementos.OrderBy(g => g.tipoMedia);
                     break;
@@ -54,6 +61,7 @@ namespace PTurismo.Controllers
 
             int pageSize = 5;
             int pageNumber = (page ?? 1);
+            galeriasElementos = galeriasElementos.Include(g => g.Elemento);
 
             return View(galeriasElementos.ToPagedList(pageNumber, pageSize));
         }
@@ -70,6 +78,7 @@ namespace PTurismo.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(galeriaElemento);
         }
 
