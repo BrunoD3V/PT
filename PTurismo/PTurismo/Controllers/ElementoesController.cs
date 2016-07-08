@@ -52,7 +52,6 @@ namespace PTurismo.Controllers
             int pageNumber = (page ?? 1);
             elementos = elementos.Include(e => e.poi);
 
-            var elemento = db.Elemento.Include(e => e.poi);
             return View(elementos.ToPagedList(pageNumber, pageSize));
         }
 

@@ -22,10 +22,13 @@
 <table class="table">
     <tr>
         <th>
+            Elemento
+        </th>
+        <th>
             @Html.ActionLink("Tipo de Media", "Index", new { sortOrder = ViewBag.TipoMediaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Legenda
+            @Html.ActionLink("Legenda", "Index", new { sortOrder = ViewBag.LegendaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             Diretório do Ficheiro
@@ -35,6 +38,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Elemento.nome)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.tipoMedia)
         </td>
@@ -54,5 +60,5 @@
 
 </table>
 <br />
-Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
