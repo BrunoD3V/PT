@@ -74,6 +74,7 @@ namespace PTurismo.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             GaleriaElemento galeriaElemento = db.GaleriaElemento.Find(id);
+        
             if (galeriaElemento == null)
             {
                 return HttpNotFound();
