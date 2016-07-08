@@ -1,5 +1,6 @@
 ﻿@using Jmelosegui.Mvc.GoogleMap
 @model IEnumerable<PTurismo.Models.Poi>
+
 @{
     ViewBag.Title = "Home Page";
 }
@@ -15,6 +16,8 @@
               .ApiKey("AIzaSyAYC419uGMGyG-Lhc5gPRxzRm1q2Uu1b-4")
               .Center(c => c.Latitude(41.130325).Longitude(-7.097716))
               .FitToMarkersBounds((bool)ViewData["FitToMarkersBounds"])
+              
+              .Draggable((bool)ViewData["draggable"])
               .Markers(m =>
               {
 
