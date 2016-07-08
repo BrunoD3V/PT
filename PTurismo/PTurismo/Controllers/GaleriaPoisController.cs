@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PTurismo.DAL;
 using PTurismo.Models;
+using PagedList;
 
 namespace PTurismo.Controllers
 {
@@ -16,10 +17,53 @@ namespace PTurismo.Controllers
         private PastoralContext db = new PastoralContext();
 
         // GET: GaleriaPois
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var galeriaPoi = db.GaleriaPoi.Include(g => g.Poi);
-            return View(galeriaPoi.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.TipoMediaSortParm = String.IsNullOrEmpty(sortOrder) ? "tipoMedia_desc" : "";
+            ViewBag.LegendaSortParm = sortOrder == "Legenda" ? "legenda_desc" : "Legenda";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var galeriasPois = from g in db.GaleriaPoi
+                               select g;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                galeriasPois = galeriasPois.Where(g => g.legenda.Contains(searchString) || g.tipoMedia.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "tipoMedia_desc":
+                    galeriasPois = galeriasPois.OrderByDescending(g => g.tipoMedia);
+                    break;
+                case "Legenda":
+                    galeriasPois = galeriasPois.OrderBy(c => c.legenda);
+                    break;
+                case "legenda_desc":
+                    galeriasPois = galeriasPois.OrderByDescending(c => c.legenda);
+                    break;
+                default:
+                    galeriasPois = galeriasPois.OrderBy(g => g.tipoMedia);
+                    break;
+
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            galeriasPois = galeriasPois.Include(g => g.Poi);
+
+            return View(galeriasPois.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: GaleriaPois/Details/5
