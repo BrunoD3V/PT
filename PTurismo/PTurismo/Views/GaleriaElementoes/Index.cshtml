@@ -25,10 +25,10 @@
             Elemento
         </th>
         <th>
-            @Html.ActionLink("Tipo de Media", "Index", new { sortOrder = ViewBag.TipoMediaSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Tipo Media:", "Index", new { sortOrder = ViewBag.TipoMediaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Legenda", "Index", new { sortOrder = ViewBag.LegendaSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Legenda:", "Index", new { sortOrder = ViewBag.LegendaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             Diretório do Ficheiro
@@ -60,5 +60,5 @@
 
 </table>
 <br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

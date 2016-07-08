@@ -1,10 +1,10 @@
 ﻿@model PTurismo.Models.GaleriaPoi
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Criar";
 }
 
-<h2>Create</h2>
+<h2>Criar</h2>
 
 
 @using (Html.BeginForm()) 
@@ -16,7 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.PoiID, "PoiID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PoiID, "PoiID:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("PoiID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PoiID, "", new { @class = "text-danger" })
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.media, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.media, "Media:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.media, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.media, "", new { @class = "text-danger" })
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.legenda, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.legenda, "Legenda:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.legenda, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.legenda, "", new { @class = "text-danger" })
@@ -40,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.tipoMedia, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.tipoMedia, "Tipo media:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.tipoMedia, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.tipoMedia, "", new { @class = "text-danger" })
@@ -49,14 +49,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Criar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar à lista", "Index")
 </div>
 
 @section Scripts {
