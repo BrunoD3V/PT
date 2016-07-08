@@ -7,25 +7,30 @@
 
 
 <div class="row">
-    <div class="col-md-12">
-        @(Html.GoogleMap()
+    <div class="container-fluid">
+        <div class="col-md-6">
+            @(Html.GoogleMap()
               .Name("map")
               .Height(800)
               .ApiKey("AIzaSyAYC419uGMGyG-Lhc5gPRxzRm1q2Uu1b-4")
-              .Center(c =>c.Latitude(41.589282).Longitude(-6.924816))
+              .Center(c => c.Latitude(41.130325).Longitude(-7.097716))
               .FitToMarkersBounds((bool)ViewData["FitToMarkersBounds"])
               .Markers(m =>
               {
-                  
+
                   foreach (var p in Model)
                   {
                       m.Add().Latitude(p.latitude).Longitude(p.longitude);
-                   
+
                   }
               })
-              .MarkerEvents(events => events.OnMarkerClick("markerClick"))
-        )
+            )
+        </div>
+        <div class="col-md-6">
+            Descrever
+        </div>
     </div>
+
 </div>
 
 @section scripts
