@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Criar novo", "Create")
 </p>
 <table class="table">
     <tr>
@@ -41,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.tipoMedia)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.GaleriaPoiID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.GaleriaPoiID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.GaleriaPoiID })
+            @Html.ActionLink("Editar", "Edit", new { id=item.GaleriaPoiID }) <br />
+            @Html.ActionLink("Detalhes", "Details", new { id=item.GaleriaPoiID }) <br />
+            @Html.ActionLink("Apagar", "Delete", new { id=item.GaleriaPoiID })
         </td>
     </tr>
 }

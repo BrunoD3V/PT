@@ -45,8 +45,8 @@
             @Html.DisplayFor(modelItem => item.media)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.GaleriaElementoID }) |
-            @Html.ActionLink("Detalhes", "Details", new { id=item.GaleriaElementoID }) |
+            @Html.ActionLink("Editar", "Edit", new { id=item.GaleriaElementoID }) <br />
+            @Html.ActionLink("Detalhes", "Details", new { id=item.GaleriaElementoID }) <br />
             @Html.ActionLink("Eliminar", "Delete", new { id=item.GaleriaElementoID })
         </td>
     </tr>
@@ -54,5 +54,5 @@
 
 </table>
 <br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
