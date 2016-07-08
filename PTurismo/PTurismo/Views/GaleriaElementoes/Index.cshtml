@@ -1,0 +1,58 @@
+﻿@model PagedList.IPagedList<PTurismo.Models.GaleriaElemento>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Galeria de Elementos";
+}
+
+<h2>Galeria de Elementos</h2>
+
+<p>
+    @Html.ActionLink("Criar Novo", "Create")
+</p>
+@using (Html.BeginForm("Index", "GaleriaElementoes", FormMethod.Get))
+{
+    <p>
+        Procurar por Tipo de Media/Legenda: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Procurar" class="btn btn-danger" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Tipo de Media", "Index", new { sortOrder = ViewBag.TipoMediaSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Legenda
+        </th>
+        <th>
+            Diretório do Ficheiro
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipoMedia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.legenda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.media)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.GaleriaElementoID }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.GaleriaElementoID }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.GaleriaElementoID })
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

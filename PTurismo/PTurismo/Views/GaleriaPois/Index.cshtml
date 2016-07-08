@@ -1,0 +1,51 @@
+﻿@model IEnumerable<PTurismo.Models.GaleriaPoi>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Poi.nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.media)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.legenda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipoMedia)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Poi.nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.media)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.legenda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipoMedia)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.GaleriaPoiID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GaleriaPoiID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GaleriaPoiID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,111 @@
+﻿@model PTurismo.Models.Poi
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Poi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.categoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.categoria.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imagem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imagem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.resumo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resumo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.elementos)
+        </dt>
+
+        <dd>
+           <table class="table">
+               <tr>
+                   <th>Elemento</th>
+               </tr>
+               @foreach (var item in Model.elementos)
+               {
+                   <tr>
+                       <td>
+                           @Html.DisplayFor(modelItem => item.nome)
+                       </td>
+                   </tr>
+               }
+           </table>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.galeriaPoi)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Galeria</th>
+                </tr>
+                @foreach (var item in Model.galeriaPoi)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.legenda)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PoiID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
