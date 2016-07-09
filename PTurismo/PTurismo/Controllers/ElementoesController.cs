@@ -59,7 +59,7 @@ namespace PTurismo.Controllers
 
             }
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
 
             elementos = elementos.Include(e => e.poi);
