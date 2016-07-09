@@ -1,10 +1,10 @@
 ﻿@model PTurismo.Models.Categoria
 
 @{
-    ViewBag.Title = "Apagar";
+    ViewBag.Title = "Eliminar";
 }
 
-<h2>Apagar</h2>
+<h2>Eliminar</h2>
 
 <h3>Tem a certeza que pretender eliminar o ficheiro?</h3>
 <div>
@@ -33,7 +33,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Apagar" class="btn btn-default" /> |
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
             @Html.ActionLink("Voltar à lista", "Index")
         </div>
     }

@@ -9,7 +9,7 @@
 <h2>Galeria do Poi</h2>
 
 <p>
-    @Html.ActionLink("Criar novo", "Create")
+    @Html.ActionLink("Criar Novo", "Create")
 </p>
 @using (Html.BeginForm("Index", "GaleriaPois", FormMethod.Get))
 {
@@ -54,7 +54,7 @@
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.GaleriaPoiID }) <br />
             @Html.ActionLink("Detalhes", "Details", new { id=item.GaleriaPoiID }) <br />
-            @Html.ActionLink("Apagar", "Delete", new { id=item.GaleriaPoiID })
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.GaleriaPoiID })
         </td>
     </tr>
 }

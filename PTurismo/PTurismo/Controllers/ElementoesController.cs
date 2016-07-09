@@ -21,6 +21,7 @@ namespace PTurismo.Controllers
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.PoiSortParm = sortOrder == "Poi" ? "poi_desc" : "Poi";
 
             if (searchString != null)
             {
@@ -32,11 +33,13 @@ namespace PTurismo.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
+
             var elementos = from e in db.Elemento
-                            select e;
+                       select e;
+
             if (!String.IsNullOrEmpty(searchString))
             {
-                elementos = elementos.Where(e => e.nome.Contains(searchString));
+                elementos = elementos.Where(e => e.nome.Contains(searchString) || e.poi.nome.Contains(searchString));
             }
 
             switch (sortOrder)
@@ -44,12 +47,21 @@ namespace PTurismo.Controllers
                 case "name_desc":
                     elementos = elementos.OrderByDescending(e => e.nome);
                     break;
+                case "Categoria":
+                    elementos = elementos.OrderBy(e => e.poi.nome);
+                    break;
+                case "categoria_desc":
+                    elementos = elementos.OrderByDescending(e => e.poi.nome);
+                    break;
                 default:
                     elementos = elementos.OrderBy(e => e.nome);
                     break;
+
             }
+
             int pageSize = 3;
             int pageNumber = (page ?? 1);
+
             elementos = elementos.Include(e => e.poi);
 
             return View(elementos.ToPagedList(pageNumber, pageSize));
@@ -90,7 +102,7 @@ namespace PTurismo.Controllers
                 {
                     db.Elemento.Add(elemento);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Create","GaleriaElementoes");
                 }
             }
             catch (DataException)

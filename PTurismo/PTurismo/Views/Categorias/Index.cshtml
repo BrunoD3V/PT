@@ -12,11 +12,11 @@
 <p>
     @Html.ActionLink("Criar novo", "Create")
 </p>
-@using (Html.BeginForm("Index", "Categoria", FormMethod.Get))
+@using (Html.BeginForm("Index", "Categorias", FormMethod.Get))
 {
     <p>
         Procurar por nome: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Procurar"/> 
+        <input type="submit" value="Procurar" class="btn btn-danger"/> 
     </p>
 }
 
@@ -42,7 +42,7 @@
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.CategoriaID }) <br />
             @Html.ActionLink("Detalhes", "Details", new { id=item.CategoriaID }) <br />
-            @Html.ActionLink("Apagar", "Delete", new { id=item.CategoriaID })
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.CategoriaID })
         </td>
     </tr>
 }

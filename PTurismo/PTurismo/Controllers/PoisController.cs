@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using PTurismo.DAL;
 using PTurismo.Models;
 using System.Data.Entity.Infrastructure;
+using PagedList;
 
 namespace PTurismo.Controllers
 {
@@ -17,10 +18,54 @@ namespace PTurismo.Controllers
         private PastoralContext db = new PastoralContext();
 
         // GET: Pois
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var poi = db.Poi.Include(p => p.categoria);
-            return View(poi.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.CategoriaSortParm = sortOrder == "Categoria" ? "categoria_desc" : "Categoria";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var pois = from p in db.Poi
+                             select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                pois = pois.Where(c => c.nome.Contains(searchString) || c.categoria.nome.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    pois = pois.OrderByDescending(c => c.nome);
+                    break;
+                case "Categoria":
+                    pois = pois.OrderBy(c => c.categoria.nome);
+                    break;
+                case "categoria_desc":
+                    pois = pois.OrderByDescending(c => c.categoria.nome);
+                    break;
+                default:
+                    pois = pois.OrderBy(c => c.nome);
+                    break;
+
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            pois = pois.Include(p => p.categoria);
+
+            return View(pois.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Pois/Details/5
@@ -58,7 +103,7 @@ namespace PTurismo.Controllers
                 {
                     db.Poi.Add(poi);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Create","GaleriaPois");
                 }
             }
             catch (RetryLimitExceededException)

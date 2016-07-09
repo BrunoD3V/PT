@@ -1,21 +1,30 @@
-﻿@model IEnumerable<PTurismo.Models.Poi>
+﻿@model PagedList.IPagedList<PTurismo.Models.Poi>
+@using PagedList.Mvc;
 
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pois";
 }
 
-<h2>Index</h2>
+<h2>Pontos de Interesse</h2>
 
 <p>
     @Html.ActionLink("Criar Novo", "Create")
 </p>
+@using (Html.BeginForm("Index", "Pois", FormMethod.Get))
+{
+    <p>
+        Procurar por Nome ou Categoria: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Procurar" class="btn btn-danger" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            Categoria
+            @Html.ActionLink("Categoria", "Index", new { sortOrder = ViewBag.CategoriaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Nome
+            @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             Latitude
@@ -67,3 +76,7 @@
 }
 
 </table>
+<br />
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

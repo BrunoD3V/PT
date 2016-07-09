@@ -1,21 +1,31 @@
-﻿@model IEnumerable<PTurismo.Models.Elemento>
+﻿@model PagedList.IPagedList<PTurismo.Models.Elemento>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Elementos";
 }
 
-<h2>Index</h2>
+<h2>Elementos</h2>
 
 <p>
-    @Html.ActionLink("Criar novo", "Create")
+    @Html.ActionLink("Criar Novo", "Create")
 </p>
+@using (Html.BeginForm("Index", "Elementoes", FormMethod.Get))
+{
+    <p>
+        Procurar por Nome do Elemento ou Nome do Poi: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Procurar" class="btn btn-danger" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            Poi
+            @Html.ActionLink("Poi", "Index", new { sortOrder = ViewBag.PoiSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Nome
+            @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             Descrição
@@ -43,9 +53,13 @@
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.ElementoID }) <br />
             @Html.ActionLink("Detalhes", "Details", new { id=item.ElementoID }) <br />
-            @Html.ActionLink("Apagar", "Delete", new { id=item.ElementoID })
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ElementoID })
         </td>
     </tr>
 }
 
 </table>
+<br />
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
