@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace PTurismo.Models
 {
@@ -11,6 +12,7 @@ namespace PTurismo.Models
         public virtual int CategoriaID { get; set; }
         public virtual string nome { get; set; }
         public virtual string genero { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Poi> Poi { get; set; }
         
     }

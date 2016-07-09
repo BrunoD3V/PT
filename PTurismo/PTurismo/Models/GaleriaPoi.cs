@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace PTurismo.Models
 {
@@ -12,6 +13,7 @@ namespace PTurismo.Models
         public virtual string Legenda { get; set; }
         public virtual int PoiID { get; set; }
         public virtual Poi Poi { get; set; }
+        [JsonIgnore]
         public virtual ICollection<FilePathPoi> FilePaths { get; set; }
 
     }

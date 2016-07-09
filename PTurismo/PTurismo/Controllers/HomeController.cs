@@ -23,7 +23,7 @@ namespace PTurismo.Controllers
             this.ViewData["clickable"] = clickable ?? true;
             this.ViewData["draggable"] = draggable ?? true;
             ViewData["Pois"] = data;
-            return View(new PoiViewModel(data));
+            return View(new MapaViewModel());
         }
 
         public ActionResult About()

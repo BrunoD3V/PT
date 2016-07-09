@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace PTurismo.Models
 {
@@ -14,6 +15,7 @@ namespace PTurismo.Models
         public string Descricao { get; set; }
         public FileType FileType { get; set; }
         public int GaleriaPoiID { get; set; }
+        [JsonIgnore]
         public virtual GaleriaPoi GaleriaPoi { get; set; }
     }
 }

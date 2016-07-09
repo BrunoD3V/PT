@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace PTurismo.Models
 {
@@ -13,6 +14,7 @@ namespace PTurismo.Models
         public virtual string descricao { get; set; }
         public virtual string imagem { get; set; }
         public virtual Poi poi { get; set; }
+        [JsonIgnore]
         public virtual ICollection<GaleriaElemento> galeriaElemento { get; set; }
     }
 }

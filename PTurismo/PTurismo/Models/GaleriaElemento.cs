@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace PTurismo.Models
 {
@@ -12,6 +13,7 @@ namespace PTurismo.Models
         public virtual string media { get; set; }
         public virtual string legenda { get; set; }
         public virtual string tipoMedia { get; set; }
+        [JsonIgnore]
         public virtual Elemento Elemento { get; set; }
     }
 }
