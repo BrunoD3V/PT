@@ -1,5 +1,7 @@
 ﻿@using Jmelosegui.Mvc.GoogleMap
-@model IEnumerable<PTurismo.Models.Poi>
+@using PTurismo.Helpers
+@using System.Web.Script.Serialization;
+@model PTurismo.ViewModels.PoiViewModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -21,16 +23,17 @@
               .Markers(m =>
               {
 
-                  foreach (var p in Model)
+                  foreach (var p in Model.Pois)
                   {
                       m.Add().Latitude(p.latitude).Longitude(p.longitude);
 
                   }
               })
+              .MarkerEvents(events => events.OnMarkerClick("markerClick"))
             )
         </div>
-        <div class="col-md-6">
-            Descrever
+        <div id ="Descricao" class="col-md-6">
+           
         </div>
     </div>
 
@@ -39,4 +42,21 @@
 @section scripts
 {
     @(Html.GoogleMap().ScriptRegistrar())
+    <script type="text/javascript">
+        var pois = @JavaScriptConvert.SerializeObject(@Model.Pois);
+        
+        
+        function markerClick(args) {
+
+            if (args.eventName === 'click') {
+                
+
+                $('#Descricao').html(pois[args.id].nome);
+                alert(pois[args.id].nome);
+            }
+
+        }
+
+
+    </script>
 }

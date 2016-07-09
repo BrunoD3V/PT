@@ -7,10 +7,12 @@ namespace PTurismo.Models
 {
     public class GaleriaPoi
     {
-        public int GaleriaPoiID { get; set; }
-        public string Legenda { get; set; }
-        public int PoiID { get; set; }
+
+        public virtual int GaleriaPoiID { get; set; }
+        public virtual string Legenda { get; set; }
+        public virtual int PoiID { get; set; }
         public virtual Poi Poi { get; set; }
         public virtual ICollection<FilePathPoi> FilePaths { get; set; }
+
     }
 }

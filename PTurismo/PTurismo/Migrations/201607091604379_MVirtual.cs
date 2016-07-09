@@ -3,7 +3,7 @@ namespace PTurismo.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CreatingNewDataBase : DbMigration
+    public partial class MVirtual : DbMigration
     {
         public override void Up()
         {
@@ -67,42 +67,27 @@ namespace PTurismo.Migrations
                 c => new
                     {
                         GaleriaPoiID = c.Int(nullable: false, identity: true),
-                        Legenda = c.String(unicode: false),
                         PoiID = c.Int(nullable: false),
+                        media = c.String(unicode: false),
+                        legenda = c.String(unicode: false),
+                        tipoMedia = c.String(unicode: false),
                     })
                 .PrimaryKey(t => t.GaleriaPoiID)
                 .ForeignKey("dbo.Poi", t => t.PoiID, cascadeDelete: true)
                 .Index(t => t.PoiID);
-            
-            CreateTable(
-                "dbo.FilePathPoi",
-                c => new
-                    {
-                        FilePathPoiID = c.Int(nullable: false, identity: true),
-                        FileName = c.String(maxLength: 255, storeType: "nvarchar"),
-                        Descricao = c.String(unicode: false),
-                        FileType = c.Int(nullable: false),
-                        GaleriaPoiID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.FilePathPoiID)
-                .ForeignKey("dbo.GaleriaPoi", t => t.GaleriaPoiID, cascadeDelete: true)
-                .Index(t => t.GaleriaPoiID);
             
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.GaleriaPoi", "PoiID", "dbo.Poi");
-            DropForeignKey("dbo.FilePathPoi", "GaleriaPoiID", "dbo.GaleriaPoi");
             DropForeignKey("dbo.Elemento", "PoiID", "dbo.Poi");
             DropForeignKey("dbo.GaleriaElemento", "ElementoID", "dbo.Elemento");
             DropForeignKey("dbo.Poi", "CategoriaID", "dbo.Categoria");
-            DropIndex("dbo.FilePathPoi", new[] { "GaleriaPoiID" });
             DropIndex("dbo.GaleriaPoi", new[] { "PoiID" });
             DropIndex("dbo.GaleriaElemento", new[] { "ElementoID" });
             DropIndex("dbo.Elemento", new[] { "PoiID" });
             DropIndex("dbo.Poi", new[] { "CategoriaID" });
-            DropTable("dbo.FilePathPoi");
             DropTable("dbo.GaleriaPoi");
             DropTable("dbo.GaleriaElemento");
             DropTable("dbo.Elemento");

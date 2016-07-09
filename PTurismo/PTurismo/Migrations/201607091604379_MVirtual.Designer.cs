@@ -7,13 +7,13 @@ namespace PTurismo.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreatingNewDataBase : IMigrationMetadata
+    public sealed partial class MVirtual : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreatingNewDataBase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(MVirtual));
         
         string IMigrationMetadata.Id
         {
-            get { return "201607091527408_CreatingNewDataBase"; }
+            get { return "201607091604379_MVirtual"; }
         }
         
         string IMigrationMetadata.Source
