@@ -198,13 +198,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607072231261_fixDatabase.cs" />
-    <Compile Include="Migrations\201607072231261_fixDatabase.Designer.cs">
-      <DependentUpon>201607072231261_fixDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\201607091527408_CreatingNewDataBase.cs" />
+    <Compile Include="Migrations\201607091527408_CreatingNewDataBase.Designer.cs">
+      <DependentUpon>201607091527408_CreatingNewDataBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Elemento.cs" />
+    <Compile Include="Models\FilePathElemento.cs" />
+    <Compile Include="Models\FilePathPoi.cs" />
+    <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\GaleriaElemento.cs" />
     <Compile Include="Models\GaleriaPoi.cs" />
     <Compile Include="Models\Poi.cs" />
@@ -293,6 +296,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
+    <Folder Include="Content\Videos\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
@@ -300,8 +304,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607072231261_fixDatabase.resx">
-      <DependentUpon>201607072231261_fixDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607091527408_CreatingNewDataBase.resx">
+      <DependentUpon>201607091527408_CreatingNewDataBase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

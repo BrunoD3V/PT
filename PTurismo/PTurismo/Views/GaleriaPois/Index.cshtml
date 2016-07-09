@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<PTurismo.Models.GaleriaPoi>
 @using PagedList.Mvc;
+@using PTurismo.Models;
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
@@ -14,7 +15,7 @@
 @using (Html.BeginForm("Index", "GaleriaPois", FormMethod.Get))
 {
     <p>
-        Procurar por Tipo de Media/Legenda: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        Procurar por Nome: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Procurar" class="btn btn-danger" />
     </p>
     <hr />
@@ -25,15 +26,14 @@
             Poi
         </th>
         <th>
-            @Html.ActionLink("Tipo Media", "Index", new { sortOrder = ViewBag.TipoMediaSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
             @Html.ActionLink("Legenda", "Index", new { sortOrder = ViewBag.LegendaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Diretório do Ficheiro
+            Preview
         </th>
-        
+        <th>
+            Ficheiro
+        </th>
         <th></th>
     </tr>
 
@@ -43,21 +43,28 @@
             @Html.DisplayFor(modelItem => item.Poi.nome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.tipoMedia)
+            @Html.DisplayFor(modelItem => item.Legenda)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.legenda)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.media)
-        </td>
+        @foreach (var items in item.FilePaths)
+        {
+            if (items.FileType == FileType.Photo)
+            {
+                <td>
+                    <div class="img-responsive text-center">
+                        <img src="~/Content/Images/@items.FileName" alt="" width="150" height="150"/>
+                    </div>
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => items.FileName)
+            </td>
+        }
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.GaleriaPoiID }) <br />
             @Html.ActionLink("Eliminar", "Delete", new { id=item.GaleriaPoiID })
         </td>
     </tr>
 }
-
 </table>
 <br />
 Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount

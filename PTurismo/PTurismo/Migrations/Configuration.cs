@@ -94,15 +94,16 @@ namespace PTurismo.Migrations
 
             galeriaElementos.ForEach(g => Context.GaleriaElemento.Add(g));
             Context.SaveChanges();
-
+            
             var galeriaPois = new List<GaleriaPoi>
             {
-                new GaleriaPoi {GaleriaPoiID=1, media="CatedralMiranda.mpeg", legenda="Video do Exterior da Catedral", tipoMedia="Video", PoiID=2 },
-                new GaleriaPoi {GaleriaPoiID=2, media="CatedralMirandaInterior.mpeg", legenda="Video do Interior da Catedral", tipoMedia="Video", PoiID=2 }
+                new GaleriaPoi {GaleriaPoiID=1, Legenda="Video do Exterior da Catedral",  PoiID=2 },
+                new GaleriaPoi {GaleriaPoiID=2, Legenda="Video do Interior da Catedral",  PoiID=2 }
             };
 
             galeriaPois.ForEach(p => Context.GaleriaPoi.Add(p));
             Context.SaveChanges();
+            
         }
     }
 }

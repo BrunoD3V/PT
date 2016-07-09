@@ -12,6 +12,6 @@ namespace PTurismo.Models
         public string media { get; set; }
         public string legenda { get; set; }
         public string tipoMedia { get; set; }
-        public Elemento Elemento { get; set; }
+        public virtual Elemento Elemento { get; set; }
     }
 }

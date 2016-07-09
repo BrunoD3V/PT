@@ -12,35 +12,18 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Media:
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.media)
-        </dd>
-
-        <dt>
             Legenda:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.legenda)
+            @Html.DisplayFor(model => model.Legenda)
         </dd>
-
-        <dt>
-            Tipo media:
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tipoMedia)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
+        <div class="form-actions">
             <input type="submit" value="Eliminar" class="btn btn-danger" /> |
             @Html.ActionLink("Voltar à lista", "Index")
         </div>

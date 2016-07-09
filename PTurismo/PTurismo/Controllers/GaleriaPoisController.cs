@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using PTurismo.DAL;
 using PTurismo.Models;
 using PagedList;
+using System.IO;
 
 namespace PTurismo.Controllers
 {
@@ -39,29 +40,26 @@ namespace PTurismo.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                galeriasPois = galeriasPois.Where(g => g.legenda.Contains(searchString) || g.tipoMedia.Contains(searchString));
+                galeriasPois = galeriasPois.Where(g => g.Legenda.Contains(searchString));
             }
 
             switch (sortOrder)
             {
-                case "tipoMedia_desc":
-                    galeriasPois = galeriasPois.OrderByDescending(g => g.tipoMedia);
-                    break;
+                
                 case "Legenda":
-                    galeriasPois = galeriasPois.OrderBy(c => c.legenda);
+                    galeriasPois = galeriasPois.OrderBy(c => c.Legenda);
                     break;
-                case "legenda_desc":
-                    galeriasPois = galeriasPois.OrderByDescending(c => c.legenda);
-                    break;
+                
                 default:
-                    galeriasPois = galeriasPois.OrderBy(g => g.tipoMedia);
+                    galeriasPois = galeriasPois.OrderBy(g => g.Legenda);
                     break;
 
             }
 
             int pageSize = 5;
             int pageNumber = (page ?? 1);
-            galeriasPois = galeriasPois.Include(g => g.Poi);
+            galeriasPois = galeriasPois.Include(g => g.Poi)
+                .Include(f => f.FilePaths);
 
             return View(galeriasPois.ToPagedList(pageNumber, pageSize));
         }
@@ -93,10 +91,21 @@ namespace PTurismo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GaleriaPoiID,PoiID,media,legenda,tipoMedia")] GaleriaPoi galeriaPoi)
+        public ActionResult Create([Bind(Include = "GaleriaPoiID,PoiID,media,legenda,tipoMedia")] GaleriaPoi galeriaPoi, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var file = new FilePathPoi
+                    {
+                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        FileType = FileType.Imagem
+                    };
+                    galeriaPoi.FilePaths = new List<FilePathPoi>();
+                    galeriaPoi.FilePaths.Add(file);
+                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images"), file.FileName));
+                }
                 db.GaleriaPoi.Add(galeriaPoi);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -127,10 +136,35 @@ namespace PTurismo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GaleriaPoiID,PoiID,media,legenda,tipoMedia")] GaleriaPoi galeriaPoi)
+        public ActionResult Edit([Bind(Include = "GaleriaPoiID,PoiID,media,legenda,tipoMedia")] GaleriaPoi galeriaPoi, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var file = new FilePathPoi();
+
+                    if (upload.ContentType == ".jpeg" || upload.ContentType == ".png")
+                    {
+                        file = new FilePathPoi
+                        {
+                            FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                            FileType = FileType.Imagem
+                        };
+                        upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images"), file.FileName));
+                    }else if (upload.ContentType == ".mpeg4")
+                    {
+                        file = new FilePathPoi
+                        {
+                            FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                            FileType = FileType.Video
+                        };
+                        upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Videos"), file.FileName));
+                    }
+                    galeriaPoi.FilePaths = new List<FilePathPoi>();
+                    galeriaPoi.FilePaths.Add(file);
+                }
+                //TODO: EDITAR-VER FOTOGRAFIA
                 db.Entry(galeriaPoi).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

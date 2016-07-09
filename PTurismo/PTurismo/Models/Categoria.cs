@@ -12,6 +12,6 @@ namespace PTurismo.Models
         public string nome { get; set; }
         public string genero { get; set; }
         public virtual ICollection<Poi> Poi { get; set; }
-        //TODO
+        
     }
 }

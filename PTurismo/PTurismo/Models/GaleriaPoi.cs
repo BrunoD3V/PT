@@ -8,10 +8,9 @@ namespace PTurismo.Models
     public class GaleriaPoi
     {
         public int GaleriaPoiID { get; set; }
+        public string Legenda { get; set; }
         public int PoiID { get; set; }
-        public string media { get; set; }
-        public string legenda { get; set; }
-        public string tipoMedia { get; set; }
-        public Poi Poi { get; set; }
+        public virtual Poi Poi { get; set; }
+        public virtual ICollection<FilePathPoi> FilePaths { get; set; }
     }
 }
