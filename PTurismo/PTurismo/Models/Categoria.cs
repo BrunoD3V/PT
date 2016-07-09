@@ -8,9 +8,9 @@ namespace PTurismo.Models
 {
     public class Categoria
     {
-        public int CategoriaID { get; set; }
-        public string nome { get; set; }
-        public string genero { get; set; }
+        public virtual int CategoriaID { get; set; }
+        public virtual string nome { get; set; }
+        public virtual string genero { get; set; }
         public virtual ICollection<Poi> Poi { get; set; }
         //TODO
     }

@@ -3,7 +3,7 @@ namespace PTurismo.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class fixDatabase : DbMigration
+    public partial class MVirtual : DbMigration
     {
         public override void Up()
         {

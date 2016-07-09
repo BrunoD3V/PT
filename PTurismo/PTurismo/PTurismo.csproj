@@ -109,8 +109,8 @@
       <HintPath>..\packages\MySql.Data.Entity.7.0.3-DMR\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -198,9 +198,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607072231261_fixDatabase.cs" />
-    <Compile Include="Migrations\201607072231261_fixDatabase.Designer.cs">
-      <DependentUpon>201607072231261_fixDatabase.cs</DependentUpon>
+    <Compile Include="Helpers\JavaScriptConvert.cs" />
+    <Compile Include="Migrations\201607091604379_MVirtual.cs" />
+    <Compile Include="Migrations\201607091604379_MVirtual.Designer.cs">
+      <DependentUpon>201607091604379_MVirtual.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categoria.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Models\GaleriaPoi.cs" />
     <Compile Include="Models\Poi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\PoiViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -298,8 +300,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607072231261_fixDatabase.resx">
-      <DependentUpon>201607072231261_fixDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607091604379_MVirtual.resx">
+      <DependentUpon>201607091604379_MVirtual.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

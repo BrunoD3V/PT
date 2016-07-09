@@ -7,11 +7,11 @@ namespace PTurismo.Models
 {
     public class GaleriaPoi
     {
-        public int GaleriaPoiID { get; set; }
-        public int PoiID { get; set; }
-        public string media { get; set; }
-        public string legenda { get; set; }
-        public string tipoMedia { get; set; }
-        public Poi Poi { get; set; }
+        public virtual int GaleriaPoiID { get; set; }
+        public virtual int PoiID { get; set; }
+        public virtual string media { get; set; }
+        public virtual string legenda { get; set; }
+        public virtual string tipoMedia { get; set; }
+        public virtual Poi Poi { get; set; }
     }
 }

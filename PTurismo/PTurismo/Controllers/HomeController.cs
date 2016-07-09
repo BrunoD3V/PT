@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PTurismo.Models;
 using PTurismo.DAL;
+using PTurismo.ViewModels;
 
 
 namespace PTurismo.Controllers
@@ -17,6 +18,7 @@ namespace PTurismo.Controllers
         {
 
           
+            var x = (db.Poi.Select(p => p));
 
             var data = from p in db.Poi
                 select p;
@@ -24,7 +26,7 @@ namespace PTurismo.Controllers
             this.ViewData["clickable"] = clickable ?? true;
             this.ViewData["draggable"] = draggable ?? true;
             ViewData["Pois"] = data;
-            return View(data.ToList());
+            return View(new PoiViewModel(data));
         }
 
         public ActionResult About()
@@ -36,9 +38,8 @@ namespace PTurismo.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            
+            return this.View();
         }
 
        
