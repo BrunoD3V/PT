@@ -11,10 +11,11 @@
 
 <div class="row">
     <div class="container-fluid">
+        <br />
         <div class="col-md-6">
             @(Html.GoogleMap()
               .Name("map")
-              .Height(800)
+              .Height(600)
               .ApiKey("AIzaSyAYC419uGMGyG-Lhc5gPRxzRm1q2Uu1b-4")
               .Center(c => c.Latitude(41.130325).Longitude(-7.097716))
               .FitToMarkersBounds((bool)ViewData["FitToMarkersBounds"])
@@ -32,14 +33,17 @@
               .MarkerEvents(events => events.OnMarkerClick("markerClick"))
             )
         </div>
-        <div id="NomePoi" class="col-md-6">
-
-        </div>
+        
         <div id="Categoria" class="col-md-6">
 
         </div>
-        <div id="Descricao" class="col-md-6">
+        
+        <div id="NomePoi" class="col-md-6">
 
+        </div>
+
+        <div id="Descricao" class="col-md-6">
+            
         </div>
       
 
@@ -60,10 +64,11 @@
             if (args.eventName === 'click') {
 
                 var catID = pois[args.id].CategoriaID;
-                $('#NomePoi').html(pois[args.id].nome);
-                $('#Descricao').html(pois[args.id].descricao);
-                $('#Categoria').html(categorias[catID-1].nome);
-                //alert(pois[args.id].nome);
+                $('#Categoria').html('<h2>'+categorias[catID-1].nome+'</h2>');
+                $('#NomePoi').html('<h1>'+pois[args.id].nome+'</h1>');
+                $('#Descricao').html('<h4>'+pois[args.id].descricao+'</h4>');
+                
+               //alert(pois[args.id].nome);
             }
 
         }
