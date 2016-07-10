@@ -1,6 +1,8 @@
-﻿@using Jmelosegui.Mvc.GoogleMap
+﻿@using System.Collections
+@using Jmelosegui.Mvc.GoogleMap
 @using PTurismo.Helpers
 @using System.Web.Script.Serialization
+@using PTurismo.Models
 @model PTurismo.ViewModels.MapaViewModel
 @Scripts.Render("~/Scripts/script.js")
 
@@ -47,9 +49,21 @@
             
         </div>
         <div id="Elemento" class="col-md-6">
-
+            @foreach (var g in Model.GaleriaPois)
+            {
+                try
+                {
+                    ICollection<FilePathPoi> fps = g.FilePaths;
+                    //TODO verificar como se acede a isto
+                }
+                catch (Exception)
+                {
+                    
+                }
+            }
         </div>
 
+      
 
        
     </div>
