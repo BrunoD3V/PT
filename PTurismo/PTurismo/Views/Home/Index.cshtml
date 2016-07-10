@@ -12,10 +12,11 @@
 
 <div class="row">
     <div class="container-fluid">
+        <br />
         <div class="col-md-6">
             @(Html.GoogleMap()
               .Name("map")
-              .Height(800)
+              .Height(600)
               .ApiKey("AIzaSyAYC419uGMGyG-Lhc5gPRxzRm1q2Uu1b-4")
               .Center(c => c.Latitude(41.130325).Longitude(-7.097716))
               .FitToMarkersBounds((bool)ViewData["FitToMarkersBounds"])
@@ -33,18 +34,22 @@
               .MarkerEvents(events => events.OnMarkerClick("markerClick"))
             )
         </div>
-        <div id="NomePoi" class="col-md-6">
-
-        </div>
+        
         <div id="Categoria" class="col-md-6">
 
         </div>
-        <div id="Descricao" class="col-md-6">
+        
+        <div id="NomePoi" class="col-md-6">
 
+        </div>
+
+        <div id="Descricao" class="col-md-6">
+            
         </div>
         <div id="Elemento" class="col-md-6">
 
         </div>
+
 
        
     </div>
@@ -104,6 +109,7 @@
                
 
                 //alert(pois[args.id].nome);
+
             }
 
         }
