@@ -7,13 +7,13 @@ namespace PTurismo.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class bdpastoral : IMigrationMetadata
+    public sealed partial class novopoi : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(bdpastoral));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(novopoi));
         
         string IMigrationMetadata.Id
         {
-            get { return "201607101331044_bdpastoral"; }
+            get { return "201607101545097_novopoi"; }
         }
         
         string IMigrationMetadata.Source

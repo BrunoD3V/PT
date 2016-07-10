@@ -29,6 +29,10 @@ namespace PTurismo.DAL
 
             var pois = new List<Poi>
             {
+                 new Poi { PoiID=0, nome="Igreja Matriz Vale de Salgueiro", CategoriaID = 1, latitude=41.590878, longitude=-7.235249,
+                    descricao ="Igreja descrita", imagem="https://pt.wikipedia.org/wiki/S%C3%A9_Velha_de_Bragan%C3%A7a#/media/File:Bragan%C3%A7a_Old_Cathedral.jpg",
+                    resumo = "Igreja resumida"},
+
                 new Poi { PoiID=1, nome="Sé Velha", CategoriaID = 2, latitude=41.805923, longitude=-6.756663,
                     descricao ="Sé Velha descrita", imagem="https://pt.wikipedia.org/wiki/S%C3%A9_Velha_de_Bragan%C3%A7a#/media/File:Bragan%C3%A7a_Old_Cathedral.jpg",
                     resumo = "Sé Velha resumida"},
