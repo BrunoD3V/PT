@@ -3,7 +3,7 @@ namespace PTurismo.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ficheiros : DbMigration
+    public partial class bdpastoral : DbMigration
     {
         public override void Up()
         {

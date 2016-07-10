@@ -199,9 +199,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\JavaScriptConvert.cs" />
-    <Compile Include="Migrations\201607091856278_ficheiros.cs" />
-    <Compile Include="Migrations\201607091856278_ficheiros.Designer.cs">
-      <DependentUpon>201607091856278_ficheiros.cs</DependentUpon>
+    <Compile Include="Migrations\201607101331044_bdpastoral.cs" />
+    <Compile Include="Migrations\201607101331044_bdpastoral.Designer.cs">
+      <DependentUpon>201607101331044_bdpastoral.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categoria.cs" />
@@ -306,8 +306,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607091856278_ficheiros.resx">
-      <DependentUpon>201607091856278_ficheiros.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607101331044_bdpastoral.resx">
+      <DependentUpon>201607101331044_bdpastoral.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
