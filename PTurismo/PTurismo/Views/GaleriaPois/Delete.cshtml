@@ -12,11 +12,24 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            Poi:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Poi.nome)
+            <hr />
+        </dd>
+        <dt>
             Legenda:
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Legenda)
+            <hr />
+        </dd>
+        <dt>
+            Ficheiro Media:
+        </dt>
+        <dd>
+            <img src="~/Content/Images/@Model.FilePaths.First().FileName" alt="" width="150" height="150" alt="Ficheiro Media" />
         </dd>
     </dl>
 
