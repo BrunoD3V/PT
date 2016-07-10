@@ -2,12 +2,30 @@
 @{
     ViewBag.Title = "Contactos";
 }
-<h2>@ViewBag.Title</h2>
 
-<br />
-<div class="row">
-    
-        <div class="col-md-6">
+<div class="page-header">
+    <h1>@ViewBag.Title <br/><small>Contacte o Riquinho a qualquer hora 910254845</small></h1>
+</div>
+
+
+<div class="row"> 
+    <div class="col-md-6">
+        <address>
+            <strong>Morada:</strong><br />
+            Serviço Diocesano da Pastoral do Turismo da Diocese de Bragança-Miranda<br />
+            S. D. da Pastoral Social e a Mobilidade Humana<br />
+            Casa Episcopal<br />
+            Rua Emídio Navarro, 2<br />
+            5300-210 Bragança<br />
+            <br />
+            <strong>E-mail:</strong><br />
+            geral@ptbm.pt<br />
+            <br />
+            <strong>Telef:</strong><br />
+            968 559 767<br />
+        </address>
+    </div>
+    <div class="col-md-6">
             @(
                 Html.GoogleMap()
                 .Name("map")
@@ -15,22 +33,5 @@
                 .Height(300)
                 .Center(c => c.Latitude(41.8065703).Longitude(-6.7575273))
             )
-        </div>
-        <div class="col-md-6">
-            <address>
-                <strong>Morada:</strong><br />
-                Serviço Diocesano da Pastoral do Turismo da Diocese de Bragança-Miranda<br />
-                S. D. da Pastoral Social e a Mobilidade Humana<br />
-                Casa Episcopal<br />
-                Rua Emídio Navarro, 2<br />
-                5300-210 Bragança<br />
-                <br />
-                <strong>E-mail:</strong><br />
-                geral@ptbm.pt<br />
-                <br />
-                <strong>Telef:</strong><br />
-                968 559 767<br />
-            </address>
-        </div>
     </div>
 </div>
