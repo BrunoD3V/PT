@@ -10,7 +10,6 @@
     ViewBag.Title = "Home Page";
 }
 
-
 <div class="row">
     <div class="container-fluid">
         <br />
@@ -25,7 +24,6 @@
               .Draggable((bool)ViewData["draggable"])
               .Markers(m =>
               {
-
                   foreach (var p in Model.Pois)
                   {
                       m.Add().Latitude(p.latitude).Longitude(p.longitude);
@@ -108,7 +106,7 @@
                
                 var catID = pois[args.id].CategoriaID;
                 
-                $('#NomePoi').html('<div> nome:'+pois[args.id].nome+'</div>');
+                $('#NomePoi').html(pois[args.id].nome);
                 $('#Descricao').html(pois[args.id].descricao);
                 $('#Categoria').html(categorias[catID-1].nome);
                 if (eles.length>1) {
