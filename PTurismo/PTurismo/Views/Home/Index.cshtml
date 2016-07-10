@@ -49,6 +49,7 @@
 
         </div>
 
+
        
     </div>
 
@@ -82,15 +83,14 @@
                 }
                
                 var catID = pois[args.id].CategoriaID;
-
+                
                 $('#Categoria').html('<h2>'+categorias[catID-1].nome+'</h2>');
                 $('#NomePoi').html('<h1>'+pois[args.id].nome+'</h1>');
                 $('#Descricao').html('<h4>'+pois[args.id].descricao+'</h4>');
                 
                //alert(pois[args.id].nome);
 
-                
-             
+ 
                /* if (eles!==null) {
                     eles = JSON.parse(eles);
                     $.each(eles,
