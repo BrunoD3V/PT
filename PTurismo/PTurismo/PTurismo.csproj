@@ -198,6 +198,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\JavaScriptConvert.cs" />
     <Compile Include="Migrations\201607101331044_bdpastoral.cs" />
     <Compile Include="Migrations\201607101331044_bdpastoral.Designer.cs">
