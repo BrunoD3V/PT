@@ -33,9 +33,11 @@ namespace PTurismo.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Contact(bool? fitToMarkersBounds, bool? clickable, bool? draggable)
         {
-            
+            this.ViewData["FitToMarkersBounds"] = fitToMarkersBounds ?? true;
+            this.ViewData["clickable"] = clickable ?? true;
+            this.ViewData["draggable"] = draggable ?? true;
             return this.View();
         }
 

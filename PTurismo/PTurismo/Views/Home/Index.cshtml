@@ -41,7 +41,9 @@
         <div id="Descricao" class="col-md-6">
 
         </div>
-      
+        <div id="Elemento" class="col-md-6">
+
+        </div>
 
        
     </div>
@@ -54,15 +56,41 @@
     <script type="text/javascript">
         var pois = @JavaScriptConvert.SerializeObject(@Model.Pois);
         var categorias = @JavaScriptConvert.SerializeObject(@Model.Categorias);
+        var elementos = @JavaScriptConvert.SerializeObject(@Model.Elementos);
+        elem = JSON.parse(elementos);
+        console.log(elementos[0]);
         
         function markerClick(args) {
 
             if (args.eventName === 'click') {
-
+               
+                try {
+                    
+                    $.each(elem,
+                        function(i, v) {
+                            if (v.PoiID.search(args.id) != -1) {
+                                eles.add(v);
+                                console.log(v);
+                            }
+                        });
+                } catch (err) {
+                    $('#Elemento').html('<div></div>');
+                }
+               
                 var catID = pois[args.id].CategoriaID;
-                $('#NomePoi').html(pois[args.id].nome);
+                
+                $('#NomePoi').html('<div> nome:'+pois[args.id].nome+'</div>');
                 $('#Descricao').html(pois[args.id].descricao);
                 $('#Categoria').html(categorias[catID-1].nome);
+               /* if (eles!==null) {
+                    eles = JSON.parse(eles);
+                    $.each(eles,
+                        function(i, v) {
+                            $('#Elemento').html(v.nome);
+                        });
+                } */
+               
+
                 //alert(pois[args.id].nome);
             }
 

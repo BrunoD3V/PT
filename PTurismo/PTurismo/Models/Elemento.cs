@@ -13,6 +13,7 @@ namespace PTurismo.Models
         public virtual string nome { get; set; }
         public virtual string descricao { get; set; }
         public virtual string imagem { get; set; }
+        [JsonIgnore]
         public virtual Poi poi { get; set; }
         [JsonIgnore]
         public virtual ICollection<GaleriaElemento> galeriaElemento { get; set; }
