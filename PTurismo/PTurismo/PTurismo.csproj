@@ -200,9 +200,9 @@
     </Compile>
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\JavaScriptConvert.cs" />
-    <Compile Include="Migrations\201607101331044_bdpastoral.cs" />
-    <Compile Include="Migrations\201607101331044_bdpastoral.Designer.cs">
-      <DependentUpon>201607101331044_bdpastoral.cs</DependentUpon>
+    <Compile Include="Migrations\201607101545097_novopoi.cs" />
+    <Compile Include="Migrations\201607101545097_novopoi.Designer.cs">
+      <DependentUpon>201607101545097_novopoi.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categoria.cs" />
@@ -252,6 +252,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\mapascript.js" />
     <Content Include="Scripts\markerclusterer.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
@@ -307,8 +308,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607101331044_bdpastoral.resx">
-      <DependentUpon>201607101331044_bdpastoral.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607101545097_novopoi.resx">
+      <DependentUpon>201607101545097_novopoi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

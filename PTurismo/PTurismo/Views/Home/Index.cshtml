@@ -1,7 +1,8 @@
 ﻿@using Jmelosegui.Mvc.GoogleMap
 @using PTurismo.Helpers
-@using System.Web.Script.Serialization;
+@using System.Web.Script.Serialization
 @model PTurismo.ViewModels.MapaViewModel
+@Scripts.Render("~/Scripts/script.js")
 
 @{
     ViewBag.Title = "Home Page";
@@ -57,42 +58,49 @@
         var pois = @JavaScriptConvert.SerializeObject(@Model.Pois);
         var categorias = @JavaScriptConvert.SerializeObject(@Model.Categorias);
         var elementos = @JavaScriptConvert.SerializeObject(@Model.Elementos);
-        elem = JSON.parse(elementos);
-        console.log(elementos[0]);
         
+
+        function getElementos() {
+          
+            var eles = new Array();
+            for (var i = 0; i < elementos.length; i++) {
+                var obj = elementos[i];
+                for (var key in obj) {
+                    var attrName = key;
+                    var attrValue = obj[key];
+                          
+                    if (attrName === "PoiID" && attrValue == args.id) {
+                                
+                        eles.push(elementos[i]);
+                        console.log(eles[i]);
+                    }
+                }
+            }
+            return eles;
+        }
         function markerClick(args) {
 
             if (args.eventName === 'click') {
-               
+                var eles = new Array();
                 try {
-                    
-                    $.each(elem,
-                        function(i, v) {
-                            if (v.PoiID.search(args.id) != -1) {
-                                eles.add(v);
-                                console.log(v);
-                            }
-                        });
+                    eles = getElementos();
+
                 } catch (err) {
-                    $('#Elemento').html('<div></div>');
+                    //$('#Elemento').html('<div></div>');
                 }
                
                 var catID = pois[args.id].CategoriaID;
                 
-                $('#Categoria').html('<h2>'+categorias[catID-1].nome+'</h2>');
-                $('#NomePoi').html('<h1>'+pois[args.id].nome+'</h1>');
-                $('#Descricao').html('<h4>'+pois[args.id].descricao+'</h4>');
-                
-               //alert(pois[args.id].nome);
-
- 
-               /* if (eles!==null) {
-                    eles = JSON.parse(eles);
-                    $.each(eles,
-                        function(i, v) {
-                            $('#Elemento').html(v.nome);
-                        });
-                } */
+                $('#NomePoi').html('<div> nome:'+pois[args.id].nome+'</div>');
+                $('#Descricao').html(pois[args.id].descricao);
+                $('#Categoria').html(categorias[catID-1].nome);
+                if (eles.length>1) {
+                  
+                    for (var j = 0; j < eles.length; j++) {
+                       console.log(j);
+                       //TODO mostrar cada elemento do poi
+                    }
+                } 
                
 
                 //alert(pois[args.id].nome);

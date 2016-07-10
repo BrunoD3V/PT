@@ -18,7 +18,8 @@ namespace PTurismo.Helpers
                 var serializer =
                     JsonSerializer.Create(new JsonSerializerSettings
                     {
-                        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                        Formatting = Formatting.Indented
                     });
             
                 
