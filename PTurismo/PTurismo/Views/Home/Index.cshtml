@@ -1,13 +1,14 @@
-﻿@using Jmelosegui.Mvc.GoogleMap
+﻿@using System.Collections
+@using Jmelosegui.Mvc.GoogleMap
 @using PTurismo.Helpers
 @using System.Web.Script.Serialization
+@using PTurismo.Models
 @model PTurismo.ViewModels.MapaViewModel
 @Scripts.Render("~/Scripts/script.js")
 
 @{
     ViewBag.Title = "Home Page";
 }
-
 
 <div class="row">
     <div class="container-fluid">
@@ -23,7 +24,6 @@
               .Draggable((bool)ViewData["draggable"])
               .Markers(m =>
               {
-
                   foreach (var p in Model.Pois)
                   {
                       m.Add().Latitude(p.latitude).Longitude(p.longitude);
@@ -33,21 +33,36 @@
               .MarkerEvents(events => events.OnMarkerClick("markerClick"))
             )
         </div>
-        <div class="col-md-6">
-            <div class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object" src="~/Content/Images/Capture.png" alt="...">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 id="NomePoi" class="media-heading">Carregar nos markups do mapa para interagir</h4>
-                    <div id="Categoria"></div>
-                    <div id="Descricao"></div>
-                    <div id="Elemento"></div>
-                </div>
-            </div>
+        
+        <div id="Categoria" class="col-md-6">
+
         </div>
+        
+        <div id="NomePoi" class="col-md-6">
+
+        </div>
+
+        <div id="Descricao" class="col-md-6">
+            
+        </div>
+        <div id="Elemento" class="col-md-6">
+            @foreach (var g in Model.GaleriaPois)
+            {
+                try
+                {
+                    ICollection<FilePathPoi> fps = g.FilePaths;
+                    //TODO verificar como se acede a isto
+                }
+                catch (Exception)
+                {
+                    
+                }
+            }
+        </div>
+
+      
+
+       
     </div>
 </div>
 
@@ -91,7 +106,7 @@
                
                 var catID = pois[args.id].CategoriaID;
                 
-                $('#NomePoi').html('<div> nome:'+pois[args.id].nome+'</div>');
+                $('#NomePoi').html(pois[args.id].nome);
                 $('#Descricao').html(pois[args.id].descricao);
                 $('#Categoria').html(categorias[catID-1].nome);
                 if (eles.length>1) {
