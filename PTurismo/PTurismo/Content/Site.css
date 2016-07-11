@@ -1,5 +1,5 @@
 ﻿body {
-    background-image: url('/Content/Images/BodyBackground/background.jpg');
+    background-image: url('/Content/Images/BodyBackground/background3.png');
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -27,3 +27,25 @@ textarea {
 .form-actions {
     margin-left: 95px;
 }
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 7px;
+    margin-right: 15px;
+}
+
+#rowprincipal{
+    background-color: rgba(245, 245, 245, 0.80);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+#mapafixe{
+    margin-top: 0px;
+}
+
+
