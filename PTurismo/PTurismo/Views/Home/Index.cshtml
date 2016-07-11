@@ -48,18 +48,8 @@
 
                 <div id="Descricao"></div>
                 <div id="Elemento">
-                    @foreach (var g in Model.GaleriaPois)
-                    {
-                        try
-                        {
-                            ICollection<FilePathPoi> fps = g.FilePaths;
-                            //TODO verificar como se acede a isto
-                        }
-                        catch (Exception)
-                        {
-
-                        }
-                    }
+                   
+                    
                 </div>
                 <div>
                     <img id="my_image" src="~/Content/Images/f76e268d-ee7f-4a65-bf18-ad6d5fc3f6c0.jpeg" alt="Imagem"/>
@@ -79,11 +69,12 @@
         var pois = @JavaScriptConvert.SerializeObject(@Model.Pois);
         var categorias = @JavaScriptConvert.SerializeObject(@Model.Categorias);
         var elementos = @JavaScriptConvert.SerializeObject(@Model.Elementos);
-        var galeraisPoi =@JavaScriptConvert.SerializeObject(Model.GaleriaPois);
-        var filePathPoi =@JavaScriptConvert.SerializeObject(@Model.FilePathPois);
+        var galeriasPoi = @JavaScriptConvert.SerializeObject(Model.GaleriaPois);
+        var filePathPoi = @JavaScriptConvert.SerializeObject(@Model.FilePathPois);
 
-        function getElementos() {
-
+        
+        function getElementos(elementos, id) {
+            console.log(id);
             var eles = new Array();
             for (var i = 0; i < elementos.length; i++) {
                 var obj = elementos[i];
@@ -91,7 +82,7 @@
                     var attrName = key;
                     var attrValue = obj[key];
 
-                    if (attrName === "PoiID" && attrValue == args.id) {
+                    if (attrName === "PoiID" && attrValue == id) {
 
                         eles.push(elementos[i]);
                         console.log(eles[i]);
@@ -100,36 +91,106 @@
             }
             return eles;
         }
+
+        function getFilePathPoi(filePathPoi, galeriasPoi, id) {
+
+            var files = new Array();
+            var galerias = new Array();
+            galerias = getGaleriasPoi(galeriasPoi, id);
+
+            if (galerias.length > 0) {
+                for (var i = 0; i < galerias.length; i++) {
+                    var obj = galerias[i];
+                    // console.log(obj);
+                    for (var key in obj) {
+                        var attrName = key;
+                        var attrValue = obj[key];
+
+                        if (attrName === "GaleriaPoiID") {
+                            // console.log("attrValue =" + attrValue);
+                            // console.log("attrName : " + attrName);
+                            for (var j = 0; j < filePathPoi.length; j++) {
+                                var objt = filePathPoi[j];
+
+
+                                for (var k in objt) {
+                                    var attName = k;
+                                    var attValue = objt[k];
+                                    //console.log("Nome: " + attName);
+                                    //console.log("attValue = " + attValue);
+                                    // console.log("attrValue =" + attrValue);
+
+                                    if (attName === "GaleriaPoiID" && attrValue == attValue) {
+                                        // console.log(filePathPoi[j]);
+                                        files.push(filePathPoi[i]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return files;
+        }
+
+        function getGaleriasPoi(galeriasPoi, id) {
+
+            var galerias = new Array();
+            for (var i = 0; i < galeriasPoi.length; i++) {
+                var obj = galeriasPoi[i];
+                for (var key in obj) {
+                    var attrName = key;
+                    var attrValue = obj[key];
+
+                    if (attrName === "PoiID" && attrValue == id) {
+
+                        galerias.push(galeriasPoi[i]);
+                        //console.log(galeriasPoi[i]);
+                    }
+                }
+            }
+            return galerias;
+        }
         function markerClick(args) {
 
             if (args.eventName === 'click') {
+                var id = parseInt(args.id) + 1;
                 var eles = new Array();
                 try {
-                    eles = getElementos();
-
+                    eles = getElementos(elementos, id);
+                    console.log("AQUI");
+                    console.log(eles[0]);
                 } catch (err) {
-                    //$('#Elemento').html('<div></div>');
+                    $('#Elemento').html('<div></div>');
                 }
+
 
                 var catID = pois[args.id].CategoriaID;
 
                 $('#NomePoi').html(pois[args.id].nome);
                 $('#Descricao').html(pois[args.id].descricao);
-                $('#Categoria').html(categorias[catID-1].nome);
+                $('#Categoria').html(categorias[catID - 1].nome);
 
-                if (eles.length>1) {
+                if (eles.length > 1) {
 
                     for (var j = 0; j < eles.length; j++) {
-                       console.log(j);
-                       //TODO mostrar cada elemento do poi
+                        console.log(eles[j]);
+                        //TODO mostrar cada elemento do poi
                     }
                 }
-                var ficheiro = "~/Content/Images/" + filePathPoi[0].FileName;
-                var treta = '<img src=\"'+ficheiro+'\">';
-                console.log(treta);
-                $('#my_image').attr("src", "/Content/Images/Capture.png");
-                //alert(pois[args.id].nome);
 
+                var ficheiros = new Array();
+
+                ficheiros = getFilePathPoi(filePathPoi, galeriasPoi, id);
+                if (ficheiros.length > 0) {
+                    console.log(ficheiros[0]);//TODO mostrar todos os ficheiros;
+                    var ficheiro = "/Content/Images/" + ficheiros[0].FileName;
+
+
+                    $('#my_image').attr("src", ficheiro);
+                } else {
+                    $('#my_image').attr("src", "/Content/Images/f76e268d-ee7f-4a65-bf18-ad6d5fc3f6c0.jpeg");
+                }
             }
 
         }

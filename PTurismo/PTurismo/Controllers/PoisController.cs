@@ -95,7 +95,7 @@ namespace PTurismo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PoiID,CategoriaID,nome,latitude,longitude,descricao,imagem,resumo")] Poi poi)
+        public ActionResult Create([Bind(Include = "PoiID,CategoriaID,nome,latitude,longitude,descricao,resumo")] Poi poi)
         {
             try
             {
