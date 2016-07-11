@@ -33,36 +33,38 @@
               .MarkerEvents(events => events.OnMarkerClick("markerClick"))
             )
         </div>
-        
-        <div id="Categoria" class="col-md-6">
 
+        <div class="media">
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object" src="..." alt="...">
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 id="NomePoi" class="media-heading">Clique no mapa para interagir</h4>
+                <div id="Categoria"></div>
+
+                <div id="NomePoi"></div>
+
+                <div id="Descricao"></div>
+                <div id="Elemento" ">
+                    @foreach (var g in Model.GaleriaPois)
+                    {
+                        try
+                        {
+                            ICollection<FilePathPoi> fps = g.FilePaths;
+                            //TODO verificar como se acede a isto
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                    }
+                </div>
+            </div>
         </div>
         
-        <div id="NomePoi" class="col-md-6">
-
-        </div>
-
-        <div id="Descricao" class="col-md-6">
-            
-        </div>
-        <div id="Elemento" class="col-md-6">
-            @foreach (var g in Model.GaleriaPois)
-            {
-                try
-                {
-                    ICollection<FilePathPoi> fps = g.FilePaths;
-                    //TODO verificar como se acede a isto
-                }
-                catch (Exception)
-                {
-                    
-                }
-            }
-        </div>
-
-      
-
-       
+        
     </div>
 </div>
 
