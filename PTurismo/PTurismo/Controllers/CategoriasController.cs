@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using PTurismo.DAL;
 using PTurismo.Models;
 using PagedList;
+using System.IO;
 
 namespace PTurismo.Controllers
 {
@@ -90,7 +91,7 @@ namespace PTurismo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "nome,genero")] Categoria categoria)
+        public ActionResult Create([Bind(Include = "nome,genero")] Categoria categoria, HttpPostedFileBase upload)
         {
             try
             {
@@ -99,6 +100,30 @@ namespace PTurismo.Controllers
                     db.Categoria.Add(categoria);
                     db.SaveChanges();
                     return RedirectToAction("Index");
+
+                    string[] allowedImageExtensions = { ".gif", ".png", ".jpeg", ".jpg" };
+                   
+                    String fileExtension = Path.GetExtension(upload.FileName);
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        for (int i = 0; i < allowedImageExtensions.Length; i++)
+                        {
+                            if (fileExtension == allowedImageExtensions[i])
+                            {
+                                var FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
+                                var FileTypes = FileType.Imagem;
+                                
+                                categoria.FilePathCategoria = new FilePathCategoria();
+                                categoria.FilePathCategoria.FileName = FileName;
+                                categoria.FilePathCategoria.FileType = FileTypes;
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images"), FileName));
+                            }
+                        }
+
+                        db.Categoria.Add(categoria);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
             }
             catch(DataException)
