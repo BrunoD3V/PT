@@ -97,9 +97,7 @@ namespace PTurismo.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Categoria.Add(categoria);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                   
 
                     string[] allowedImageExtensions = { ".gif", ".png", ".jpeg", ".jpg" };
                    
