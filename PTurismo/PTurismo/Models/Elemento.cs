@@ -12,7 +12,7 @@ namespace PTurismo.Models
         public virtual int PoiID { get; set; }
         public virtual string nome { get; set; }
         public virtual string descricao { get; set; }
-        public virtual string imagem { get; set; }
+        public virtual FilePathElemento ImagemElemento { get; set; }
         [JsonIgnore]
         public virtual Poi poi { get; set; }
         [JsonIgnore]

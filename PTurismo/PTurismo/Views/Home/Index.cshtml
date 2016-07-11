@@ -37,7 +37,7 @@
         <div class="media">
             <div class="media-left">
                 <a href="#">
-                    <img class="media-object" src="~/Content/Images/Capture.png" alt="...">
+                    <img class="media-object" src="~/Content/Images/Capture.png" alt="..."/>
                 </a>
             </div>
             <div class="media-body">
@@ -47,7 +47,7 @@
                 <div id="NomePoi"></div>
 
                 <div id="Descricao"></div>
-                <div id="Elemento" ">
+                <div id="Elemento">
                     @foreach (var g in Model.GaleriaPois)
                     {
                         try
@@ -60,6 +60,9 @@
 
                         }
                     }
+                </div>
+                <div>
+                    <img id="my_image" src="~/Content/Images/f76e268d-ee7f-4a65-bf18-ad6d5fc3f6c0.jpeg" alt="Imagem"/>
                 </div>
             </div>
         </div>
@@ -75,7 +78,8 @@
         var pois = @JavaScriptConvert.SerializeObject(@Model.Pois);
         var categorias = @JavaScriptConvert.SerializeObject(@Model.Categorias);
         var elementos = @JavaScriptConvert.SerializeObject(@Model.Elementos);
-        
+        var galeraisPoi =@JavaScriptConvert.SerializeObject(Model.GaleriaPois);
+        var filePathPoi =@JavaScriptConvert.SerializeObject(@Model.FilePathPois);
 
         function getElementos() {
           
@@ -111,15 +115,18 @@
                 $('#NomePoi').html(pois[args.id].nome);
                 $('#Descricao').html(pois[args.id].descricao);
                 $('#Categoria').html(categorias[catID-1].nome);
+
                 if (eles.length>1) {
                   
                     for (var j = 0; j < eles.length; j++) {
                        console.log(j);
                        //TODO mostrar cada elemento do poi
                     }
-                } 
-               
-
+                }
+                var ficheiro = "~/Content/Images/" + filePathPoi[0].FileName;
+                var treta = '<img src=\"'+ficheiro+'\">';
+                console.log(treta);
+                $('#my_image').attr("src", "/Content/Images/Capture.png");
                 //alert(pois[args.id].nome);
 
             }

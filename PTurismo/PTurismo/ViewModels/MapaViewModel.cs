@@ -12,9 +12,10 @@ namespace PTurismo.ViewModels
         public IEnumerable<PTurismo.Models.Poi> Pois { get; private set; }
         public IEnumerable<PTurismo.Models.Categoria> Categorias { get; private set; }
         public IEnumerable<PTurismo.Models.Elemento> Elementos { get; private set; }
-        public IEnumerable<PTurismo.Models.GaleriaElemento> GaleriaElementos { get; set; }
-        public IEnumerable<PTurismo.Models.GaleriaPoi> GaleriaPois { get; set; }
-
+        public IEnumerable<PTurismo.Models.GaleriaElemento> GaleriaElementos { get; private set; }
+        public IEnumerable<PTurismo.Models.GaleriaPoi> GaleriaPois { get; private set; }
+        public IEnumerable<PTurismo.Models.FilePathPoi> FilePathPois { get; private set; }
+        public IEnumerable<PTurismo.Models.FilePathElemento> FilePathElementos { get; private set; }
         public MapaViewModel()
         {
             Pois = from p in db.Poi
@@ -27,6 +28,8 @@ namespace PTurismo.ViewModels
                 select ge;
             GaleriaPois = from gp in db.GaleriaPoi
                 select gp;
+            FilePathPois = from fpp in db.FilePaths
+                select fpp;
         }
     }
 }

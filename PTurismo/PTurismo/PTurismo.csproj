@@ -203,6 +203,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Elemento.cs" />
+    <Compile Include="Models\FilePathCategoria.cs" />
     <Compile Include="Models\FilePathElemento.cs" />
     <Compile Include="Models\FilePathPoi.cs" />
     <Compile Include="Models\FileType.cs" />
