@@ -10,39 +10,51 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="row">
-    <div class="container-fluid">
-        <br />
-        <div class="col-md-6">
-            @(Html.GoogleMap()
-              .Name("map")
-              .Height(600)
-              .ApiKey("AIzaSyAYC419uGMGyG-Lhc5gPRxzRm1q2Uu1b-4")
-              .Center(c => c.Latitude(41.130325).Longitude(-7.097716))
-              .FitToMarkersBounds((bool)ViewData["FitToMarkersBounds"])
-              
-              .Draggable((bool)ViewData["draggable"])
-              .Markers(m =>
-              {
-                  foreach (var p in Model.Pois)
-                  {
-                      m.Add().Latitude(p.latitude).Longitude(p.longitude);
+    <div class="row">
+        <div class="col-md-6 text-right">
+            <img src="~/Content/Images/Logo/Logo1.png"/>
+            <img src="~/Content/Images/Logo/Logo2.png"/>
+        </div>
+        <div class="col-md-6 text-right">
+            <img src="~/Content/Images/Helper/help.png" width="50px" height="50px" />
+        </div>
+    </div>
 
-                  }
-              })
-              .MarkerEvents(events => events.OnMarkerClick("markerClick"))
+
+    <div id="rowprincipal" class="row">
+        <div id="mapafixe" class="col-md-5">
+            @(Html.GoogleMap()
+            .Name("map")
+            .Height(600)
+            .ApiKey("AIzaSyAYC419uGMGyG-Lhc5gPRxzRm1q2Uu1b-4")
+            .Center(c => c.Latitude(41.130325).Longitude(-7.097716))
+            .FitToMarkersBounds((bool)ViewData["FitToMarkersBounds"])
+
+            .Draggable((bool)ViewData["draggable"])
+            .Markers(m =>
+            {
+                foreach (var p in Model.Pois)
+                {
+                    m.Add().Latitude(p.latitude).Longitude(p.longitude);
+                }
+            })
+            .MarkerEvents(events => events.OnMarkerClick("markerClick"))
             )
         </div>
-
-        <div class="media">
-            <div class="media-left">
-                <a href="#">
-                    <img class="media-object" src="~/Content/Images/Capture.png" alt="..."/>
-                </a>
+        <div id="dataShow" class="col-md-7">
+            <div class="row">
+                <h1 id="NomePoi" />
             </div>
-            <div class="media-body">
-                <h4 id="NomePoi" class="media-heading">Clique no mapa para interagir</h4>
-                <div id="Categoria"></div>
+            <div class="row">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" src="~/Content/Images/Capture.png" alt="..." />
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 id="NomePoi" class="media-heading">Clique no mapa para interagir</h4>
+                        <div id="Categoria"></div>
 
                 <div id="NomePoi"></div>
 
@@ -55,11 +67,18 @@
                     <img id="my_image" src="~/Content/Images/f76e268d-ee7f-4a65-bf18-ad6d5fc3f6c0.jpeg" alt="Imagem"/>
                 </div>
             </div>
+
+            <div class="row bottom">
+                <button class="btn btn-warning">NEXT</button>
+            </div>
+
+
         </div>
-        
-        
+
+
     </div>
-</div>
+
+
 
 @section scripts
 {

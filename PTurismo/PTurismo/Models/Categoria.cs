@@ -13,10 +13,8 @@ namespace PTurismo.Models
         public virtual string nome { get; set; }
         public virtual string genero { get; set; }
         public virtual FilePathCategoria FilePathCategoria { get; set; }
-        
         [JsonIgnore]
         public virtual ICollection<Poi> Poi { get; set; }
 
-        
     }
 }
