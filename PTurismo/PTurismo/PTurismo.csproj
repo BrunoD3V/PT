@@ -200,9 +200,9 @@
     </Compile>
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\JavaScriptConvert.cs" />
-    <Compile Include="Migrations\201607101545097_novopoi.cs" />
-    <Compile Include="Migrations\201607101545097_novopoi.Designer.cs">
-      <DependentUpon>201607101545097_novopoi.cs</DependentUpon>
+    <Compile Include="Migrations\201607110943123_aeiou.cs" />
+    <Compile Include="Migrations\201607110943123_aeiou.Designer.cs">
+      <DependentUpon>201607110943123_aeiou.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categoria.cs" />
@@ -308,8 +308,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607101545097_novopoi.resx">
-      <DependentUpon>201607101545097_novopoi.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607110943123_aeiou.resx">
+      <DependentUpon>201607110943123_aeiou.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
