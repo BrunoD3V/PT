@@ -17,6 +17,5 @@ namespace PTurismo.Models
         [JsonIgnore]
         public virtual ICollection<Poi> Poi { get; set; }
 
-        
     }
 }
