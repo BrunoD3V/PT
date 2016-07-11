@@ -75,6 +75,7 @@
 {
     @(Html.GoogleMap().ScriptRegistrar())
     <script type="text/javascript">
+
         var pois = @JavaScriptConvert.SerializeObject(@Model.Pois);
         var categorias = @JavaScriptConvert.SerializeObject(@Model.Categorias);
         var elementos = @JavaScriptConvert.SerializeObject(@Model.Elementos);
@@ -82,16 +83,16 @@
         var filePathPoi =@JavaScriptConvert.SerializeObject(@Model.FilePathPois);
 
         function getElementos() {
-          
+
             var eles = new Array();
             for (var i = 0; i < elementos.length; i++) {
                 var obj = elementos[i];
                 for (var key in obj) {
                     var attrName = key;
                     var attrValue = obj[key];
-                          
+
                     if (attrName === "PoiID" && attrValue == args.id) {
-                                
+
                         eles.push(elementos[i]);
                         console.log(eles[i]);
                     }
@@ -109,15 +110,15 @@
                 } catch (err) {
                     //$('#Elemento').html('<div></div>');
                 }
-               
+
                 var catID = pois[args.id].CategoriaID;
-                
+
                 $('#NomePoi').html(pois[args.id].nome);
                 $('#Descricao').html(pois[args.id].descricao);
                 $('#Categoria').html(categorias[catID-1].nome);
 
                 if (eles.length>1) {
-                  
+
                     for (var j = 0; j < eles.length; j++) {
                        console.log(j);
                        //TODO mostrar cada elemento do poi
@@ -132,7 +133,6 @@
             }
 
         }
-
 
     </script>
 }
