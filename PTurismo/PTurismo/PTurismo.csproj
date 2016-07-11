@@ -296,7 +296,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\" />
+    <Folder Include="Content\Images\BodyBackground\" />
+    <Folder Include="Content\Images\GaleriaElemento\Imagem\" />
+    <Folder Include="Content\Images\GaleriaPoi\Imagem\" />
+    <Folder Include="Content\Images\Helper\" />
+    <Folder Include="Content\Images\Logo\" />
     <Folder Include="Content\Videos\" />
   </ItemGroup>
   <ItemGroup>
