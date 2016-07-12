@@ -93,6 +93,23 @@ namespace PTurismo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "nome,genero")] Categoria categoria, HttpPostedFileBase upload)
         {
+            bool validName = false;
+            try
+            {
+                foreach (var c in db.Categoria)
+            {
+               
+                    if (upload.FileName.Equals(c.nome))
+                        validName = true;
+                }
+
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Tem que introduzir um ficheiro");
+            }
+            if (!validName)
+                return View(categoria);
             try
             {
                 if (ModelState.IsValid)
@@ -108,13 +125,13 @@ namespace PTurismo.Controllers
                         {
                             if (fileExtension == allowedImageExtensions[i])
                             {
-                                var FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
+                                var FileName =upload.FileName + Path.GetExtension(upload.FileName);
                                 var FileTypes = FileType.Imagem;
                                 
                                 categoria.FilePathCategoria = new FilePathCategoria();
                                 categoria.FilePathCategoria.FileName = FileName;
                                 categoria.FilePathCategoria.FileType = FileTypes;
-                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images"), FileName));
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/Icones"), FileName));
                             }
                         }
 

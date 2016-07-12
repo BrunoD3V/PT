@@ -170,6 +170,7 @@ namespace PTurismo.Controllers
             {
                 try
                 {
+
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }

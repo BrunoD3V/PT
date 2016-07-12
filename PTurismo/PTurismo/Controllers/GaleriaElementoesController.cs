@@ -96,45 +96,52 @@ namespace PTurismo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "GaleriaElementoID,ElementoID,legenda")] GaleriaElemento galeriaElemento, HttpPostedFileBase upload)
         {
-            if (ModelState.IsValid)
+            try
             {
-                string[] allowedImageExtensions = { ".gif", ".png", ".jpeg", ".jpg" };
-                string[] allowedVideoExtensions = { ".mp4" };
-                String fileExtension = Path.GetExtension(upload.FileName);
-                if (upload != null && upload.ContentLength > 0)
+                if (ModelState.IsValid)
                 {
-                    for (int i = 0; i < allowedImageExtensions.Length; i++)
+                    string[] allowedImageExtensions = {".gif", ".png", ".jpeg", ".jpg"};
+                    string[] allowedVideoExtensions = {".mp4"};
+                    String fileExtension = Path.GetExtension(upload.FileName);
+                    if (upload != null && upload.ContentLength > 0)
                     {
-                        if (fileExtension == allowedImageExtensions[i])
+                        for (int i = 0; i < allowedImageExtensions.Length; i++)
                         {
-                            var file = new FilePathElemento
+                            if (fileExtension == allowedImageExtensions[i])
                             {
-                                FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
-                                FileType = FileType.Imagem
-                            };
-                            galeriaElemento.FilePathElementos = new List<FilePathElemento>();
-                            galeriaElemento.FilePathElementos.Add(file);
-                            upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images"), file.FileName));
+                                var file = new FilePathElemento
+                                {
+                                    FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
+                                    FileType = FileType.Imagem
+                                };
+                                galeriaElemento.FilePathElementos = new List<FilePathElemento>();
+                                galeriaElemento.FilePathElementos.Add(file);
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images"), file.FileName));
+                            }
+                        }
+                        for (int i = 0; i < allowedVideoExtensions.Length; i++)
+                        {
+                            if (fileExtension == allowedVideoExtensions[i])
+                            {
+                                var file = new FilePathElemento()
+                                {
+                                    FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
+                                    FileType = FileType.Video
+                                };
+                                galeriaElemento.FilePathElementos = new List<FilePathElemento>();
+                                galeriaElemento.FilePathElementos.Add(file);
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Videos"), file.FileName));
+                            }
                         }
                     }
-                    for (int i = 0; i < allowedVideoExtensions.Length; i++)
-                    {
-                        if (fileExtension == allowedVideoExtensions[i])
-                        {
-                            var file = new FilePathElemento()
-                            {
-                                FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
-                                FileType = FileType.Video
-                            };
-                            galeriaElemento.FilePathElementos = new List<FilePathElemento>();
-                            galeriaElemento.FilePathElementos.Add(file);
-                            upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Videos"), file.FileName));
-                        }
-                    }
+                    db.GaleriaElemento.Add(galeriaElemento);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                db.GaleriaElemento.Add(galeriaElemento);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Tem que adicionar um ficheiro");
             }
 
             ViewBag.ElementoID = new SelectList(db.Elemento, "ElementoID", "nome", galeriaElemento.ElementoID);
