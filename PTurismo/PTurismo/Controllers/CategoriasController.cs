@@ -97,10 +97,14 @@ namespace PTurismo.Controllers
             try
             {
                 foreach (var c in db.Categoria)
-            {
-               
+                {
                     if (upload.FileName.Equals(c.nome))
                         validName = true;
+                }
+                string nomeF = categoria.nome + Path.GetExtension(upload.FileName);
+                if (nomeF.Equals(upload.FileName))
+                {
+                    validName = true;
                 }
 
             }
