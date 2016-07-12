@@ -35,9 +35,7 @@ namespace PTurismo.Migrations
 
             var pois = new List<Poi>
             {
-                new Poi { PoiID=0, nome="Igreja Matriz Vale de Salgueiro", CategoriaID = 1, latitude=41.590878, longitude=-7.235249,
-                    descricao ="Igreja descrita", 
-                    resumo = "Igreja resumida"},
+               
 
                 new Poi { PoiID=1, nome="Sé Velha", CategoriaID = 2, latitude=41.805923, longitude=-6.756663,
                     descricao ="Sé Velha descrita", 
@@ -79,8 +77,10 @@ namespace PTurismo.Migrations
                 new Poi { PoiID=15, nome="Santuário de Nossa Senhora do Aviso", CategoriaID=5, latitude=41.599406, longitude=-6.765357, descricao="Neste local além do santuário, composto por oito templetes alusivos ao calvário, fica também a fonte dos Engaranhos com umas inscrições imperceptíveis.", resumo="" },
                 new Poi { PoiID=16, nome="Igreja Matriz de Santa Comba da Vilariça", CategoriaID=1, latitude=41.1533885, longitude=-7.0148377, descricao=" Igreja barroca que guarda no seu interior dois altares de talha dourada e, no lado do Evangelho, um púlpito quadrado com mísula pétrea. Ostenta um tecto de madeira formado por grandes painéis.",  resumo="" },
                 new Poi { PoiID=17, nome="Igreja de Vale de Prados", CategoriaID=1, latitude=41.6178244,longitude=-7.2266654, descricao="Vale de Prados de Ledra chamava se assim porque existia na Terra de Ledra e para distinguir de Vale de Prados de Macedo de Cavaleiros.O Orago era Santo André.A paróquia foi instituída pela abadia de Guide depois do século XV na ermida local dedicada ao apóstolo.Foi unida a Múrias depois da extinção da paróquia(cerca de 1834).",  resumo="" },
-                new Poi { PoiID=18, nome="Santuário de N. Sra. da Assunção", CategoriaID=5, latitude=41.2837901, longitude=-7.4999258, descricao="É o maior e um dos mais importantes santuários Marianos de Trás-os-Montes. Erguido no século XIX no alto de um monte que domina toda a paisagem envolvente, representa um dos pontos mais altos do Concelho, com cerca de 760 metros de altitude.O Santuário de N. Sra.da Assunção, é também Miradouro de primeira qualidade.Junto ao varandim do adro obtém-se uma rara e vasta paisagem, cobrindo a vizinha Sanábria, Montesinho, Bornes, Mirandela e as vilas e aldeias vizinhas num raio de 100km.A sua história é milenar visto ter existido um castro neste magnífico monte, que justamente foi escolhido pela sua capacidade de Posto de Vigia.Possui uma igreja de nave única e capela-mor retangulares, várias capelinhas espalhadas pelo recinto e um monumental escadório, tudo envolto em imensos tufos de floresta.Santuário de N.Sra. do Rosário, em Freixiel.",  resumo="" }
-
+                new Poi { PoiID=18, nome="Santuário de N. Sra. da Assunção", CategoriaID=5, latitude=41.2837901, longitude=-7.4999258, descricao="É o maior e um dos mais importantes santuários Marianos de Trás-os-Montes. Erguido no século XIX no alto de um monte que domina toda a paisagem envolvente, representa um dos pontos mais altos do Concelho, com cerca de 760 metros de altitude.O Santuário de N. Sra.da Assunção, é também Miradouro de primeira qualidade.Junto ao varandim do adro obtém-se uma rara e vasta paisagem, cobrindo a vizinha Sanábria, Montesinho, Bornes, Mirandela e as vilas e aldeias vizinhas num raio de 100km.A sua história é milenar visto ter existido um castro neste magnífico monte, que justamente foi escolhido pela sua capacidade de Posto de Vigia.Possui uma igreja de nave única e capela-mor retangulares, várias capelinhas espalhadas pelo recinto e um monumental escadório, tudo envolto em imensos tufos de floresta.Santuário de N.Sra. do Rosário, em Freixiel.",  resumo="" },
+                 new Poi { PoiID=19, nome="Igreja Matriz Vale de Salgueiro", CategoriaID = 1, latitude=41.590878, longitude=-7.235249,
+                    descricao ="Igreja descrita",
+                    resumo = "Igreja resumida"}
             };
 
             pois.ForEach(p => Context.Poi.Add(p));
@@ -101,10 +101,10 @@ namespace PTurismo.Migrations
 
             var galeriaElementos = new List<GaleriaElemento>
             {
-                new GaleriaElemento { GaleriaElementoID=1, media="Navecentral.mpeg", legenda="Video Nave Central", tipoMedia="Video", ElementoID=1 },
-                new GaleriaElemento { GaleriaElementoID=2, media="http://www.patrimoniocultural.pt/static/data/cache/d5/c4/d5c439d97808ff47aa72849fcd828d4c.jpg",
-                    legenda ="Fotografia do Teto da Nave Central", tipoMedia="Fotografia", ElementoID=1 },
-                new GaleriaElemento { GaleriaElementoID=2, media="CapelaMor.mpeg",legenda ="Video Capela Mor", tipoMedia="Video", ElementoID=2 }
+                new GaleriaElemento { GaleriaElementoID=1, ElementoID=1 },
+                new GaleriaElemento { GaleriaElementoID=2, 
+                    legenda ="Fotografia do Teto da Nave Central", ElementoID=1 },
+                new GaleriaElemento { GaleriaElementoID=2, legenda ="Video Capela Mor",  ElementoID=2 }
             };
 
             galeriaElementos.ForEach(g => Context.GaleriaElemento.Add(g));

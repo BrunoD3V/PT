@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -20,8 +22,8 @@ namespace PTurismo.Controllers
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.TipoMediaSortParm = String.IsNullOrEmpty(sortOrder) ? "tipoMedia_desc" : "";
-            ViewBag.LegendaSortParm = sortOrder == "Legenda" ? "legenda_desc" : "Legenda";
+            ViewBag.LegendaSortParm = String.IsNullOrEmpty(sortOrder) ? "legenda_desc" : "";
+            
 
             if (searchString != null)
             {
@@ -39,23 +41,20 @@ namespace PTurismo.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                galeriasElementos = galeriasElementos.Where(g => g.legenda.Contains(searchString) || g.tipoMedia.Contains(searchString));
+                galeriasElementos = galeriasElementos.Where(g => g.legenda.Contains(searchString) );
             }
 
             switch (sortOrder)
             {
-                case "tipoMedia_desc":
-                    galeriasElementos = galeriasElementos.OrderByDescending(g => g.tipoMedia);
-                    break;
-                case "Legenda":
-                    galeriasElementos = galeriasElementos.OrderBy(c => c.legenda);
-                    break;
+               
+               
                 case "legenda_desc":
                     galeriasElementos = galeriasElementos.OrderByDescending(c => c.legenda);
                     break;
                 default:
-                    galeriasElementos = galeriasElementos.OrderBy(g => g.tipoMedia);
+                    galeriasElementos = galeriasElementos.OrderBy(c => c.legenda);
                     break;
+                 
 
             }
 
@@ -95,10 +94,44 @@ namespace PTurismo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GaleriaElementoID,ElementoID,media,legenda,tipoMedia")] GaleriaElemento galeriaElemento)
+        public ActionResult Create([Bind(Include = "GaleriaElementoID,ElementoID,legenda")] GaleriaElemento galeriaElemento, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                string[] allowedImageExtensions = { ".gif", ".png", ".jpeg", ".jpg" };
+                string[] allowedVideoExtensions = { ".mp4" };
+                String fileExtension = Path.GetExtension(upload.FileName);
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    for (int i = 0; i < allowedImageExtensions.Length; i++)
+                    {
+                        if (fileExtension == allowedImageExtensions[i])
+                        {
+                            var file = new FilePathElemento
+                            {
+                                FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
+                                FileType = FileType.Imagem
+                            };
+                            galeriaElemento.FilePathElementos = new List<FilePathElemento>();
+                            galeriaElemento.FilePathElementos.Add(file);
+                            upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images"), file.FileName));
+                        }
+                    }
+                    for (int i = 0; i < allowedVideoExtensions.Length; i++)
+                    {
+                        if (fileExtension == allowedVideoExtensions[i])
+                        {
+                            var file = new FilePathElemento()
+                            {
+                                FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
+                                FileType = FileType.Video
+                            };
+                            galeriaElemento.FilePathElementos = new List<FilePathElemento>();
+                            galeriaElemento.FilePathElementos.Add(file);
+                            upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Videos"), file.FileName));
+                        }
+                    }
+                }
                 db.GaleriaElemento.Add(galeriaElemento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -129,13 +162,79 @@ namespace PTurismo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GaleriaElementoID,ElementoID,media,legenda,tipoMedia")] GaleriaElemento galeriaElemento)
+        public ActionResult Edit([Bind(Include = "GaleriaElementoID,ElementoID,legenda")] GaleriaElemento galeriaElemento, HttpPostedFileBase upload)
         {
+            var galeriaElementoToUpdate = db.GaleriaElemento.Find(galeriaElemento.GaleriaElementoID);
             if (ModelState.IsValid)
             {
-                db.Entry(galeriaElemento).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (TryUpdateModel(galeriaElementoToUpdate, "", new string[] { "GaleriaElementoID,ElementoID,legenda" }))
+                {
+                    try
+                    {
+                        if (upload != null && upload.ContentLength > 0)
+                        {
+                            //Apaga a lista dos ficheiros associados e o ficheiro local associado
+                            if (galeriaElementoToUpdate.FilePathElementos.Any(f => f.FileType == FileType.Imagem))
+                            {
+                                string currentFilePath = galeriaElementoToUpdate.FilePathElementos.First().FileName;
+                                db.FilePathsEl.Remove(
+                                    galeriaElementoToUpdate.FilePathElementos.First(f => f.FileType == FileType.Imagem));
+                                FileInfo file =
+                                    new FileInfo(Path.Combine(Server.MapPath("~/Content/Images"), currentFilePath));
+                                file.Delete();
+                            }
+                            else
+                            {
+                                string currentFilePath = galeriaElementoToUpdate.FilePathElementos.First().FileName;
+                                db.FilePathsEl.Remove(galeriaElementoToUpdate.FilePathElementos.First(f => f.FileType == FileType.Video));
+                                FileInfo file =
+                                    new FileInfo(Path.Combine(Server.MapPath("~/Content/Videos"), currentFilePath));
+                                file.Delete();
+                            }
+                            //Verifica se o novo ficheiro é de uma extenção válida e adiciona-o à lista de ficheiros e insere localmente na pasta correspondente
+                            string[] allowedImageExtensions = {".png", ".jpeg", ".jpg"};
+                            string[] allowedVideoExtensions = {".gif"};
+                            String fileExtension = Path.GetExtension(upload.FileName);
+                            for (int i = 0; i < allowedImageExtensions.Length; i++)
+                            {
+                                if (fileExtension == allowedImageExtensions[i])
+                                {
+                                    var file = new FilePathElemento
+                                    {
+                                        FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
+                                        FileType = FileType.Imagem
+                                    };
+                                    galeriaElementoToUpdate.FilePathElementos.Add(file);
+                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images"), file.FileName));
+                                }
+                            }
+                            for (int i = 0; i < allowedVideoExtensions.Length; i++)
+                            {
+                                if (fileExtension == allowedVideoExtensions[i])
+                                {
+                                    var file = new FilePathElemento
+                                    {
+                                        FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
+                                        FileType = FileType.Video
+                                    };
+                                    galeriaElementoToUpdate.FilePathElementos = new List<FilePathElemento>();
+                                    galeriaElementoToUpdate.FilePathElementos.Add(file);
+                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Videos"), file.FileName));
+                                }
+                            }
+                        }
+                        db.Entry(galeriaElemento).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (RetryLimitExceededException /* dex */)
+                    {
+                        //Log the error (uncomment dex variable name and add a line here to write a log.
+                        ModelState.AddModelError("",
+                            "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    }
+                }
+
             }
             ViewBag.ElementoID = new SelectList(db.Elemento, "ElementoID", "nome", galeriaElemento.ElementoID);
             return View(galeriaElemento);
@@ -162,6 +261,9 @@ namespace PTurismo.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             GaleriaElemento galeriaElemento = db.GaleriaElemento.Find(id);
+            string currentFilePath = galeriaElemento.FilePathElementos.First().FileName;
+            FileInfo file = new FileInfo(Path.Combine(Server.MapPath("~/Content/Images"), currentFilePath));
+            file.Delete();
             db.GaleriaElemento.Remove(galeriaElemento);
             db.SaveChanges();
             return RedirectToAction("Index");

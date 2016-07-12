@@ -21,8 +21,8 @@ namespace PTurismo.DAL
         public DbSet<GaleriaElemento> GaleriaElemento { get; set; }
         public DbSet<GaleriaPoi> GaleriaPoi { get; set; }
         public DbSet<FilePathPoi> FilePaths { get; set; }
-        //public DbSet<FilePathElemento> FilePathsEl { get; set; }
-
+        public DbSet<FilePathElemento> FilePathsEl { get; set; }
+        public DbSet<FilePathCategoria> FilePathCats { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
