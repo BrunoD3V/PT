@@ -77,11 +77,11 @@ textarea {
     padding: 30px;
 }
 
-#mapafixe{
+#mapa-margin{
     margin-top: 0px;
 }
 
-#imgThumbnail{
+#img-thumbnail{
     width: 150px;
     height: 150px;
 }
@@ -107,6 +107,11 @@ div.thumbnail ul{
 
 .black-color {
     color: black;
+}
+
+.img-poi{
+    width: 282px;
+    height: 175px;
 }
 
 

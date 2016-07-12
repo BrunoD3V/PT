@@ -35,8 +35,8 @@
 <!--INICIO DA PAGINA-->
 <div class="row">
     <div class="col-md-6 text-right">
-        <img src="~/Content/Images/Logo/Logo1.png"/>
-        <img src="~/Content/Images/Logo/Logo2.png"/>
+        <img class="img-poi" src="~/Content/Images/Logo/Logo1.jpg"/>
+        <img id="ImagemPath" class="img-poi" src="~/Content/Images/Logo/Logo2.png"/>
     </div>
     <div class="col-md-6 text-right">
         <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#helpModal"><span class="glyphicon glyphicon-question-sign black-color"></span></button>
@@ -44,7 +44,7 @@
 </div>
 
 <div id="row-principal" class="row">
-    <div id="mapafixe" class="col-md-5">
+    <div id="mapa-margin" class="col-md-5">
         @(Html.GoogleMap()
         .Name("map")
         .Height(600)
@@ -131,12 +131,13 @@
             <h4 id="Descricao">O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde o ano de 1500, quando uma misturou os caracteres de um texto para criar um espécime de livro. Este texto não só sobreviveu 5 séculos, mas também o salto para a tipografia electrónica, mantendo-se essencialmente inalterada. Foi popularizada nos anos 60 com a disponibilização das folhas de Letraset, que continham passagens com Lorem Ipsum, e mais recentemente com os programas de publicação como o Aldus PageMaker que incluem versões do Lorem Ipsum.</h4>
             <div id="Elemento">ELEMENTO</div>
         </div>
+
         <div class="row bottom-left">
             <div class="col-xs-6 col-md-6 col-lg-6">
                 <div class="thumbnail">
                     <div class="col-md-4">
                         <!--MUDAR IMAGEM-->
-                        <img id="imgThumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                        <img id="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
                     </div>
                     <div class="col-md-8">
                         <!-- CONTEUDO A ESCREVER -->
@@ -149,7 +150,7 @@
                 <div class="thumbnail">
                     <div class="col-md-4">
                          <!--MUDAR IMAGEM-->
-                        <img id="imgThumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                        <img id="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
                     </div>
                     <div class="col-md-8">
                         <!-- CONTEUDO A ESCREVER -->
@@ -259,6 +260,8 @@
             }
             return galerias;
         }
+
+
         function markerClick(args) {
 
             if (args.eventName === 'click') {
@@ -278,7 +281,8 @@
                 $('#NomePoi').html(pois[args.id].nome);
                 $('#Descricao').html(pois[args.id].descricao);
                 $('#Categoria').html(categorias[catID - 1].nome);
-
+                $('ImagemPath').attr("src", "/Content/Images/GaleriaPoi/Imagem/"+ pois[args.id].ImagemPath.FileName);   
+                
                 if (eles.length > 1) {
 
                     for (var j = 0; j < eles.length; j++) {
@@ -303,7 +307,7 @@
 
         }
 
-
+        //JQUERY PARA MODAL HELP
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').focus()
         })

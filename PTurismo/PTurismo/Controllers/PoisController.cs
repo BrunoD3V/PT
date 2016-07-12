@@ -116,12 +116,10 @@ namespace PTurismo.Controllers
                                     FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
                                     FileType = FileType.Imagem
                                 };
-                                poi.ImagemPath = new FilePathPoi();
                                
-                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem"), poi.ImagemPath.FileName));
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem/"), poi.ImagemPath.FileName));
                             }
                         }
-                    
                         db.Poi.Add(poi);
                         db.SaveChanges();
                         return RedirectToAction("Index");
@@ -133,7 +131,6 @@ namespace PTurismo.Controllers
                 ModelState.AddModelError("",
                     "Erro ao guardar as alterações. Tente novamente, se persistir contacte o administrador.");
             }
-
             PopulateCategoriasDropDownList(poi.CategoriaID);
             return View(poi);
         }
