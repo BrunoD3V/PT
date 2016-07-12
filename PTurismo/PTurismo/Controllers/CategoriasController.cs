@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -129,7 +130,7 @@ namespace PTurismo.Controllers
                         {
                             if (fileExtension == allowedImageExtensions[i])
                             {
-                                var FileName =upload.FileName + Path.GetExtension(upload.FileName);
+                                var FileName = upload.FileName;
                                 var FileTypes = FileType.Imagem;
                                 
                                 categoria.FilePathCategoria = new FilePathCategoria();
@@ -173,15 +174,82 @@ namespace PTurismo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoriaID,nome,genero")] Categoria categoria)
+        public ActionResult Edit([Bind(Include = "CategoriaID,nome,genero")] Categoria categoria, HttpPostedFileBase upload)
         {
+            var categoriaToUpdate = db.Categoria.Find(categoria.CategoriaID);
+            bool validName = false;
+            try
+            {
+                foreach (var c in db.Categoria)
+                {
+                    if (upload.FileName.Equals(c.nome))
+                        validName = true;
+                }
+                string nomeF = categoria.nome + Path.GetExtension(upload.FileName);
+                if (nomeF.Equals(upload.FileName))
+                {
+                    validName = true;
+                }
+
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Tem que introduzir um ficheiro");
+            }
+            if (!validName)
+                return View(categoria);
             if (ModelState.IsValid)
             {
-                db.Entry(categoria).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (TryUpdateModel(categoriaToUpdate, "",
+                    new string[] {"CategoriaID", "nome", "genero", "FilePathCategoria"}))
+                {
+                    try
+                    {
+                        if (upload != null && upload.ContentLength > 0)
+                        {
+                            if (categoriaToUpdate.FilePathCategoria != null)
+                            {
+                                string currentFilePath = categoriaToUpdate.FilePathCategoria.FileName;
+                           
+                                db.FilePathCats.Remove(categoriaToUpdate.FilePathCategoria);
+                                FileInfo file =
+                                    new FileInfo(Path.Combine(Server.MapPath("~/Content/Images/Icones"), currentFilePath));
+                                file.Delete();
+                            }
+                        }
+                        string[] allowedImageExtensions = {".gif", ".png", ".jpeg", ".jpg"};
+
+                        String fileExtension = Path.GetExtension(upload.FileName);
+                        if (upload != null && upload.ContentLength > 0)
+                        {
+                            for (int i = 0; i < allowedImageExtensions.Length; i++)
+                            {
+                                if (fileExtension == allowedImageExtensions[i])
+                                {
+                                    var FileName = upload.FileName;
+                                    var FileTypes = FileType.Imagem;
+
+                                    categoria.FilePathCategoria = new FilePathCategoria();
+                                    categoria.FilePathCategoria.FileName = FileName;
+                                    categoria.FilePathCategoria.FileType = FileTypes;
+                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/Icones"), FileName));
+                                }
+                            }
+
+                        }
+                        db.Entry(categoriaToUpdate).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (RetryLimitExceededException)
+                    {
+                        ModelState.AddModelError("",
+                            "Erro a guardar as alterações. Tente outra vez, se o problema persitir contate o administrador do sistema");
+                    }
+                }
+               
             }
-            return View(categoria);
+            return View(categoriaToUpdate);
         }
 
         // GET: Categorias/Delete/5
