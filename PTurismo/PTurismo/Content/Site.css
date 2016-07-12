@@ -52,7 +52,7 @@ textarea {
 
 
 #row-principal{
-    background-color: rgba(245, 245, 245, 0.80);
+    background-color: rgb(255, 255, 255);
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -60,7 +60,7 @@ textarea {
 }
 
 #row-table{
-    background-color: rgba(245, 245, 245, 0.80);
+    background-color: rgb(255, 255, 255);
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -81,23 +81,23 @@ textarea {
     margin-top: 0px;
 }
 
-#img-thumbnail{
+.img-thumbnail{
     width: 150px;
     height: 150px;
 }
 
 div.thumbnail{
     display: flex;
+    margin-bottom: 0px;
 }
 
 div.thumbnail div{
     float: left;
-    margin: 1%;
+    margin: 0.1%;
 }
 
 div.thumbnail div:last-child{
-    margin-top: 25px;
-    margin-top: 25px;
+   text-align: left;
 }
 
 div.thumbnail ul{
@@ -107,6 +107,10 @@ div.thumbnail ul{
 
 .black-color {
     color: black;
+}
+
+.white-color{
+    color: white;
 }
 
 .img-poi{

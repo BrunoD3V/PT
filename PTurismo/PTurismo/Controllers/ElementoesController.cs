@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using PagedList;
 using PTurismo.DAL;
 using PTurismo.Models;
+using System.IO;
+using System.Data.Entity.Infrastructure;
 
 namespace PTurismo.Controllers
 {
@@ -66,7 +68,6 @@ namespace PTurismo.Controllers
 
             return View(elementos.ToPagedList(pageNumber, pageSize));
         }
-
         // GET: Elementoes/Details/5
         public ActionResult Details(int? id)
         {
@@ -81,7 +82,6 @@ namespace PTurismo.Controllers
             }
             return View(elemento);
         }
-
         // GET: Elementoes/Create
         public ActionResult Create()
         {
@@ -94,22 +94,36 @@ namespace PTurismo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PoiID,nome,descricao,imagem")] Elemento elemento)
+        public ActionResult Create([Bind(Include = "PoiID,nome,descricao,imagem")] Elemento elemento, HttpPostedFileBase upload)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.Elemento.Add(elemento);
-                    db.SaveChanges();
-                    return RedirectToAction("Create","GaleriaElementoes");
+                    string[] allowedImageExtensions = { ".gif", ".png", ".jpeg", ".jpg" };
+                    String fileExtension = Path.GetExtension(upload.FileName);
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        for (int i = 0; i < allowedImageExtensions.Length; i++)
+                        {
+                            if (fileExtension == allowedImageExtensions[i])
+                            {
+                                elemento.ImagemElemento = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
+                                elemento.FileType = FileType.Imagem;
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaElemento/Imagem"), elemento.ImagemElemento));
+                            }
+                        }
+                        db.Elemento.Add(elemento);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
             }
-            catch (DataException)
+            catch (RetryLimitExceededException)
             {
-                ModelState.AddModelError("", "Erro a guardar alterações. Tente outra vez, se o problem persistir contacte o administrador do sitema.");
+                ModelState.AddModelError("",
+                    "Erro ao guardar as alterações. Tente novamente, se persistir contacte o administrador.");
             }
-
             ViewBag.PoiID = new SelectList(db.Poi, "PoiID", "nome", elemento.PoiID);
             return View(elemento);
         }

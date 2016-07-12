@@ -34,11 +34,22 @@
 
 <!--INICIO DA PAGINA-->
 <div class="row">
-    <div class="col-md-6 text-right">
-        <img class="img-poi" src="~/Content/Images/Logo/Logo1.jpg"/>
-        <img id="ImagemPath" class="img-poi" src=""/>
+    <div class="col-md-2">
+
     </div>
-    <div class="col-md-6 text-right">
+    <div class="col-md-5 text-right">
+        <div class="thumbnail">
+            <div class="col-md-12">
+                <!--MUDAR IMAGEM-->
+                <img class="img-poi" src="~/Content/Images/Logo/Logo1.png" />
+            </div>
+            <div class="col-md-12">
+                <!-- CONTEUDO A ESCREVER -->
+                <img id="ImagemPath" class="img-poi" src="" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 text-right">
         <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#helpModal"><span class="glyphicon glyphicon-question-sign black-color"></span></button>
     </div>
 </div>
@@ -129,15 +140,13 @@
             <h1 id="NomePoi">NOME DO POI</h1>
             <h3 id="Categoria">CATEGORIA</h3>
             <h4 id="Descricao">O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde o ano de 1500, quando uma misturou os caracteres de um texto para criar um espécime de livro. Este texto não só sobreviveu 5 séculos, mas também o salto para a tipografia electrónica, mantendo-se essencialmente inalterada. Foi popularizada nos anos 60 com a disponibilização das folhas de Letraset, que continham passagens com Lorem Ipsum, e mais recentemente com os programas de publicação como o Aldus PageMaker que incluem versões do Lorem Ipsum.</h4>
-            <div id="Elemento">ELEMENTO</div>
         </div>
-
         <div class="row bottom-left">
             <div class="col-xs-6 col-md-6 col-lg-6">
                 <div class="thumbnail">
                     <div class="col-md-4">
                         <!--MUDAR IMAGEM-->
-                        <img id="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                        <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
                     </div>
                     <div class="col-md-8">
                         <!-- CONTEUDO A ESCREVER -->
@@ -145,12 +154,11 @@
                     </div>
                 </div>
             </div>
-            
             <div class="col-xs-6 col-md-6 col-lg-6">
                 <div class="thumbnail">
                     <div class="col-md-4">
                          <!--MUDAR IMAGEM-->
-                        <img id="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                        <img id="ImagemEle2" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
                     </div>
                     <div class="col-md-8">
                         <!-- CONTEUDO A ESCREVER -->
@@ -158,17 +166,12 @@
                     </div>
                 </div>
             </div>
-          
         </div>
         <div class="row bottom">
             <a href="" class="btn btn-lg btn-success">Vamos Conhecer<span class="glyphicon glyphicon-triangle-right"></span></a>
         </div>
     </div>
 </div>
-
-
-
-
 
 @section scripts
 {
@@ -285,12 +288,22 @@
                 console.log(pois[args.id].ImagemPath)
                 var path = "/Content/Images/GaleriaPoi/Imagem/" + cenas;
                 $('#ImagemPath').attr( "src" , path);   
-                
-                if (eles.length > 1) {
 
-                    for (var j = 0; j < eles.length; j++) {
-                        console.log(eles[j]);
+                if (eles.length > 1) {
+                    console.log("Fora" + eles.length);
+                    for (var K = 0; K < eles.length; K++) {
+                        console.log("LENGHT" + eles.length);
+                        console.log("JJJJJJ" + K);
                         //TODO mostrar cada elemento do poi
+                        var nomeEle = eles[K].nome;
+                        var descricaoEle = eles[K].descricao;
+                        var ImagemEle = "/Content/Images/GaleriaElemento/Imagem/" + eles[K].ImagemElemento;
+                        console.log(eles[K].ImagemElemento)
+                        if(K===0){
+                            $("#ImagemEle1").attr("src", ImagemEle);
+                        }else{
+                            $("#ImagemEle2").attr("src", ImagemEle)
+                        }
                     }
                 }
 

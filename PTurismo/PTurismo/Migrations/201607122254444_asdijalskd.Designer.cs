@@ -7,13 +7,13 @@ namespace PTurismo.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class alskd : IMigrationMetadata
+    public sealed partial class asdijalskd : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(alskd));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(asdijalskd));
         
         string IMigrationMetadata.Id
         {
-            get { return "201607122141183_alskd"; }
+            get { return "201607122254444_asdijalskd"; }
         }
         
         string IMigrationMetadata.Source
