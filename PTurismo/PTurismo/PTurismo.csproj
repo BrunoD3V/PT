@@ -200,10 +200,6 @@
     </Compile>
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\JavaScriptConvert.cs" />
-    <Compile Include="Migrations\201607122141183_alskd.cs" />
-    <Compile Include="Migrations\201607122141183_alskd.Designer.cs">
-      <DependentUpon>201607122141183_alskd.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Elemento.cs" />
@@ -311,11 +307,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607122141183_alskd.resx">
-      <DependentUpon>201607122141183_alskd.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
