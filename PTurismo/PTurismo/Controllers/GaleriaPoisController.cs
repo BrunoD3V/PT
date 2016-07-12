@@ -94,11 +94,15 @@ namespace PTurismo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "GaleriaPoiID,PoiID,Legenda")] GaleriaPoi galeriaPoi, HttpPostedFileBase upload)
         {
+            try
+            {
+                String fileExtension = Path.GetExtension(upload.FileName);
+            
             if (ModelState.IsValid)
             {
                 string[] allowedImageExtensions = { ".gif", ".png", ".jpeg", ".jpg" };
                 string[] allowedVideoExtensions = { ".mp4"};
-                String fileExtension = Path.GetExtension(upload.FileName);
+               
                 if (upload != null && upload.ContentLength > 0)
                 {
                     for (int i = 0; i < allowedImageExtensions.Length; i++)
@@ -134,6 +138,11 @@ namespace PTurismo.Controllers
                     return RedirectToAction("Index");
                 }
                             
+            }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Tem que introduzir um ficheiro");
             }
 
             ViewBag.PoiID = new SelectList(db.Poi, "PoiID", "nome", galeriaPoi.PoiID);
