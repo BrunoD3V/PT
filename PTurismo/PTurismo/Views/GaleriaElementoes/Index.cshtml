@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<PTurismo.Models.GaleriaElemento>
 @using PagedList.Mvc;
+@using PTurismo.Models;
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -15,7 +16,7 @@
 @using (Html.BeginForm("Index", "GaleriaElementoes", FormMethod.Get))
 {
     <p>
-        Procurar por Tipo de Media/Legenda: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        Procurar por Legenda: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Procurar" class="btn btn-danger" />
     </p>
     <hr />
@@ -23,16 +24,16 @@
 <table class="table">
     <tr>
         <th>
-            Elemento
+           Elemento
         </th>
         <th>
-            @Html.ActionLink("Tipo Media", "Index", new { sortOrder = ViewBag.TipoMediaSortParm, currentFilter = ViewBag.CurrentFilter })
+           Legenda
         </th>
         <th>
-            @Html.ActionLink("Legenda", "Index", new { sortOrder = ViewBag.LegendaSortParm, currentFilter = ViewBag.CurrentFilter })
+            Preview
         </th>
         <th>
-            Diretório do Ficheiro
+            Ficheiro
         </th>
         <th></th>
     </tr>
@@ -42,15 +43,24 @@
         <td>
             @Html.DisplayFor(modelItem => item.Elemento.nome)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipoMedia)
-        </td>
+       
         <td>
             @Html.DisplayFor(modelItem => item.legenda)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.media)
-        </td>
+        @foreach (var items in item.FilePathElementos)
+        {
+            if (items.FileType == FileType.Imagem)
+            {
+                <td>
+                    <div class="img-responsive text-center">
+                        <img src="~/Content/Images/@items.FileName" alt="" width="150" height="150" alt="Ficheiro Media" />
+                    </div>
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => items.FileName)
+            </td>
+        }
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.GaleriaElementoID }) <br />
             @Html.ActionLink("Eliminar", "Delete", new { id=item.GaleriaElementoID })

@@ -10,10 +10,12 @@ namespace PTurismo.Models
     {
         public virtual int GaleriaElementoID { get; set; }
         public virtual int ElementoID { get; set; }
-        public virtual string media { get; set; }
+      
         public virtual string legenda { get; set; }
-        public virtual string tipoMedia { get; set; }
+       
         [JsonIgnore]
         public virtual Elemento Elemento { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<FilePathElemento> FilePathElementos { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@using System.Collections
+@using System.Drawing
 @using Jmelosegui.Mvc.GoogleMap
 @using PTurismo.Helpers
 @using System.Web.Script.Serialization
@@ -34,7 +35,31 @@
         {
             foreach (var p in Model.Pois)
             {
-                m.Add().Latitude(p.latitude).Longitude(p.longitude);
+                if (p.CategoriaID.Equals(1))
+                {
+                    m.Add()
+                        .Latitude(p.latitude)
+                        .Longitude(p.longitude)
+                        .Icon("~/Content/Images/Icones/Igreja.png", new Size(100, 100), new Point(0, 0), new Point(100, 100));
+                }else if (p.CategoriaID.Equals(3))
+                {
+                    m.Add()
+                       .Latitude(p.latitude)
+                       .Longitude(p.longitude)
+                       .Icon("~/Content/Images/Icones/Capela.png", new Size(20, 32), new Point(0, 0), new Point(0, 32));
+                }
+                else if (p.CategoriaID.Equals(5))
+                {
+                    m.Add()
+                        .Latitude(p.latitude)
+                        .Longitude(p.longitude)
+                        .Icon("~/Content/Images/Icones/Santuario.png", new Size(20, 32), new Point(0, 0), new Point(0, 32));
+                }else
+                {
+                    m.Add()
+                        .Latitude(p.latitude)
+                        .Longitude(p.longitude);
+                }
             }
         })
         .MarkerEvents(events => events.OnMarkerClick("markerClick"))
