@@ -28,15 +28,30 @@ textarea {
     margin-left: 95px;
 }
 
+.row{
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
 .bottom {
     position: absolute;
     bottom: 0;
     right: 0;
     margin-bottom: 7px;
-    margin-right: 15px;
+    margin-right: 20px;
 }
 
-#rowprincipal{
+.bottom-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 60px;
+    margin-left: 10px;
+}
+
+
+#row-principal{
     background-color: rgba(245, 245, 245, 0.80);
     display: -webkit-box;
     display: -webkit-flex;
@@ -44,8 +59,52 @@ textarea {
     display: flex;
 }
 
+#row-table{
+    background-color: rgba(245, 245, 245, 0.80);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: inline-table;
+    padding: 30px;
+}
+
+#row-edit{
+    background-color: rgba(245, 245, 245, 0.80);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: block;
+    padding: 30px;
+}
+
 #mapafixe{
     margin-top: 0px;
 }
+
+#imgThumbnail{
+    width: 150px;
+    height: 150px;
+}
+
+div.thumbnail{
+    display: flex;
+}
+
+div.thumbnail div{
+    float: left;
+    margin: 1%;
+}
+
+div.thumbnail div:last-child{
+    margin-top: 25px;
+    margin-top: 25px;
+}
+
+div.thumbnail ul{
+    list-style-type: none;
+    padding-left: 0px !important;
+}
+
+
 
 

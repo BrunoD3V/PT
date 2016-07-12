@@ -4,76 +4,83 @@
     ViewBag.Title = "Eliminar";
 }
 
-<h2>Eliminar</h2>
+<div id="row-edit" class="row">
+    <div class="row">
+        <h2>Eliminar</h2>
+    </div>
+    <div class="row">
+        <h3>Tem a certeza que pretende eliminar?</h3>
+    </div>
+    <div class="row">
+        <h4>Poi</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Categoria:
+            </dt>
 
-<h3>Tem a certeza que pretende eliminar?</h3>
-<div>
-    <h4>Poi</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Categoria:
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.categoria.nome)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.categoria.nome)
-        </dd>
+            <dt>
+                Nome:
+            </dt>
 
-        <dt>
-            Nome:
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.nome)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.nome)
-        </dd>
+            <dt>
+                Latitude:
+            </dt>
 
-        <dt>
-            Latitude:
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.latitude)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.latitude)
-        </dd>
+            <dt>
+                Longitude:
+            </dt>
 
-        <dt>
-            Longitude:
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.longitude)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.longitude)
-        </dd>
+            <dt>
+                Descrição:
+            </dt>
 
-        <dt>
-            Descrição:
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.descricao)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.descricao)
-        </dd>
+            <dt>
+                Imagem:
+            </dt>
 
-        <dt>
-            Imagem:
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ImagemPath)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.imagem)
-        </dd>
+            <dt>
+                Resumo:
+            </dt>
 
-        <dt>
-            Resumo:
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.resumo)
+            </dd>
+        </dl>
+    </div>
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.resumo)
-        </dd>
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            @Html.ActionLink("Voltar à Lista", "Index")
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                @Html.ActionLink("Voltar à Lista", "Index")
+            </div>
+        }
+    </div>
 </div>

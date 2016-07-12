@@ -6,76 +6,91 @@
     ViewBag.Title = "Pois";
 }
 
-<h2>Pontos de Interesse</h2>
+<div id="row-table" class="row">
+    <div class="row">
+        <h2>Pontos de Interesse</h2>
+    </div>
+    
+    <div class="row">
+        <p>
+            @Html.ActionLink("Criar Novo", "Create")
+        </p>
+    </div>
+    
+    <div class="row">
+        @using (Html.BeginForm("Index", "Pois", FormMethod.Get))
+        {
+            <p>
+                Procurar por Nome ou Categoria: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Procurar" class="btn btn-danger" />
+            </p>
+        }
+    </div>
+   
 
-<p>
-    @Html.ActionLink("Criar Novo", "Create")
-</p>
-@using (Html.BeginForm("Index", "Pois", FormMethod.Get))
-{
-    <p>
-        Procurar por Nome ou Categoria: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Procurar" class="btn btn-danger" />
-    </p>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Categoria", "Index", new { sortOrder = ViewBag.CategoriaSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            Latitude
-        </th>
-        <th>
-            Longitude
-        </th>
-        <th>
-            Descrição
-        </th>
-        <th>
-            Imagem
-        </th>
-        <th>
-            Resumo
-        </th>
-        <th></th>
-    </tr>
+    <div class="row">
+        <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Categoria", "Index", new { sortOrder = ViewBag.CategoriaSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                Latitude
+            </th>
+            <th>
+                Longitude
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th>
+                Imagem
+            </th>
+            <th>
+                Resumo
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.categoria.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.longitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImagemPath)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.resumo)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.PoiID }) <br />
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.PoiID })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.categoria.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.latitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.longitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImagemPath)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.resumo)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.PoiID }) <br />
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.PoiID })
+                </td>
+            </tr>
+        }
 
-</table>
-<br />
-Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    </table>
+    <br />
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    
+</div>
