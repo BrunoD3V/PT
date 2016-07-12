@@ -111,13 +111,9 @@ namespace PTurismo.Controllers
                         {
                             if (fileExtension == allowedImageExtensions[i])
                             {
-                                poi.ImagemPath = new FilePathPoi
-                                {
-                                    FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
-                                    FileType = FileType.Imagem
-                                };
-                               
-                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem/"), poi.ImagemPath.FileName));
+                                poi.ImagemPath = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
+                                poi.FileType = FileType.Imagem;
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem"), poi.ImagemPath));
                             }
                         }
                         db.Poi.Add(poi);

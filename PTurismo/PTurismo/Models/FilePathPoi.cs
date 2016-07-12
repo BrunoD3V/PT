@@ -17,5 +17,6 @@ namespace PTurismo.Models
         public int GaleriaPoiID { get; set; }
         [JsonIgnore]
         public virtual GaleriaPoi GaleriaPoi { get; set; }
+
     }
 }

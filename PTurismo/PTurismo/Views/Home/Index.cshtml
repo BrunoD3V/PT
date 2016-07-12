@@ -281,7 +281,8 @@
                 $('#NomePoi').html(pois[args.id].nome);
                 $('#Descricao').html(pois[args.id].descricao);
                 $('#Categoria').html(categorias[catID - 1].nome);
-                $('ImagemPath').attr("src", "/Content/Images/GaleriaPoi/Imagem/"+ pois[args.id].ImagemPath.FileName);   
+                var path = "/Content/Images/GaleriaPoi/Imagem/" + 
+                $('ImagemPath').attr("src", "/Content/Images/GaleriaPoi/Imagem/"+pois[args.id].ImagemPath);   
                 
                 if (eles.length > 1) {
 

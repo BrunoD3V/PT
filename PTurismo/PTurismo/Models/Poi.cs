@@ -14,7 +14,8 @@ namespace PTurismo.Models
         public virtual double latitude { get; set; }
         public virtual double longitude { get; set; }
         public virtual string descricao { get; set; }
-        public virtual FilePathPoi ImagemPath { get; set; }
+        public virtual string ImagemPath { get; set; }
+        public FileType FileType { get; set; }
         public virtual string resumo { get; set; }
         [JsonIgnore]
         public virtual Categoria categoria { get; set; }
