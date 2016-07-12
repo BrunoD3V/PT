@@ -120,6 +120,7 @@ namespace PTurismo.Controllers
                                 upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem/"), poi.ImagemPath.FileName));
                             }
                         }
+                        Console.WriteLine(poi.ImagemPath.ToString());
                         db.Poi.Add(poi);
                         db.SaveChanges();
                         return RedirectToAction("Index");
