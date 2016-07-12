@@ -40,21 +40,58 @@
                     m.Add()
                         .Latitude(p.latitude)
                         .Longitude(p.longitude)
-                        .Icon("~/Content/Images/Icones/Igreja.png", new Size(100, 100), new Point(0, 0), new Point(100, 100));
-                }else if (p.CategoriaID.Equals(3))
+                        .Icon("~/Content/Images/Icones/Igreja.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
+                }
+                else if (p.CategoriaID.Equals(3))
                 {
                     m.Add()
                        .Latitude(p.latitude)
                        .Longitude(p.longitude)
-                       .Icon("~/Content/Images/Icones/Capela.png", new Size(20, 32), new Point(0, 0), new Point(0, 32));
+                       .Icon("~/Content/Images/Icones/Capela.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
                 }
                 else if (p.CategoriaID.Equals(5))
                 {
                     m.Add()
                         .Latitude(p.latitude)
                         .Longitude(p.longitude)
-                        .Icon("~/Content/Images/Icones/Santuario.png", new Size(20, 32), new Point(0, 0), new Point(0, 32));
-                }else
+                        .Icon("~/Content/Images/Icones/Santuario.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
+                }
+                else if (p.CategoriaID.Equals(4))
+                {
+                    m.Add()
+                        .Latitude(p.latitude)
+                        .Longitude(p.longitude)
+                        .Icon("~/Content/Images/Icones/Mosteiro.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
+                }
+                else if (p.CategoriaID.Equals(6))
+                {
+                    m.Add()
+                        .Latitude(p.latitude)
+                        .Longitude(p.longitude)
+                        .Icon("~/Content/Images/Icones/Basilica.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
+                }
+                else if (p.CategoriaID.Equals(7))
+                {
+                    m.Add()
+                        .Latitude(p.latitude)
+                        .Longitude(p.longitude)
+                        .Icon("~/Content/Images/Icones/Museu.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
+                }
+                else if (p.CategoriaID.Equals(8))
+                {
+                    m.Add()
+                        .Latitude(p.latitude)
+                        .Longitude(p.longitude)
+                        .Icon("~/Content/Images/Icones/Castelo.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
+                }
+                else if (p.CategoriaID.Equals(2))
+                {
+                    m.Add()
+                        .Latitude(p.latitude)
+                        .Longitude(p.longitude)
+                        .Icon("~/Content/Images/Icones/Catedral.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
+                }
+                else
                 {
                     m.Add()
                         .Latitude(p.latitude)

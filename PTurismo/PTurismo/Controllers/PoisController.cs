@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using PTurismo.DAL;
 using PTurismo.Models;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using PagedList;
 
 namespace PTurismo.Controllers
@@ -95,20 +96,42 @@ namespace PTurismo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PoiID,CategoriaID,nome,latitude,longitude,descricao,resumo")] Poi poi)
+        public ActionResult Create([Bind(Include = "PoiID,CategoriaID,nome,latitude,longitude,descricao,resumo")] Poi poi, HttpPostedFileBase upload)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.Poi.Add(poi);
-                    db.SaveChanges();
-                    return RedirectToAction("Create","GaleriaPois");
+                    string[] allowedImageExtensions = {".gif", ".png", ".jpeg", ".jpg"};
+                    string[] allowedVideoExtensions = {".mp4"};
+                    String fileExtension = Path.GetExtension(upload.FileName);
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        for (int i = 0; i < allowedImageExtensions.Length; i++)
+                        {
+                            if (fileExtension == allowedImageExtensions[i])
+                            {
+                                poi.ImagemPath = new FilePathPoi
+                                {
+                                    FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
+                                    FileType = FileType.Imagem
+                                };
+                                poi.ImagemPath = new FilePathPoi();
+                               
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem"), poi.ImagemPath.FileName));
+                            }
+                        }
+                    
+                        db.Poi.Add(poi);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
             }
             catch (RetryLimitExceededException)
             {
-                ModelState.AddModelError("", "Erro ao guardar as alterações. Tente novamente, se persistir contacte o administrador.");
+                ModelState.AddModelError("",
+                    "Erro ao guardar as alterações. Tente novamente, se persistir contacte o administrador.");
             }
 
             PopulateCategoriasDropDownList(poi.CategoriaID);
