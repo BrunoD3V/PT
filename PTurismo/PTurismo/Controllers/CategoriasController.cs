@@ -176,7 +176,7 @@ namespace PTurismo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CategoriaID,nome,genero")] Categoria categoria, HttpPostedFileBase upload)
         {
-            var categoriaToUpdate = db.Categoria.Find(categoria.CategoriaID);
+            Categoria categoriaToUpdate = db.Categoria.Find(categoria.CategoriaID);
             bool validName = false;
             try
             {

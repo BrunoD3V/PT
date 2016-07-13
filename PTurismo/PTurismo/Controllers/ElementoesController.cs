@@ -149,12 +149,39 @@ namespace PTurismo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ElementoID,PoiID,nome,descricao,imagem")] Elemento elemento, HttpPostedFileBase upload)
+        public ActionResult Edit([Bind(Include = "ElementoID,PoiID,nome,descricao")] Elemento elemento, HttpPostedFileBase upload)
         {
             var elementoToUpdate = db.Elemento.Find(elemento.ElementoID);
             try
             {
+                if (TryUpdateModel(elementoToUpdate, "", new string[] {"ElementoID", "PoiID", "nome", "descricao"}))
+                {
+                    try
+                    {
+                        if (upload != null && upload.ContentLength > 0)
+                        {
+                            string[] allowedImageExtensions = { ".gif", ".png", ".jpeg", ".jpg" };
 
+                            String fileExtension = Path.GetExtension(upload.FileName);
+                            foreach (string t in allowedImageExtensions)
+                            {
+                                if (fileExtension == t)
+                                {
+                                    var FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
+                                    var FileTypes = FileType.Imagem;
+                                    elementoToUpdate.ImagemElemento = FileName;
+                                    elementoToUpdate.FileType = FileTypes;
+                                    
+                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/GaleriaElemento/Imagem"), FileName));
+                                }
+                            }
+                        }
+                    }
+                    catch (RetryLimitExceededException)
+                    {
+                        ModelState.AddModelError("", "Erro ao guardar alterações, tente mais tarde. Se o problema persistir contate o administrador do sistema.");
+                    }
+                }
             }
             catch (Exception)
             {
@@ -163,7 +190,7 @@ namespace PTurismo.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Entry(elemento).State = EntityState.Modified;
+                db.Entry(elementoToUpdate).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
