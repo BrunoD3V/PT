@@ -149,8 +149,18 @@ namespace PTurismo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ElementoID,PoiID,nome,descricao,imagem")] Elemento elemento)
+        public ActionResult Edit([Bind(Include = "ElementoID,PoiID,nome,descricao,imagem")] Elemento elemento, HttpPostedFileBase upload)
         {
+            var elementoToUpdate = db.Elemento.Find(elemento.ElementoID);
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+                
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(elemento).State = EntityState.Modified;
