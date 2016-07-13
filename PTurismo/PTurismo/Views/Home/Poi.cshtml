@@ -1,0 +1,416 @@
+﻿@using System.Collections
+@using System.Drawing
+@using Jmelosegui.Mvc.GoogleMap
+@using PTurismo.Helpers
+@using System.Web.Script.Serialization
+@using PTurismo.Models
+@model PTurismo.ViewModels.MapaViewModel
+
+@Scripts.Render("~/Scripts/script.js")
+
+@{
+    ViewBag.Title = "Poi";
+}
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title" id="myModalLabel">Help - Ajuda</h3>
+            </div>
+            <div class="modal-body">
+                <img src="~/Content/Images/Logo/Logo1.png" />
+                <img src="~/Content/Images/Logo/Logo2.png" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-block" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--INICIO DA PAGINA-->
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-5 text-right">
+        <div class="thumbnail">
+            <div class="col-md-12">
+                <!--MUDAR IMAGEM-->
+                <img class="img-poi" src="~/Content/Images/Logo/Logo1.png" />
+            </div>
+            <div class="col-md-12">
+                <!-- CONTEUDO A ESCREVER -->
+                <img id="ImagemPath" class="img-poi" src="" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 text-right">
+        <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#helpModal"><span class="glyphicon glyphicon-question-sign black-color"></span></button>
+    </div>
+</div>
+
+<div class="row row-poi">
+    <div id="mapa-margin" class="col-md-4">
+        <div class="row">
+            <h3 id="Genero">Descobrir cada pormenor </h3>
+        </div>
+        <div class="row row-scroll">
+            <div class="thumbnail">
+                <div class="col-md-4">
+                    <!--MUDAR IMAGEM-->
+                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                </div>
+                <div class="col-md-8">
+                    <h4 id="NomeEle1"></h4>
+                    <h5 id="DescricaoEle1"></h5>
+                </div>
+            </div>
+            <div class="thumbnail">
+                <div class="col-md-4">
+                    <!--MUDAR IMAGEM-->
+                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                </div>
+                <div class="col-md-8">
+                    <h4 id="NomeEle1"></h4>
+                    <h5 id="DescricaoEle1"></h5>
+                </div>
+            </div>
+            <div class="thumbnail">
+                <div class="col-md-4">
+                    <!--MUDAR IMAGEM-->
+                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                </div>
+                <div class="col-md-8">
+                    <h4 id="NomeEle1"></h4>
+                    <h5 id="DescricaoEle1"></h5>
+                </div>
+            </div>
+            <div class="thumbnail">
+                <div class="col-md-4">
+                    <!--MUDAR IMAGEM-->
+                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                </div>
+                <div class="col-md-8">
+                    <h4 id="NomeEle1"></h4>
+                    <h5 id="DescricaoEle1"></h5>
+                </div>
+            </div>
+            <div class="thumbnail">
+                <div class="col-md-4">
+                    <!--MUDAR IMAGEM-->
+                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                </div>
+                <div class="col-md-8">
+                    <h4 id="NomeEle1"></h4>
+                    <h5 id="DescricaoEle1"></h5>
+                </div>
+            </div>
+            <div class="thumbnail">
+                <div class="col-md-4">
+                    <!--MUDAR IMAGEM-->
+                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                </div>
+                <div class="col-md-8">
+                    <h4 id="NomeEle1"></h4>
+                    <h5 id="DescricaoEle1"></h5>
+                </div>
+            </div>
+            <div class="thumbnail">
+                <div class="col-md-4">
+                    <!--MUDAR IMAGEM-->
+                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                </div>
+                <div class="col-md-8">
+                    <h4 id="NomeEle1"></h4>
+                    <h5 id="DescricaoEle1"></h5>
+                </div>
+            </div>
+            <div class="thumbnail">
+                <div class="col-md-4">
+                    <!--MUDAR IMAGEM-->
+                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                </div>
+                <div class="col-md-8">
+                    <h4 id="NomeEle1"></h4>
+                    <h5 id="DescricaoEle1"></h5>
+                </div>
+            </div>
+            <div class="thumbnail">
+                <div class="col-md-4">
+                    <!--MUDAR IMAGEM-->
+                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                </div>
+                <div class="col-md-8">
+                    <h4 id="NomeEle1"></h4>
+                    <h5 id="DescricaoEle1"></h5>
+                </div>
+            </div>
+            <div class="thumbnail">
+                <div class="col-md-4">
+                    <!--MUDAR IMAGEM-->
+                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                </div>
+                <div class="col-md-8">
+                    <h4 id="NomeEle1"></h4>
+                    <h5 id="DescricaoEle1"></h5>
+                </div>
+            </div>
+            <div class="thumbnail">
+                <div class="col-md-4">
+                    <!--MUDAR IMAGEM-->
+                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                </div>
+                <div class="col-md-8">
+                    <h4 id="NomeEle1"></h4>
+                    <h5 id="DescricaoEle1"></h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="dataShow" class="col-md-8">
+        <div class="row">
+            <h1 id="NomePoi">NOME DO POI</h1>
+        </div>
+        <div class="row">
+            <!--DESCRICAO-->
+            <div id="showDescricao style="display: none;"">
+
+            </div>
+            <!--CAROUSEL-->
+            <div id="showCarousel" style="display: none;">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="img_chania.jpg" alt="Chania" width="460" height="345">
+                        </div>
+
+                        <div class="item">
+                            <img src="img_chania2.jpg" alt="Chania" width="460" height="345">
+                        </div>
+
+                        <div class="item">
+                            <img src="img_flower.jpg" alt="Flower" width="460" height="345">
+                        </div>
+
+                        <div class="item">
+                            <img src="img_flower2.jpg" alt="Flower" width="460" height="345">
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <!--FIM CAROUSEL-->
+            </div>
+            <!--VIDEO-->
+            <div id="showVideo" align="center" class="embed-responsive embed-responsive-16by9">
+                <video controls class="embed-responsive-item">
+                    <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
+                </video>
+            </div>
+
+        </div>
+        <div class="row bottom-poi">
+            <div class="col-md-3">
+                <button class="btn btn-lg btn-success buttons-poi">Descrição <span class="glyphicon glyphicon-modal-window"></span></button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-lg btn-success buttons-poi">Fotografias <span class="glyphicon glyphicon-camera"></span></button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-lg btn-success buttons-poi">Áudio <span class="glyphicon glyphicon-music"></span></button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-lg btn-success buttons-poi">Videos <span class="glyphicon glyphicon-facetime-video"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        function getElementos(elementos, id) {
+            console.log(id);
+            var eles = new Array();
+            for (var i = 0; i < elementos.length; i++) {
+                var obj = elementos[i];
+                for (var key in obj) {
+                    var attrName = key;
+                    var attrValue = obj[key];
+
+                    if (attrName === "PoiID" && attrValue == id) {
+
+                        eles.push(elementos[i]);
+                        console.log(eles[i]);
+                    }
+                }
+            }
+            return eles;
+        }
+
+        function getFilePathPoi(filePathPoi, galeriasPoi, id) {
+
+            var files = new Array();
+            var galerias = new Array();
+            galerias = getGaleriasPoi(galeriasPoi, id);
+
+            if (galerias.length > 0) {
+                for (var i = 0; i < galerias.length; i++) {
+                    var obj = galerias[i];
+                    // console.log(obj);
+                    for (var key in obj) {
+                        var attrName = key;
+                        var attrValue = obj[key];
+
+                        if (attrName === "GaleriaPoiID") {
+                            // console.log("attrValue =" + attrValue);
+                            // console.log("attrName : " + attrName);
+                            for (var j = 0; j < filePathPoi.length; j++) {
+                                var objt = filePathPoi[j];
+
+
+                                for (var k in objt) {
+                                    var attName = k;
+                                    var attValue = objt[k];
+                                    //console.log("Nome: " + attName);
+                                    //console.log("attValue = " + attValue);
+                                    // console.log("attrValue =" + attrValue);
+
+                                    if (attName === "GaleriaPoiID" && attrValue == attValue) {
+                                        // console.log(filePathPoi[j]);
+                                        files.push(filePathPoi[i]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return files;
+        }
+
+        function getGaleriasPoi(galeriasPoi, id) {
+
+            var galerias = new Array();
+            for (var i = 0; i < galeriasPoi.length; i++) {
+                var obj = galeriasPoi[i];
+                for (var key in obj) {
+                    var attrName = key;
+                    var attrValue = obj[key];
+
+                    if (attrName === "PoiID" && attrValue == id) {
+
+                        galerias.push(galeriasPoi[i]);
+                        //console.log(galeriasPoi[i]);
+                    }
+                }
+            }
+            return galerias;
+        }
+
+
+        function markerClick(args) {
+
+            if (args.eventName === 'click') {
+                var id = parseInt(args.id) + 1;
+                var eles = new Array();
+                try {
+                    eles = getElementos(elementos, id);
+                    console.log("AQUI");
+                    console.log(eles[0]);
+                } catch (err) {
+                    $('#Elemento').html('<div></div>');
+                }
+                var catID = pois[args.id].CategoriaID;
+                var generoCat = categorias[catID - 1].genero;
+                //GENERO A ESCREVER
+                if (generoCat.localeCompare("Masculino"))
+                {
+                    var displayCat = "Descobrir cada pormenor deste ";
+                    $('#Genero').html(displayCat);
+                } else {
+                    var displayCat = "Descobrir cada pormenor desta ";
+                    $('#Genero').html(displayCat);
+                }
+                //FIM GENERO
+
+                //ESCREVE NOME POI
+                $('#NomePoi').html(pois[args.id].nome);
+                //ESCREVE DESCRIÇAO POI
+                $('#Descricao').html(pois[args.id].descricao);
+                //ESCREVE CATEGORIA POI
+                $('#Categoria').html(categorias[catID - 1].nome);
+
+                //IMAGEM PRINCIPAL POI
+                var nomeFicheiro = pois[args.id].ImagemPath;
+                var path = "/Content/Images/GaleriaPoi/Imagem/" + nomeFicheiro;
+                $('#ImagemPath').attr("src", path);
+                //FIM 
+
+                //PREENCHER OS DOIS ELEMENTOS A DISPONIBILIZAR
+                if (eles.length >= 1 && eles.length <= 2) {
+                    console.log("Fora" + eles.length);
+                    for (var K = 0; K < eles.length; K++) {
+                        //TODO mostrar cada elemento do poi
+                        var nomeEle = eles[K].nome;
+                        var descricaoEle = eles[K].descricao;
+                        var ImagemEle = "/Content/Images/GaleriaElemento/Imagem/" + eles[K].ImagemElemento;
+                        console.log(eles[K].ImagemElemento)
+                        if(K===0){
+                            $("#NomeEle1").html(nomeEle);
+                            $("#DescricaoEle1").html(descricaoEle);
+                            $("#ImagemEle1").attr("src", ImagemEle);
+                        }else{
+                            $("#NomeEle2").html(nomeEle);
+                            $("#DescricaoEle2").html(descricaoEle);
+                            $("#ImagemEle2").attr("src", ImagemEle)
+                        }
+                    }
+                }
+                //FIM ELEMENTOS
+
+                //?????????????
+                var ficheiros = new Array();
+
+                ficheiros = getFilePathPoi(filePathPoi, galeriasPoi, id);
+                if (ficheiros.length > 0) {
+                    console.log(ficheiros[0]);//TODO mostrar todos os ficheiros;
+                    var ficheiro = "/Content/Images/" + ficheiros[0].FileName;
+                    $('#my_image').attr("src", ficheiro);
+                } else {
+                    $('#my_image').attr("src", "/Content/Images/f76e268d-ee7f-4a65-bf18-ad6d5fc3f6c0.jpeg");
+                }
+            }
+        }
+
+        //JQUERY PARA MODAL HELP
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').focus()
+        })
+        //FIM
+    </script>
+        
+}

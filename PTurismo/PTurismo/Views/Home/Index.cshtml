@@ -149,8 +149,8 @@
                         <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
                     </div>
                     <div class="col-md-8">
-                        <!-- CONTEUDO A ESCREVER -->
-                        SAMPLE
+                       <h4 id="NomeEle1" ></h4>
+                       <h5 id="DescricaoEle1"></h5>
                     </div>
                 </div>
             </div>
@@ -161,14 +161,16 @@
                         <img id="ImagemEle2" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
                     </div>
                     <div class="col-md-8">
-                        <!-- CONTEUDO A ESCREVER -->
-                        SAMPLE
+                        <h4 id="NomeEle2"></h4>
+                        <h5 id="DescricaoEle2"></h5>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row bottom">
-            <a href="" class="btn btn-lg btn-success">Vamos Conhecer<span class="glyphicon glyphicon-triangle-right"></span></a>
+            <!-- PASSAR ID new { id = item.PoiID } BY MODEL -->
+            <button class="btn btn-lg btn-success" onclick="@("window.location.href='" + @Url.Action("Poi", "Home") + "'");">
+            Vamos Conhecer<span class="glyphicon glyphicon-triangle-right"></span></button>
         </div>
     </div>
 </div>
@@ -289,19 +291,21 @@
                 var path = "/Content/Images/GaleriaPoi/Imagem/" + cenas;
                 $('#ImagemPath').attr( "src" , path);   
 
-                if (eles.length > 1) {
+                if (eles.length >= 1 && eles.length <= 2) {
                     console.log("Fora" + eles.length);
                     for (var K = 0; K < eles.length; K++) {
-                        console.log("LENGHT" + eles.length);
-                        console.log("JJJJJJ" + K);
                         //TODO mostrar cada elemento do poi
                         var nomeEle = eles[K].nome;
                         var descricaoEle = eles[K].descricao;
                         var ImagemEle = "/Content/Images/GaleriaElemento/Imagem/" + eles[K].ImagemElemento;
                         console.log(eles[K].ImagemElemento)
                         if(K===0){
+                            $("#NomeEle1").html(nomeEle);
+                            $("#DescricaoEle1").html(descricaoEle);
                             $("#ImagemEle1").attr("src", ImagemEle);
                         }else{
+                            $("#NomeEle2").html(nomeEle);
+                            $("#DescricaoEle2").html(descricaoEle);
                             $("#ImagemEle2").attr("src", ImagemEle)
                         }
                     }

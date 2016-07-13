@@ -118,5 +118,38 @@ div.thumbnail ul{
     height: 175px;
 }
 
+.row-poi{
+    height: 600px;
+    background-color: rgb(255, 255, 255);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+   
+}
 
+.bottom-poi{
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 7px;
+     width: 95%;
+}
 
+.buttons-poi{
+    width: 100%;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+}
+
+.row-scroll{
+    overflow: auto;
+    height: 540px;
+}
+
+.embed-responsive-16by9{
+    padding-bottom: 37%;
+}

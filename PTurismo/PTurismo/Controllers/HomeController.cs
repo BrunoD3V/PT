@@ -38,9 +38,14 @@ namespace PTurismo.Controllers
             this.ViewData["FitToMarkersBounds"] = fitToMarkersBounds ?? true;
             this.ViewData["clickable"] = clickable ?? true;
             this.ViewData["draggable"] = draggable ?? true;
+
             return this.View();
         }
 
-       
+        public ActionResult Poi(int? poiId)
+        {
+           
+            return View();
+        }
     }
 }
