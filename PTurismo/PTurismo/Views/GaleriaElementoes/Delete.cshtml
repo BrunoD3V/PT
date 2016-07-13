@@ -3,54 +3,65 @@
 @{
     ViewBag.Title = "Eliminar";
 }
+<div class="row row-edit">
+    <div class="row">
+        <h2>Eliminar</h2>
+    </div>
+    <div class="row">
+        <h3>Tem a certeza que pretende eliminar?</h3>
+    </div>
+    <div class="row">
+        <div>
+            <h4>Galeria do Elemento</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    Nome
+                </dt>
 
-<h2>Eliminar</h2>
+                <dd>
+                    @Html.DisplayFor(model => model.Elemento.nome)
+                </dd>
 
-<h3>Tem a certeza que pretende eliminar?</h3>
-<div>
-    <h4>Galeria do Elemento</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nome
-        </dt>
+                <dt>
+                    Diretório do Ficheiro
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Elemento.nome)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.media)
+                </dd>
 
-        <dt>
-            Diretório do Ficheiro
-        </dt>
+                <dt>
+                    Legenda
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.media)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.legenda)
+                </dd>
 
-        <dt>
-            Legenda
-        </dt>
+                <dt>
+                    Tipo de Media
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.legenda)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.tipoMedia)
+                </dd>
 
-        <dt>
-            Tipo de Media
-        </dt>
+            </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.tipoMedia)
-        </dd>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            @Html.ActionLink("Voltar à Lista", "Index")
+                <div class="form-actions no-color">
+                    <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                    @Html.ActionLink("Voltar à Lista", "Index")
+                </div>
+            }
         </div>
-    }
+
+    </div>
 </div>
+
+
+

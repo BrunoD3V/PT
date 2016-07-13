@@ -6,49 +6,61 @@
 @{
     ViewBag.Title = "Categorias";
 }
+<div class="row row-edit">
+    <div class="row">
+        <h2>Categorias</h2>
+    </div>
+    <div class="row">
+        <p>
+            @Html.ActionLink("Criar novo", "Create")
+        </p>
+    </div>
+    <div class="row">
 
-<h2>Categorias</h2>
+        @using (Html.BeginForm("Index", "Categorias", FormMethod.Get))
+        {
+            <p>
+                Procurar por nome: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Procurar" class="btn btn-danger" />
+            </p>
+        }
+    </div>
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    @Html.ActionLink("Genero", "Index", new { sortOrder = ViewBag.GeneroSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th></th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Criar novo", "Create")
-</p>
-@using (Html.BeginForm("Index", "Categorias", FormMethod.Get))
-{
-    <p>
-        Procurar por nome: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Procurar" class="btn btn-danger"/> 
-    </p>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.genero)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.CategoriaID }) <br />
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.CategoriaID })
+                    </td>
+                </tr>
+            }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Genero", "Index",  new { sortOrder = ViewBag.GeneroSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th></th>
-    </tr>
+        </table>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.genero)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.CategoriaID }) <br />
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.CategoriaID })
-        </td>
-    </tr>
-}
+        <br />
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
-</table>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+</div>
 
-<br />
-Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+

@@ -4,41 +4,55 @@
     ViewBag.Title = "Eliminar";
 }
 
-<h2>Eliminar</h2>
+<div class="row row-edit">
+    <div class="row">
+        <h2>Eliminar</h2>
+    </div>
+    <div class="row">
+        <h3>Tem a certeza que pretender Eliminar?</h3>
 
-<h3>Tem a certeza que pretender Eliminar?</h3>
-<div>
-    <h4>Galeria do Poi</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Poi:
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Poi.nome)
+    </div>
+    <div class="row">
+        <div>
+            <h4>Galeria do Poi</h4>
             <hr />
-        </dd>
-        <dt>
-            Legenda:
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Legenda)
-            <hr />
-        </dd>
-        <dt>
-            Ficheiro Media:
-        </dt>
-        <dd>
-            <img src="~/Content/Images/@Model.FilePaths.First().FileName" alt="" width="150" height="150" alt="Ficheiro Media" />
-        </dd>
-    </dl>
+            <dl class="dl-horizontal">
+                <dt>
+                    Poi:
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Poi.nome)
+                    <hr />
+                </dd>
+                <dt>
+                    Legenda:
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Legenda)
+                    <hr />
+                </dd>
+                <dt>
+                    Ficheiro Media:
+                </dt>
+                <dd>
+                    <img src="~/Content/Images/@Model.FilePaths.First().FileName" alt="" width="150" height="150" alt="Ficheiro Media" />
+                </dd>
+            </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-actions">
-            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            @Html.ActionLink("Voltar à lista", "Index")
+                <div class="form-actions">
+                    <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                    @Html.ActionLink("Voltar à lista", "Index")
+                </div>
+            }
         </div>
-    }
+
+    </div>
 </div>
+
+
+
+

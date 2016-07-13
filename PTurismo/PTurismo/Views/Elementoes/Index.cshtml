@@ -6,59 +6,72 @@
 @{
     ViewBag.Title = "Elementos";
 }
+<div class="row row-edit">
+    <div class="row">
+        <h2>Elementos</h2>
+    </div>
+    <div class="row">
+        <p>
+            @Html.ActionLink("Criar Novo", "Create")
+        </p>
+    </div>
+    <div class="row">
+        @using (Html.BeginForm("Index", "Elementoes", FormMethod.Get))
+        {
+            <p>
+                Procurar por Nome do Elemento ou Nome do Poi: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Procurar" class="btn btn-danger" />
+            </p>
+        }
+    </div>
+    <div class="row">
+       
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.ActionLink("Poi", "Index", new { sortOrder = ViewBag.PoiSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    Descrição
+                </th>
+                <th>
+                    Imagem
+                </th>
+                <th></th>
+            </tr>
 
-<h2>Elementos</h2>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.poi.nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ImagemElemento)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.ElementoID }) <br />
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ElementoID })
+                    </td>
+                </tr>
+            }
 
-<p>
-    @Html.ActionLink("Criar Novo", "Create")
-</p>
-@using (Html.BeginForm("Index", "Elementoes", FormMethod.Get))
-{
-    <p>
-        Procurar por Nome do Elemento ou Nome do Poi: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Procurar" class="btn btn-danger" />
-    </p>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Poi", "Index", new { sortOrder = ViewBag.PoiSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            Descrição
-        </th>
-        <th>
-            Imagem
-        </th>
-        <th></th>
-    </tr>
+        </table>
+        <br />
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.poi.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImagemElemento)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.ElementoID }) <br />
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.ElementoID })
-        </td>
-    </tr>
-}
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+</div>
 
-</table>
-<br />
-Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+

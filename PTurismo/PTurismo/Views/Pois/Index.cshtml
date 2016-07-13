@@ -6,17 +6,15 @@
     ViewBag.Title = "Pois";
 }
 
-<div id="row-table" class="row">
+<div class="row row-table">
     <div class="row">
         <h2>Pontos de Interesse</h2>
     </div>
-    
     <div class="row">
         <p>
             @Html.ActionLink("Criar Novo", "Create")
         </p>
     </div>
-    
     <div class="row">
         @using (Html.BeginForm("Index", "Pois", FormMethod.Get))
         {

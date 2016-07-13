@@ -51,7 +51,7 @@ textarea {
 }
 
 
-#row-principal{
+.row-principal{
     background-color: rgb(255, 255, 255);
     display: -webkit-box;
     display: -webkit-flex;
@@ -59,7 +59,7 @@ textarea {
     display: flex;
 }
 
-#row-table{
+.row-table{
     background-color: rgb(255, 255, 255);
     display: -webkit-box;
     display: -webkit-flex;
@@ -68,8 +68,8 @@ textarea {
     padding: 30px;
 }
 
-#row-edit{
-    background-color: rgba(245, 245, 245, 0.80);
+.row-edit{
+    background-color: rgb(255, 255, 255);
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;

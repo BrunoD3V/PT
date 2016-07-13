@@ -3,38 +3,49 @@
 @{
     ViewBag.Title = "Eliminar";
 }
+<div class="row row-edit">
+    <div class="row">
+        <h2>Eliminar</h2>
+    </div>
+    <div class="row">
+        <h3>Tem a certeza que pretender eliminar o ficheiro?</h3>
+    </div>
+    <div class="row">
+        <div>
+            <h4>Categoria</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    Nome:
+                </dt>
 
-<h2>Eliminar</h2>
+                <dd>
+                    @Html.DisplayFor(model => model.nome)
+                </dd>
 
-<h3>Tem a certeza que pretender eliminar o ficheiro?</h3>
-<div>
-    <h4>Categoria</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nome:
-        </dt>
+                <dt>
+                    Genero:
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.nome)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.genero)
+                </dd>
 
-        <dt>
-            Genero:
-        </dt>
+            </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.genero)
-        </dd>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            @Html.ActionLink("Voltar à lista", "Index")
+                <div class="form-actions no-color">
+                    <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                    @Html.ActionLink("Voltar à lista", "Index")
+                </div>
+            }
         </div>
-    }
+    </div>
 </div>
+
+
+
+

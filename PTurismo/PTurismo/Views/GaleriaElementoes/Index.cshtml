@@ -8,67 +8,83 @@
     ViewBag.Title = "Galeria do Elemento";
 }
 
-<h2>Galeria do Elemento</h2>
-
-<p>
-    @Html.ActionLink("Criar Novo", "Create")
-</p>
-@using (Html.BeginForm("Index", "GaleriaElementoes", FormMethod.Get))
-{
-    <p>
-        Procurar por Legenda: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Procurar" class="btn btn-danger" />
-    </p>
-    <hr />
-}
-<table class="table">
-    <tr>
-        <th>
-           Elemento
-        </th>
-        <th>
-           Legenda
-        </th>
-        <th>
-            Preview
-        </th>
-        <th>
-            Ficheiro
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Elemento.nome)
-        </td>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.legenda)
-        </td>
-        @foreach (var items in item.FilePathElementos)
+<div class="row row-edit">
+    <div class="row">
+        <h2>Galeria do Elemento</h2>
+    </div>
+    <div class="row">
+        <p>
+            @Html.ActionLink("Criar Novo", "Create")
+        </p>
+    </div>
+    <div class="row">
+        @using (Html.BeginForm("Index", "GaleriaElementoes", FormMethod.Get))
         {
-            if (items.FileType == FileType.Imagem)
-            {
-                <td>
-                    <div class="img-responsive text-center">
-                        <img src="~/Content/Images/@items.FileName" alt="" width="150" height="150" alt="Ficheiro Media" />
-                    </div>
-                </td>
-            }
-            <td>
-                @Html.DisplayFor(modelItem => items.FileName)
-            </td>
+            <p>
+                Procurar por Legenda: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Procurar" class="btn btn-danger" />
+            </p>
+            <hr />
         }
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.GaleriaElementoID }) <br />
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.GaleriaElementoID })
-        </td>
-    </tr>
-}
+    </div>
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>
+                    Elemento
+                </th>
+                <th>
+                    Legenda
+                </th>
+                <th>
+                    Preview
+                </th>
+                <th>
+                    Ficheiro
+                </th>
+                <th></th>
+            </tr>
 
-</table>
-<br />
-Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Elemento.nome)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.legenda)
+                    </td>
+                    @foreach (var items in item.FilePathElementos)
+                    {
+                        if (items.FileType == FileType.Imagem)
+                        {
+                            <td>
+                                <div class="img-responsive text-center">
+                                    <img src="~/Content/Images/@items.FileName" alt="" width="150" height="150" alt="Ficheiro Media" />
+                                </div>
+                            </td>
+                        }
+                        <td>
+                            @Html.DisplayFor(modelItem => items.FileName)
+                        </td>
+                    }
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.GaleriaElementoID }) <br />
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.GaleriaElementoID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <br />
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
+    </div>
+</div>
+
+
+
+
