@@ -153,7 +153,7 @@ namespace PTurismo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id)
+        public ActionResult EditPost(int? id, HttpPostedFileBase upload)
         {
             if (id == null)
             {
@@ -164,9 +164,30 @@ namespace PTurismo.Controllers
             {
                 try
                 {
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        string[] allowedImageExtensions = { ".gif", ".png", ".jpeg", ".jpg" };
 
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                        String fileExtension = Path.GetExtension(upload.FileName);
+                        foreach (string t in allowedImageExtensions)
+                        {
+                            if (fileExtension == t)
+                            {
+                                var FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
+                                var FileTypes = FileType.Imagem;
+                                poiToUpdate.ImagemPath = FileName;
+                                poiToUpdate.FileType = FileTypes;
+
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem"), FileName));
+                            }
+                        }
+                    }
+                    if (ModelState.IsValid)
+                    {
+                        db.Entry(poiToUpdate).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
                 catch (RetryLimitExceededException)
                 {
