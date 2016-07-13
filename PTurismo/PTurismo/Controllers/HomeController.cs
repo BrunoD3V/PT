@@ -44,7 +44,7 @@ namespace PTurismo.Controllers
 
         public ActionResult Poi(int? poiId)
         {
-           
+
             return View();
         }
     }
