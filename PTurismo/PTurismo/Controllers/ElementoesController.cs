@@ -61,7 +61,7 @@ namespace PTurismo.Controllers
 
             }
 
-            int pageSize = 5;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
 
             elementos = elementos.Include(e => e.poi);
@@ -110,7 +110,7 @@ namespace PTurismo.Controllers
                             {
                                 elemento.ImagemElemento = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
                                 elemento.FileType = FileType.Imagem;
-                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaElemento/Imagem"), elemento.ImagemElemento));
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaElemento/Imagem/"), elemento.ImagemElemento));
                             }
                         }
                         db.Elemento.Add(elemento);

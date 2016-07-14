@@ -58,7 +58,7 @@ namespace PTurismo.Controllers
 
             }
 
-            int pageSize = 5;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
             galeriasElementos = galeriasElementos.Include(g => g.Elemento);
 
@@ -116,7 +116,7 @@ namespace PTurismo.Controllers
                                 };
                                 galeriaElemento.FilePathElementos = new List<FilePathElemento>();
                                 galeriaElemento.FilePathElementos.Add(file);
-                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images"), file.FileName));
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaElemento/"), file.FileName));
                             }
                         }
                         for (int i = 0; i < allowedVideoExtensions.Length; i++)

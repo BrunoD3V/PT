@@ -298,6 +298,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Audio\" />
     <Folder Include="Content\Images\BodyBackground\" />
     <Folder Include="Content\Images\GaleriaElemento\Imagem\" />
     <Folder Include="Content\Images\GaleriaPoi\Imagem\" />

@@ -34,6 +34,11 @@
 
 <!--INICIO DA PAGINA-->
 <div class="row">
+    <div class="col-md-offset-4">
+        <button class="btn btn-sm btn-danger" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");"><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-2">
 
     </div>
@@ -179,8 +184,8 @@
         </div>
         <div class="row">
             <!--DESCRICAO-->
-            <div id="showDescricao style="display: none;"">
-
+            <div id="showDescricao" >
+                <h4 id="Descricao">DESCRIÇÃO</h4>
             </div>
             <!--CAROUSEL-->
             <div id="showCarousel" style="display: none;">
@@ -225,12 +230,32 @@
                 <!--FIM CAROUSEL-->
             </div>
             <!--VIDEO-->
-            <div id="showVideo" align="center" class="embed-responsive embed-responsive-16by9">
+            <div id="showVideo" align="center" class="embed-responsive embed-responsive-16by9" style="display: none">
                 <video controls class="embed-responsive-item">
                     <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
                 </video>
             </div>
 
+            <div id="showAudio" align="center" style="display:none">
+                <div class="row">
+                    <h3>Please place your headphones in your ears and plug it in in order to hear the audio description.</h3>
+                </div>
+                <div class="row">
+                    <img src="~/Content/Audio/audio.png" alt="Audio" width="250" height="250"/>
+                </div>
+                <div class="row">
+                    <article class="audio">
+                        <audio controls>
+                            <source src="~/Content/Audio/BUSH.mp3" type="audio/mp3" />
+                            <p>Your browser does not support HTML 5 audio element</p>
+                        </audio>
+                    </article>
+                </div>
+                <div class="row">
+                    <h3>Thank you in advance.</h3>
+                </div>
+                
+            </div>
         </div>
         <div class="row bottom-poi">
             <div class="col-md-3">
@@ -248,6 +273,7 @@
         </div>
     </div>
 </div>
+<div id="screenSaverForm" style="background-image: url(../../Content/Images/BodyBackground/screensaver.png); position: absolute; width: 100%; height:100%; left:0px; top: 0px; right: 0px; bottom: 0px; z-index:9999; display: none;"></div>
 
 @section scripts
 {
@@ -461,7 +487,36 @@
             $(this).addClass('active');
         });
         //FIM J QUERY BUTTONS
+        var mousetimeout;
+        var screensaver_active = false;
+        var idletime = 5;
 
+        var screenSaver = $("#screenSaverForm");
+        var formDiv = $("#bodyForm");
+
+        function show_screensaver() {
+            formDiv.fadeOut(100);
+            screenSaver.fadeIn(900);
+            screensaver_active = true;
+        }
+
+        function stop_screensaver() {
+            screenSaver.fadeOut(100);
+            formDiv.fadeIn(900);
+            screensaver_active = false;
+        }
+
+        $(document).mousemove(function () {
+            clearTimeout(mousetimeout);
+
+            if (screensaver_active) {
+                stop_screensaver();
+            }
+
+            mousetimeout = setTimeout(function () {
+                show_screensaver();
+            }, 1000 * idletime); // 5 secs          
+        });
 
 
     </script>

@@ -174,7 +174,7 @@
         </div>
     </div>
 </div>
-
+<div id="screenSaverForm" style="background-image: url(../../Content/Images/BodyBackground/screensaver.png); position: absolute; width: 100%; height:100%; left:0px; top: 0px; right: 0px; bottom: 0px; z-index:9999; display: none;"></div>
 @section scripts
 {
     @(Html.GoogleMap().ScriptRegistrar())
@@ -186,7 +186,7 @@
         var galeriasPoi = @JavaScriptConvert.SerializeObject(Model.GaleriaPois);
         var filePathPoi = @JavaScriptConvert.SerializeObject(@Model.FilePathPois);
 
-        
+
         function getElementos(elementos, id) {
             console.log(id);
             var eles = new Array();
@@ -288,9 +288,9 @@
                 var cenas = pois[args.id].ImagemPath;
                 console.log(pois[args.id].ImagemPath)
                 var path = "/Content/Images/GaleriaPoi/Imagem/" + cenas;
-                $('#ImagemPath').attr( "src", path);   
+                $('#ImagemPath').attr( "src", path);
                 $('#PoiID').val(args.id);
-                
+
                 if (eles.length >= 1 && eles.length <= 2) {
                     console.log("Fora" + eles.length);
                     for (var K = 0; K < eles.length; K++) {
@@ -326,5 +326,43 @@
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').focus()
         })
+
+        //REDIRECT
+       /*
+        $('#buttonid').click(function () {
+            document.location = 'Url.Action("Poi","Home", new { id =})';
+        });*/
+
+        var mousetimeout;
+        var screensaver_active = false;
+        var idletime = 5;
+
+        var screenSaver = $("#screenSaverForm");
+        var formDiv = $("#bodyForm");
+
+        function show_screensaver() {
+            formDiv.fadeOut(100);
+            screenSaver.fadeIn(900);
+            screensaver_active = true;
+        }
+
+        function stop_screensaver() {
+            screenSaver.fadeOut(100);
+            formDiv.fadeIn(900);
+            screensaver_active = false;
+        }
+
+        $(document).mousemove(function () {
+            clearTimeout(mousetimeout);
+
+            if (screensaver_active) {
+                stop_screensaver();
+            }
+
+            mousetimeout = setTimeout(function () {
+                show_screensaver();
+            }, 1000 * idletime); // 5 secs          
+        });
+
     </script>
 }

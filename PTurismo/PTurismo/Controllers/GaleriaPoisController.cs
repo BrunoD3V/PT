@@ -57,7 +57,7 @@ namespace PTurismo.Controllers
 
             }
 
-            int pageSize = 5;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
             galeriasPois = galeriasPois.Include(g => g.Poi)
                 .Include(f => f.FilePaths);
@@ -116,7 +116,7 @@ namespace PTurismo.Controllers
                             };
                             galeriaPoi.FilePaths = new List<FilePathPoi>();
                             galeriaPoi.FilePaths.Add(file);
-                            upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images"), file.FileName));
+                            upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/"), file.FileName));
                         }
                     }
                     for (int i = 0; i < allowedVideoExtensions.Length; i++)

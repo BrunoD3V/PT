@@ -60,7 +60,7 @@ namespace PTurismo.Controllers
                    
             }
 
-            int pageSize = 5;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
 
             return View(categorias.ToPagedList(pageNumber, pageSize));
@@ -136,7 +136,7 @@ namespace PTurismo.Controllers
                                 categoria.FilePathCategoria = new FilePathCategoria();
                                 categoria.FilePathCategoria.FileName = FileName;
                                 categoria.FilePathCategoria.FileType = FileTypes;
-                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/Icones"), FileName));
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/Icones/"), FileName));
                             }
                         }
 

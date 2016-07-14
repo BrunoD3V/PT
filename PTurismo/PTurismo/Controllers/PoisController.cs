@@ -61,7 +61,7 @@ namespace PTurismo.Controllers
 
             }
 
-            int pageSize = 5;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
 
             pois = pois.Include(p => p.categoria);
@@ -113,7 +113,7 @@ namespace PTurismo.Controllers
                             {
                                 poi.ImagemPath = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
                                 poi.FileType = FileType.Imagem;
-                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem"), poi.ImagemPath));
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem/"), poi.ImagemPath));
                             }
                         }
                         Console.WriteLine(poi.ImagemPath.ToString());

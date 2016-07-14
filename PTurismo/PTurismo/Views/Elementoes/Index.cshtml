@@ -56,7 +56,9 @@
                         @Html.DisplayFor(modelItem => item.descricao)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ImagemElemento)
+                        <div class="img-responsive text-center">
+                            <img src="~/Content/Images/GaleriaElemento/Imagem/@item.ImagemElemento" width="150" height="150" alt="Ficheiro Media" />
+                        </div>
                     </td>
                     <td>
                         @Html.ActionLink("Editar", "Edit", new { id = item.ElementoID }) <br />

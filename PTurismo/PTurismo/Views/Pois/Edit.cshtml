@@ -60,7 +60,12 @@
                         @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <span class="control-label col-md-2"><strong>Ficheiro Media</strong></span>
+                    <div class="col-md-10">
+                        <img src="~/Content/Images/GaleriaPoi/Imagem/@Model.ImagemPath" width="150" height="150" alt="Ficheiro Media" />
+                    </div>
+                </div>
                 <div class="form-group">
                     @Html.Label("Novo Ficheiro", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
