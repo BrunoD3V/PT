@@ -209,9 +209,15 @@
                             </div>
                             @foreach (var item in Model.Poi.galeriaPoi)
                             {
-                                <div class="item">
-                                    <img src="~/Content/Images/GaleriaPoi/@item.FilePaths.First().FileName" width="460" height="345">
-                                </div>
+                                if (item.FilePaths.Count > 0)
+                                {
+                                    if (item.FilePaths.First().FileType == FileType.Imagem)
+                                    {
+                                        <div class="item">
+                                            <img src="~/Content/Images/GaleriaPoi/@item.FilePaths.First().FileName" width="460" height="345">
+                                        </div>
+                                    }
+                                }
                             }
                         </div>
 
