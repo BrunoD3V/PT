@@ -105,6 +105,25 @@ div.thumbnail ul{
     padding-left: 0px !important;
 }
 
+a.thumbnail{
+    display: flex;
+    margin-bottom: 0px;
+}
+
+a.thumbnail div{
+    float: left;
+    margin: 0.1%;
+}
+
+a.thumbnail a:last-child{
+   text-align: left;
+}
+
+a.thumbnail ul{
+    list-style-type: none;
+    padding-left: 0px !important;
+}
+
 .black-color {
     color: black;
 }

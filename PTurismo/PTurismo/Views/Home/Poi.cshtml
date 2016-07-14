@@ -4,7 +4,7 @@
 @using PTurismo.Helpers
 @using System.Web.Script.Serialization
 @using PTurismo.Models
-@model PTurismo.ViewModels.MapaViewModel
+@model PTurismo.Models.Poi
 
 @Scripts.Render("~/Scripts/script.js")
 
@@ -35,7 +35,7 @@
 <!--INICIO DA PAGINA-->
 <div class="row">
     <div class="col-md-offset-4">
-        <button class="btn btn-sm btn-danger" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");"><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+        <button class="btn btn-sm btn-danger" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");"><span class="glyphicon glyphicon-arrow-left"></span> Voltar ao Inicio</button>
     </div>
 </div>
 <div class="row">
@@ -50,7 +50,7 @@
             </div>
             <div class="col-md-12">
                 <!-- CONTEUDO A ESCREVER -->
-                <img id="ImagemPath" class="img-poi" src="" />
+                <img id="ImagemPath" class="img-poi" src="~/Content/Images/GaleriaPoi/Imagem/@Model.ImagemPath" />
             </div>
         </div>
     </div>
@@ -62,133 +62,45 @@
 <div class="row row-poi">
     <div id="mapa-margin" class="col-md-4">
         <div class="row">
-            <h3 id="Genero">Descobrir cada pormenor </h3>
-        </div>
-        <div class="row row-scroll">
-            <div class="thumbnail">
-                <div class="col-md-4">
-                    <!--MUDAR IMAGEM-->
-                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
-                </div>
-                <div class="col-md-8">
-                    <h4 id="NomeEle1"></h4>
-                    <h5 id="DescricaoEle1"></h5>
-                </div>
-            </div>
-            <div class="thumbnail">
-                <div class="col-md-4">
-                    <!--MUDAR IMAGEM-->
-                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
-                </div>
-                <div class="col-md-8">
-                    <h4 id="NomeEle1"></h4>
-                    <h5 id="DescricaoEle1"></h5>
-                </div>
-            </div>
-            <div class="thumbnail">
-                <div class="col-md-4">
-                    <!--MUDAR IMAGEM-->
-                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
-                </div>
-                <div class="col-md-8">
-                    <h4 id="NomeEle1"></h4>
-                    <h5 id="DescricaoEle1"></h5>
-                </div>
-            </div>
-            <div class="thumbnail">
-                <div class="col-md-4">
-                    <!--MUDAR IMAGEM-->
-                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
-                </div>
-                <div class="col-md-8">
-                    <h4 id="NomeEle1"></h4>
-                    <h5 id="DescricaoEle1"></h5>
-                </div>
-            </div>
-            <div class="thumbnail">
-                <div class="col-md-4">
-                    <!--MUDAR IMAGEM-->
-                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
-                </div>
-                <div class="col-md-8">
-                    <h4 id="NomeEle1"></h4>
-                    <h5 id="DescricaoEle1"></h5>
-                </div>
-            </div>
-            <div class="thumbnail">
-                <div class="col-md-4">
-                    <!--MUDAR IMAGEM-->
-                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
-                </div>
-                <div class="col-md-8">
-                    <h4 id="NomeEle1"></h4>
-                    <h5 id="DescricaoEle1"></h5>
-                </div>
-            </div>
-            <div class="thumbnail">
-                <div class="col-md-4">
-                    <!--MUDAR IMAGEM-->
-                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
-                </div>
-                <div class="col-md-8">
-                    <h4 id="NomeEle1"></h4>
-                    <h5 id="DescricaoEle1"></h5>
-                </div>
-            </div>
-            <div class="thumbnail">
-                <div class="col-md-4">
-                    <!--MUDAR IMAGEM-->
-                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
-                </div>
-                <div class="col-md-8">
-                    <h4 id="NomeEle1"></h4>
-                    <h5 id="DescricaoEle1"></h5>
-                </div>
-            </div>
-            <div class="thumbnail">
-                <div class="col-md-4">
-                    <!--MUDAR IMAGEM-->
-                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
-                </div>
-                <div class="col-md-8">
-                    <h4 id="NomeEle1"></h4>
-                    <h5 id="DescricaoEle1"></h5>
-                </div>
-            </div>
-            <div class="thumbnail">
-                <div class="col-md-4">
-                    <!--MUDAR IMAGEM-->
-                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
-                </div>
-                <div class="col-md-8">
-                    <h4 id="NomeEle1"></h4>
-                    <h5 id="DescricaoEle1"></h5>
-                </div>
-            </div>
-            <div class="thumbnail">
-                <div class="col-md-4">
-                    <!--MUDAR IMAGEM-->
-                    <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
-                </div>
-                <div class="col-md-8">
-                    <h4 id="NomeEle1"></h4>
-                    <h5 id="DescricaoEle1"></h5>
-                </div>
-            </div>
+            @if (Model.categoria.genero.Equals("Masculino"))
+            {
+                <h3 id="Genero">Descobrir cada pormenor deste @Model.categoria.nome</h3>
+            }
+            else
+            {
+                <h3 id="Genero">Descobrir cada pormenor desta @Model.categoria.nome</h3>
+            }
 
         </div>
+        <div class="row row-scroll">
+           @foreach (var item in Model.elementos)
+           {
+            <a href="#" class="thumbnail">
+                <div class="col-md-4">
+                    <!--MUDAR IMAGEM-->
+                    <img id="ImagemEle1" class="img-thumbnail" src="~/Content/Images/GaleriaElemento/Imagem/@item.ImagemElemento" alt="Generic placeholder thumbnail" />
+                </div>
+                <div class="col-md-8">
+                    <h4>Nome: </h4>
+                    <h5>@item.nome</h5>
+                    <h6>Descrição: @item.descricao</h6>
+                </div>
+            </a>
+           }
+         </div>
     </div>
     <div id="dataShow" class="col-md-8">
         <div class="row">
-            <h1 id="NomePoi">NOME DO POI</h1>
+            <h1 id="NomePoi">@Model.nome</h1>
         </div>
         <div class="row">
             <!--DESCRICAO-->
             <div id="showDescricao" >
-                <h4 id="Descricao">DESCRIÇÃO</h4>
+                <h4 id="Descricao">@Model.descricao</h4>
             </div>
             <!--CAROUSEL-->
             <div id="showCarousel" style="display: none;">
+                
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
@@ -227,6 +139,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+
                 <!--FIM CAROUSEL-->
             </div>
             <!--VIDEO-->
@@ -238,7 +151,7 @@
 
             <div id="showAudio" align="center" style="display:none">
                 <div class="row">
-                    <h3>Please place your headphones in your ears and plug it in in order to hear the audio description.</h3>
+                    <h3>Por favor coloque os auriculares para ouvir a descrição.</h3>
                 </div>
                 <div class="row">
                     <img src="~/Content/Audio/audio.png" alt="Audio" width="250" height="250"/>
@@ -252,9 +165,8 @@
                     </article>
                 </div>
                 <div class="row">
-                    <h3>Thank you in advance.</h3>
+                    <h3>Obrigado.</h3>
                 </div>
-                
             </div>
         </div>
         <div class="row bottom-poi">
@@ -278,160 +190,16 @@
 @section scripts
 {
     <script type="text/javascript">
-        function getElementos(elementos, id) {
-            console.log(id);
-            var eles = new Array();
-            for (var i = 0; i < elementos.length; i++) {
-                var obj = elementos[i];
-                for (var key in obj) {
-                    var attrName = key;
-                    var attrValue = obj[key];
-
-                    if (attrName === "PoiID" && attrValue == id) {
-
-                        eles.push(elementos[i]);
-                        console.log(eles[i]);
-                    }
-                }
+        /*
+        $.ajax({
+            type: "GET",
+            url: "Home/Poi/1",
+            data: "",
+            success: function (html) {
+                $("#myAccountDiv").html(html);
             }
-            return eles;
-        }
-
-        function getFilePathPoi(filePathPoi, galeriasPoi, id) {
-
-            var files = new Array();
-            var galerias = new Array();
-            galerias = getGaleriasPoi(galeriasPoi, id);
-
-            if (galerias.length > 0) {
-                for (var i = 0; i < galerias.length; i++) {
-                    var obj = galerias[i];
-                    // console.log(obj);
-                    for (var key in obj) {
-                        var attrName = key;
-                        var attrValue = obj[key];
-
-                        if (attrName === "GaleriaPoiID") {
-                            // console.log("attrValue =" + attrValue);
-                            // console.log("attrName : " + attrName);
-                            for (var j = 0; j < filePathPoi.length; j++) {
-                                var objt = filePathPoi[j];
-
-
-                                for (var k in objt) {
-                                    var attName = k;
-                                    var attValue = objt[k];
-                                    //console.log("Nome: " + attName);
-                                    //console.log("attValue = " + attValue);
-                                    // console.log("attrValue =" + attrValue);
-
-                                    if (attName === "GaleriaPoiID" && attrValue == attValue) {
-                                        // console.log(filePathPoi[j]);
-                                        files.push(filePathPoi[i]);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return files;
-        }
-
-        function getGaleriasPoi(galeriasPoi, id) {
-
-            var galerias = new Array();
-            for (var i = 0; i < galeriasPoi.length; i++) {
-                var obj = galeriasPoi[i];
-                for (var key in obj) {
-                    var attrName = key;
-                    var attrValue = obj[key];
-
-                    if (attrName === "PoiID" && attrValue == id) {
-
-                        galerias.push(galeriasPoi[i]);
-                        //console.log(galeriasPoi[i]);
-                    }
-                }
-            }
-            return galerias;
-        }
-
-
-        function markerClick(args) {
-
-            if (args.eventName === 'click') {
-                var id = parseInt(args.id) + 1;
-                var eles = new Array();
-                try {
-                    eles = getElementos(elementos, id);
-                    console.log("AQUI");
-                    console.log(eles[0]);
-                } catch (err) {
-                    $('#Elemento').html('<div></div>');
-                }
-                var catID = pois[args.id].CategoriaID;
-                var generoCat = categorias[catID - 1].genero;
-                //GENERO A ESCREVER
-                if (generoCat.localeCompare("Masculino"))
-                {
-                    var displayCat = "Descobrir cada pormenor deste ";
-                    $('#Genero').html(displayCat);
-                } else {
-                    var displayCat = "Descobrir cada pormenor desta ";
-                    $('#Genero').html(displayCat);
-                }
-                //FIM GENERO
-
-                //ESCREVE NOME POI
-                $('#NomePoi').html(pois[args.id].nome);
-                //ESCREVE DESCRIÇAO POI
-                $('#Descricao').html(pois[args.id].descricao);
-                //ESCREVE CATEGORIA POI
-                $('#Categoria').html(categorias[catID - 1].nome);
-
-                //IMAGEM PRINCIPAL POI
-                var nomeFicheiro = pois[args.id].ImagemPath;
-                var path = "/Content/Images/GaleriaPoi/Imagem/" + nomeFicheiro;
-                $('#ImagemPath').attr("src", path);
-                //FIM 
-
-                //PREENCHER OS DOIS ELEMENTOS A DISPONIBILIZAR
-                if (eles.length >= 1 && eles.length <= 2) {
-                    console.log("Fora" + eles.length);
-                    for (var K = 0; K < eles.length; K++) {
-                        //TODO mostrar cada elemento do poi
-                        var nomeEle = eles[K].nome;
-                        var descricaoEle = eles[K].descricao;
-                        var ImagemEle = "/Content/Images/GaleriaElemento/Imagem/" + eles[K].ImagemElemento;
-                        console.log(eles[K].ImagemElemento)
-                        if(K===0){
-                            $("#NomeEle1").html(nomeEle);
-                            $("#DescricaoEle1").html(descricaoEle);
-                            $("#ImagemEle1").attr("src", ImagemEle);
-                        }else{
-                            $("#NomeEle2").html(nomeEle);
-                            $("#DescricaoEle2").html(descricaoEle);
-                            $("#ImagemEle2").attr("src", ImagemEle)
-                        }
-                    }
-                }
-                //FIM ELEMENTOS
-
-                //?????????????
-                var ficheiros = new Array();
-
-                ficheiros = getFilePathPoi(filePathPoi, galeriasPoi, id);
-                if (ficheiros.length > 0) {
-                    console.log(ficheiros[0]);//TODO mostrar todos os ficheiros;
-                    var ficheiro = "/Content/Images/" + ficheiros[0].FileName;
-                    $('#my_image').attr("src", ficheiro);
-                } else {
-                    $('#my_image').attr("src", "/Content/Images/f76e268d-ee7f-4a65-bf18-ad6d5fc3f6c0.jpeg");
-                }
-            }
-        }
-
+        });
+        */
         //JQUERY PARA MODAL HELP
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').focus()

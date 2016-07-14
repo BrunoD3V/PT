@@ -5,6 +5,7 @@
 @using System.Web.Script.Serialization
 @using PTurismo.Models
 @model PTurismo.ViewModels.MapaViewModel
+
 @Scripts.Render("~/Scripts/script.js")
 
 @{
@@ -135,6 +136,7 @@
         .MarkerEvents(events => events.OnMarkerClick("markerClick"))
         )
     </div>
+
     <div id="dataShow" class="col-md-7">
         <div class="row">
             <h1 id="NomePoi">NOME DO POI</h1>
@@ -169,11 +171,8 @@
         </div>
         <div class="row bottom">
             <!-- PASSAR ID new { id = item.PoiID } BY MODEL -->
-
-
             <button class="btn btn-lg btn-success" id="btnDetalhes">
-                Vamos Conhecer<span class="glyphicon glyphicon-triangle-right"></span></button>
-            
+                Conhecer Melhor <span class="glyphicon glyphicon-triangle-right"></span></button>
         </div>
     </div>
 </div>
@@ -285,8 +284,9 @@
         function markerClick(args) {
 
             if (args.eventName === 'click') {
-                poiId = args.id;
+                
                 var id = parseInt(args.id) + 1;
+                poiId = id;
                 var eles = new Array();
                 try {
                     eles = getElementos(elementos, id);
