@@ -169,8 +169,11 @@
         </div>
         <div class="row bottom">
             <!-- PASSAR ID new { id = item.PoiID } BY MODEL -->
-            <button class="btn btn-lg btn-success" onclick="@("window.location.href='" + @Url.Action("Poi", "Home", new { id = Html.Hidden("PoiID", 0) }) + "'");">
-            Vamos Conhecer<span class="glyphicon glyphicon-triangle-right"></span></button>
+
+
+            <button class="btn btn-lg btn-success" id="btnDetalhes">
+                Vamos Conhecer<span class="glyphicon glyphicon-triangle-right"></span></button>
+            
         </div>
     </div>
 </div>
@@ -185,7 +188,7 @@
         var elementos = @JavaScriptConvert.SerializeObject(@Model.Elementos);
         var galeriasPoi = @JavaScriptConvert.SerializeObject(Model.GaleriaPois);
         var filePathPoi = @JavaScriptConvert.SerializeObject(@Model.FilePathPois);
-
+        var poiId;
         
         function getElementos(elementos, id) {
             console.log(id);
@@ -266,10 +269,23 @@
             return galerias;
         }
 
+        $(document)
+            .ready(function() {
+
+                $('#btnDetalhes')
+                    
+                    .click(function() {
+                       
+                        var baseUrl = '@Url.Content("~")';
+                       
+                        window.location.href = baseUrl + "Home/Poi/" + poiId;
+                    });
+            });
 
         function markerClick(args) {
 
             if (args.eventName === 'click') {
+                poiId = args.id;
                 var id = parseInt(args.id) + 1;
                 var eles = new Array();
                 try {
@@ -288,8 +304,8 @@
                 var cenas = pois[args.id].ImagemPath;
                 console.log(pois[args.id].ImagemPath)
                 var path = "/Content/Images/GaleriaPoi/Imagem/" + cenas;
-                $('#ImagemPath').attr( "src", path);   
-                $('#PoiID').val(args.id);
+                $('#ImagemPath').attr( "src", path);
+               
                 
                 if (eles.length >= 1 && eles.length <= 2) {
                     console.log("Fora" + eles.length);
@@ -323,8 +339,10 @@
 
         }
         //JQUERY PARA MODAL HELP
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').focus()
-        })
+        $('#myModal')
+            .on('shown.bs.modal',
+                function() {
+                    $('#myInput').focus()
+                });
     </script>
 }

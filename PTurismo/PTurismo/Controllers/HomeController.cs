@@ -16,13 +16,13 @@ namespace PTurismo.Controllers
         private PastoralContext db = new PastoralContext();
         public ActionResult Index(bool? fitToMarkersBounds, bool? clickable, bool? draggable)
         {
-            var data = from p in db.Poi
-                select p;
+            /*var data = from p in db.Poi
+                select p;*/
 
             this.ViewData["FitToMarkersBounds"] = fitToMarkersBounds ?? true;
             this.ViewData["clickable"] = clickable ?? true;
             this.ViewData["draggable"] = draggable ?? true;
-            ViewData["Pois"] = data;
+          //  ViewData["Pois"] = data;
             return View(new MapaViewModel());
         }
 
@@ -41,10 +41,11 @@ namespace PTurismo.Controllers
 
             return this.View();
         }
-
-        public ActionResult Poi(int? poiId)
+       
+        public ActionResult Poi(int? id)
         {
 
+            ViewData["id"] = id;
             return View();
         }
     }
