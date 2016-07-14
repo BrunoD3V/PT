@@ -248,7 +248,7 @@ namespace PTurismo.Controllers
                                         FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
                                         FileType = FileType.Video
                                     };
-                                    galeriaElementoToUpdate.FilePathElementos = new List<FilePathElemento>();
+                                 
                                     galeriaElementoToUpdate.FilePathElementos.Add(file);
                                     upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Videos/GaleriaElemento"), file.FileName));
                                 }
@@ -262,13 +262,13 @@ namespace PTurismo.Controllers
                                         FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
                                         FileType = FileType.Audio
                                     };
-                                    galeriaElemento.FilePathElementos = new List<FilePathElemento>();
-                                    galeriaElemento.FilePathElementos.Add(file);
+                                  
+                                    galeriaElementoToUpdate.FilePathElementos.Add(file);
                                     upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Audio/GaleriaElemento/"), file.FileName));
                                 }
                             }
                         }
-                        db.Entry(galeriaElemento).State = EntityState.Modified;
+                        db.Entry(galeriaElementoToUpdate).State = EntityState.Modified;
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
