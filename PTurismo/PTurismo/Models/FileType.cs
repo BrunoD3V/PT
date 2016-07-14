@@ -8,6 +8,7 @@ namespace PTurismo.Models
     public enum FileType
     {
         Imagem,
-        Video
+        Video,
+        Audio
     }
 }
