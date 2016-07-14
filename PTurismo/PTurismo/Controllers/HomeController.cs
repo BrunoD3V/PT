@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using PTurismo.Models;
 using PTurismo.DAL;
 using PTurismo.ViewModels;
-using System.Net;
+
 
 namespace PTurismo.Controllers
 {
