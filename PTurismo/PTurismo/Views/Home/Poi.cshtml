@@ -192,10 +192,14 @@
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                             @foreach (var item in Model.Poi.galeriaPoi)
                             {
-                                if (item.FilePaths.First().FileType == FileType.Imagem)
+                                if (item.FilePaths.Count > 0)
                                 {
-                                    <li data-target="#myCarousel" data-slide-to="@item.FilePaths.First().FilePathPoiID"></li>
+                                    if (item.FilePaths.First().FileType == FileType.Imagem)
+                                    {
+                                        <li data-target="#myCarousel" data-slide-to="@item.FilePaths.First().FilePathPoiID"></li>
+                                    }
                                 }
+
                             }
                         </ol>
                         <!-- Wrapper for slides -->
