@@ -214,7 +214,7 @@ namespace PTurismo.Controllers
                                 FileInfo file = new FileInfo(Path.Combine(Server.MapPath("~/Content/Audio/Poi/"), currentFilePath));
                                 file.Delete();
                             }
-                            else
+                            else if(galeriaPoiToUpdate.FilePaths.Any(f=>f.FileType == FileType.Video))
                             {
                                 string currentFilePath = galeriaPoiToUpdate.FilePaths.First().FileName;
                                 db.FilePaths.Remove(galeriaPoiToUpdate.FilePaths.First(f => f.FileType == FileType.Video));
@@ -236,7 +236,7 @@ namespace PTurismo.Controllers
                                         FileType = FileType.Imagem
                                     };
                                     galeriaPoiToUpdate.FilePaths.Add(file);
-                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem"), file.FileName));
+                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/"), file.FileName));
                                 }
                             }
                             for (int i = 0; i < allowedVideoExtensions.Length; i++)
