@@ -8,6 +8,7 @@ using PTurismo.Models;
 using PTurismo.DAL;
 using PTurismo.ViewModels;
 
+
 namespace PTurismo.Controllers
 {
     public class HomeController : Controller
