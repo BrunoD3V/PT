@@ -97,7 +97,7 @@ namespace PTurismo.Controllers
             try
             {
                 String fileExtension = Path.GetExtension(upload.FileName);
-            
+
             if (ModelState.IsValid)
             {
                     string[] allowedImageExtensions = { ".gif", ".png", ".jpeg", ".jpg" };
@@ -236,7 +236,7 @@ namespace PTurismo.Controllers
                                         FileType = FileType.Imagem
                                     };
                                     galeriaPoiToUpdate.FilePaths.Add(file);
-                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem"), file.FileName));
+                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/"), file.FileName));
                                 }
                             }
                             for (int i = 0; i < allowedVideoExtensions.Length; i++)
