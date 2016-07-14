@@ -46,7 +46,7 @@
             </div>
             <div class="col-md-12">
                 <!-- CONTEUDO A ESCREVER -->
-                <img id="ImagemPath" class="img-poi" src="" />
+                <img id="ImagemPath" class="img-poi" src="~/Content/Images/GaleriaPoi/Imagem/3887b946-b2bd-4233-8949-5fe52af98a70.jpg" />
             </div>
         </div>
     </div>
@@ -151,19 +151,20 @@
 
     <div id="dataShow" class="col-md-7">
         <div class="row">
-            <h1 id="NomePoi">NOME DO POI</h1>
-            <h3 id="Categoria">CATEGORIA</h3>
-            <h4 id="Descricao">O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde o ano de 1500, quando uma misturou os caracteres de um texto para criar um espécime de livro. Este texto não só sobreviveu 5 séculos, mas também o salto para a tipografia electrónica, mantendo-se essencialmente inalterada. Foi popularizada nos anos 60 com a disponibilização das folhas de Letraset, que continham passagens com Lorem Ipsum, e mais recentemente com os programas de publicação como o Aldus PageMaker que incluem versões do Lorem Ipsum.</h4>
+            <h1 id="NomePoi">Sé Velha</h1>
+            <h3 id="Categoria">Igreja</h3>
+            <h4 id="Descricao">A Sé Velha de Bragança é a antiga sede da Diocese de Bragança-Miranda, no nordeste de Portugal. O templo foi construído no século XVI para ter as funções de um convento. Em 1764, com a transferência da sede da diocese de Miranda do Douro a Bragança, o edifício passou a ser a catedral diocesana. Com a inauguração da nova catedral em 2001, o templo passou a ser uma igreja paroquial.
+O templo é consagrado ao Santo Nome de Jesus e a São João Batista. O edifício é classificado como "monumento de interesse público" pela Direção-Geral de Património Cultural.</h4>
         </div>
         <div class="row bottom-left">
             <div class="col-xs-6 col-md-6 col-lg-6">
                 <div class="thumbnail">
                     <div class="col-md-4">
                         <!--MUDAR IMAGEM-->
-                        <img id="ImagemEle1" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                        <img id="ImagemEle1" class="img-thumbnail" src="~/Content/Images/GaleriaElemento/sevelha1.jpg" alt="Generic placeholder thumbnail" />
                     </div>
                     <div class="col-md-8">
-                       <h4 id="NomeEle1" ></h4>
+                       <h4 id="NomeEle1" >Jardim da Sé Velha de Bragança</h4>
                        <h5 id="DescricaoEle1"></h5>
                     </div>
                 </div>
@@ -172,10 +173,10 @@
                 <div class="thumbnail">
                     <div class="col-md-4">
                          <!--MUDAR IMAGEM-->
-                        <img id="ImagemEle2" class="img-thumbnail" src="http://i.imgur.com/Hw1dyoP.png" alt="Generic placeholder thumbnail" />
+                        <img id="ImagemEle2" class="img-thumbnail" src="~/Content/Images/GaleriaElemento/sevelha2.jpg" alt="Generic placeholder thumbnail" />
                     </div>
                     <div class="col-md-8">
-                        <h4 id="NomeEle2"></h4>
+                        <h4 id="NomeEle2">Exterior da Sé Velha de Bragança</h4>
                         <h5 id="DescricaoEle2"></h5>
                     </div>
                 </div>
@@ -200,7 +201,7 @@
         var elementos = @JavaScriptConvert.SerializeObject(@Model.Elementos);
         var galeriasPoi = @JavaScriptConvert.SerializeObject(Model.GaleriaPois);
         var filePathPoi = @JavaScriptConvert.SerializeObject(@Model.FilePathPois);
-        var poiId;
+        var poiId = 1;
         
         function getElementos(elementos, id) {
             console.log(id);
@@ -396,7 +397,7 @@
 
             mousetimeout = setTimeout(function () {
                 show_screensaver();
-            }, 1000 * idletime); // 5 secs          
+            }, 3000 * idletime); // 5 secs          
         });
 
     </script>

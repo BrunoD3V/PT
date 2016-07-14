@@ -305,9 +305,27 @@ namespace PTurismo.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             GaleriaPoi galeriaPoi = db.GaleriaPoi.Find(id);
-            string currentFilePath = galeriaPoi.FilePaths.First().FileName;
-            FileInfo file = new FileInfo(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/"), currentFilePath));
-            file.Delete();
+            if (galeriaPoi.FilePaths.Any(f => f.FileType == FileType.Imagem))
+            {
+                string currentFilePath = galeriaPoi.FilePaths.First().FileName;
+                db.FilePaths.Remove(galeriaPoi.FilePaths.First(f => f.FileType == FileType.Imagem));
+                FileInfo file = new FileInfo(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/"), currentFilePath));
+                file.Delete();
+            }
+            else if (galeriaPoi.FilePaths.Any(f => f.FileType == FileType.Audio))
+            {
+                string currentFilePath = galeriaPoi.FilePaths.First().FileName;
+                db.FilePaths.Remove(galeriaPoi.FilePaths.First(f => f.FileType == FileType.Audio));
+                FileInfo file = new FileInfo(Path.Combine(Server.MapPath("~/Content/Audio/Poi/"), currentFilePath));
+                file.Delete();
+            }
+            else if (galeriaPoi.FilePaths.Any(f => f.FileType == FileType.Video))
+            {
+                string currentFilePath = galeriaPoi.FilePaths.First().FileName;
+                db.FilePaths.Remove(galeriaPoi.FilePaths.First(f => f.FileType == FileType.Video));
+                FileInfo file = new FileInfo(Path.Combine(Server.MapPath("~/Content/Videos/Poi/"), currentFilePath));
+                file.Delete();
+            }
             db.GaleriaPoi.Remove(galeriaPoi);
             db.SaveChanges();
             return RedirectToAction("Index");

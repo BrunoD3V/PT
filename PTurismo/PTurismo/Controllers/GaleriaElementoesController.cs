@@ -213,7 +213,7 @@ namespace PTurismo.Controllers
                                     new FileInfo(Path.Combine(Server.MapPath("~/Content/Images/GaleriaElemento/"), currentFilePath));
                                 file.Delete();
                             }
-                            else
+                            else if(galeriaElementoToUpdate.FilePathElementos.Any(f => f.FileType == FileType.Video))
                             {
                                 string currentFilePath = galeriaElementoToUpdate.FilePathElementos.First().FileName;
                                 db.FilePathsEl.Remove(galeriaElementoToUpdate.FilePathElementos.First(f => f.FileType == FileType.Video));
@@ -306,9 +306,32 @@ namespace PTurismo.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             GaleriaElemento galeriaElemento = db.GaleriaElemento.Find(id);
-            string currentFilePath = galeriaElemento.FilePathElementos.First().FileName;
-            FileInfo file = new FileInfo(Path.Combine(Server.MapPath("~/Content/Images"), currentFilePath));
-            file.Delete();
+            if (galeriaElemento.FilePathElementos.Any(f => f.FileType == FileType.Imagem))
+            {
+                string currentFilePath = galeriaElemento.FilePathElementos.First().FileName;
+                db.FilePathsEl.Remove(
+                    galeriaElemento.FilePathElementos.First(f => f.FileType == FileType.Imagem));
+                FileInfo file =
+                    new FileInfo(Path.Combine(Server.MapPath("~/Content/Images/GaleriaElemento/"), currentFilePath));
+                file.Delete();
+            }
+            else if (galeriaElemento.FilePathElementos.Any(f => f.FileType == FileType.Audio))
+            {
+                string currentFilePath = galeriaElemento.FilePathElementos.First().FileName;
+                db.FilePathsEl.Remove(
+                    galeriaElemento.FilePathElementos.First(f => f.FileType == FileType.Audio));
+                FileInfo file =
+                    new FileInfo(Path.Combine(Server.MapPath("~/Content/Images/GaleriaElemento/"), currentFilePath));
+                file.Delete();
+            }
+            else if (galeriaElemento.FilePathElementos.Any(f => f.FileType == FileType.Video))
+            {
+                string currentFilePath = galeriaElemento.FilePathElementos.First().FileName;
+                db.FilePathsEl.Remove(galeriaElemento.FilePathElementos.First(f => f.FileType == FileType.Video));
+                FileInfo file =
+                    new FileInfo(Path.Combine(Server.MapPath("~/Content/Videos/GaleriaElemento/"), currentFilePath));
+                file.Delete();
+            }
             db.GaleriaElemento.Remove(galeriaElemento);
             db.SaveChanges();
             return RedirectToAction("Index");

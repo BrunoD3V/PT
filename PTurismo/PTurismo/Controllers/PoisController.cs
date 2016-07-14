@@ -173,11 +173,15 @@ namespace PTurismo.Controllers
                         {
                             if (fileExtension == t)
                             {
+                                string currentFilePath = poiToUpdate.ImagemPath;
+                                FileInfo file = new FileInfo(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem"), currentFilePath));
+                                file.Delete();
+
                                 var FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
                                 var FileTypes = FileType.Imagem;
                                 poiToUpdate.ImagemPath = FileName;
                                 poiToUpdate.FileType = FileTypes;
-
+                               
                                 upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaPoi/Imagem"), FileName));
                             }
                         }

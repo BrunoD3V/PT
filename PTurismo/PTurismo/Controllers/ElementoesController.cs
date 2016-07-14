@@ -167,6 +167,10 @@ namespace PTurismo.Controllers
                             {
                                 if (fileExtension == t)
                                 {
+                                    string currentFilePath = elementoToUpdate.ImagemElemento;
+                                    FileInfo file = new FileInfo(Path.Combine(Server.MapPath("~/Content/Images/GaleriaElemento/Imagem"), currentFilePath));
+                                    file.Delete();
+
                                     var FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
                                     var FileTypes = FileType.Imagem;
                                     elementoToUpdate.ImagemElemento = FileName;
