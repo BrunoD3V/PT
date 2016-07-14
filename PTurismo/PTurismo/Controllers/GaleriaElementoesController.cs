@@ -101,7 +101,7 @@ namespace PTurismo.Controllers
                 if (ModelState.IsValid)
                 {
                     string[] allowedImageExtensions = {".gif", ".png", ".jpeg", ".jpg"};
-                    string[] allowedVideoExtensions = {".mp4"};
+                    string[] allowedVideoExtensions = {".mp4", ".mp3", ".wav"};
                     String fileExtension = Path.GetExtension(upload.FileName);
                     if (upload != null && upload.ContentLength > 0)
                     {
