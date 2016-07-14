@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using PTurismo.Models;
 using PTurismo.DAL;
 using PTurismo.ViewModels;
-
+using System.Net;
 
 namespace PTurismo.Controllers
 {
@@ -49,8 +49,12 @@ namespace PTurismo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewData["id"] = id;
-            return View();
+            Poi poi = db.Poi.Find(id);
+            if (poi == null)
+            {
+                return HttpNotFound();
+            }
+            return View(poi);
         }
     }
 }
