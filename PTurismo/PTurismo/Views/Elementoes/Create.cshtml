@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Criar Novo";
 }
-
 <div class="row row-edit">
     <div class="row">
         <h2>Criar Novo</h2>
@@ -24,7 +23,6 @@
                         @Html.ValidationMessageFor(model => model.PoiID, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="form-group">
                     @Html.LabelFor(model => model.nome, "Nome:", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
