@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PTurismo.Models;
@@ -44,7 +45,10 @@ namespace PTurismo.Controllers
        
         public ActionResult Poi(int? id)
         {
-
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             ViewData["id"] = id;
             return View();
         }

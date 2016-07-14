@@ -71,13 +71,16 @@
                 if (p.CategoriaID.Equals(1))
                 {
                     m.Add()
+                        .Title(p.nome)
                         .Latitude(p.latitude)
                         .Longitude(p.longitude)
                         .Icon("~/Content/Images/Icones/Igreja.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
+                        
                 }
                 else if (p.CategoriaID.Equals(3))
                 {
                     m.Add()
+                       .Title(p.nome)
                        .Latitude(p.latitude)
                        .Longitude(p.longitude)
                        .Icon("~/Content/Images/Icones/Capela.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
@@ -85,6 +88,7 @@
                 else if (p.CategoriaID.Equals(5))
                 {
                     m.Add()
+                        .Title(p.nome)
                         .Latitude(p.latitude)
                         .Longitude(p.longitude)
                         .Icon("~/Content/Images/Icones/Santuario.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
@@ -92,6 +96,7 @@
                 else if (p.CategoriaID.Equals(4))
                 {
                     m.Add()
+                        .Title(p.nome)
                         .Latitude(p.latitude)
                         .Longitude(p.longitude)
                         .Icon("~/Content/Images/Icones/Mosteiro.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
@@ -99,6 +104,7 @@
                 else if (p.CategoriaID.Equals(6))
                 {
                     m.Add()
+                        .Title(p.nome)
                         .Latitude(p.latitude)
                         .Longitude(p.longitude)
                         .Icon("~/Content/Images/Icones/Basilica.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
@@ -106,6 +112,7 @@
                 else if (p.CategoriaID.Equals(7))
                 {
                     m.Add()
+                        .Title(p.nome)
                         .Latitude(p.latitude)
                         .Longitude(p.longitude)
                         .Icon("~/Content/Images/Icones/Museu.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
@@ -113,6 +120,7 @@
                 else if (p.CategoriaID.Equals(8))
                 {
                     m.Add()
+                        .Title(p.nome)
                         .Latitude(p.latitude)
                         .Longitude(p.longitude)
                         .Icon("~/Content/Images/Icones/Castelo.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
@@ -120,6 +128,7 @@
                 else if (p.CategoriaID.Equals(2))
                 {
                     m.Add()
+                        .Title(p.nome)
                         .Latitude(p.latitude)
                         .Longitude(p.longitude)
                         .Icon("~/Content/Images/Icones/Catedral.png", new Size(30, 30), new Point(0, 0), new Point(30, 30));
@@ -127,12 +136,15 @@
                 else
                 {
                     m.Add()
+                        .Title(p.nome)
                         .Latitude(p.latitude)
                         .Longitude(p.longitude);
                 }
             }
         })
-        .MarkerEvents(events => events.OnMarkerClick("markerClick"))
+        .MarkerEvents(events =>
+        events.OnMarkerClick("markerClick")
+        .OnMarkerMouseOver("markerMouseOver"))
         )
     </div>
     <div id="dataShow" class="col-md-7">
@@ -281,6 +293,12 @@
                         window.location.href = baseUrl + "Home/Poi/" + poiId;
                     });
             });
+
+        function markerMouseOver(args) {
+            if (args.eventName === 'mouseover') {
+                pois[args.id];
+            }
+        }
 
         function markerClick(args) {
 
