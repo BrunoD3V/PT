@@ -8,12 +8,9 @@ namespace PTurismo.ViewModels
 {
     public class PoiViewModel
     {
-        public IEnumerable<Poi> Pois { get; private set; }
-
-        public PoiViewModel(IEnumerable<Poi> pois )
-        {
-            Pois = pois;
-        }
+        public Poi Poi { get; set; }
+        public Elemento ElementoSelecionado { get; set; }
+        public IEnumerable<Elemento> Elementos { get; set; }
 
     }
 }

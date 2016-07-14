@@ -43,18 +43,33 @@ namespace PTurismo.Controllers
             return this.View();
         }
        
-        public ActionResult Poi(int? id)
+        public ActionResult Poi(int? id, int? elementoID)
         {
+            var viewModel = new PoiViewModel();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Poi poi = db.Poi.Find(id);
-            if (poi == null)
+
+            if(id != null)
+            {
+                ViewBag.PoiID = id.Value;
+                viewModel.Poi = db.Poi.Find(id);
+                viewModel.Elementos = viewModel.Poi.elementos;
+            }
+            
+            if (elementoID != null)
+            {
+                ViewBag.ElementoID = elementoID.Value;
+                viewModel.ElementoSelecionado = db.Elemento.Find(elementoID);
+            }
+
+            if (viewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(poi);
+            return View(viewModel);
+
         }
     }
 }

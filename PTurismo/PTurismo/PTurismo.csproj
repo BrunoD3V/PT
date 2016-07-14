@@ -300,13 +300,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Audio\" />
+    <Folder Include="Content\Audio\Elemento\" />
+    <Folder Include="Content\Audio\GaleriaElemento\" />
+    <Folder Include="Content\Audio\GaleriaPoi\" />
+    <Folder Include="Content\Audio\Poi\" />
     <Folder Include="Content\Images\BodyBackground\" />
     <Folder Include="Content\Images\GaleriaElemento\Imagem\" />
     <Folder Include="Content\Images\GaleriaPoi\Imagem\" />
     <Folder Include="Content\Images\Helper\" />
     <Folder Include="Content\Images\Logo\" />
-    <Folder Include="Content\Videos\" />
+    <Folder Include="Content\Videos\Elemento\" />
+    <Folder Include="Content\Videos\GaleriaElemento\" />
+    <Folder Include="Content\Videos\GaleriaPoi\" />
+    <Folder Include="Content\Videos\Poi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

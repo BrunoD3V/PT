@@ -4,7 +4,7 @@
 @using PTurismo.Helpers
 @using System.Web.Script.Serialization
 @using PTurismo.Models
-@model PTurismo.Models.Poi
+@model PTurismo.ViewModels.PoiViewModel
 
 @Scripts.Render("~/Scripts/script.js")
 
@@ -36,6 +36,7 @@
 <div class="row">
     <div class="col-md-offset-4">
         <button class="btn btn-sm btn-danger" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");"><span class="glyphicon glyphicon-arrow-left"></span> Voltar ao Inicio</button>
+        <button class="btn btn-sm btn-success" onclick="@("window.location.href='" + @Url.Action("Poi", "Home", new { id = Model.Poi.PoiID }) + "'");"><span class="glyphicon glyphicon-repeat"></span> Voltar ao Poi</button>
     </div>
 </div>
 <div class="row">
@@ -50,7 +51,7 @@
             </div>
             <div class="col-md-12">
                 <!-- CONTEUDO A ESCREVER -->
-                <img id="ImagemPath" class="img-poi" src="~/Content/Images/GaleriaPoi/Imagem/@Model.ImagemPath" />
+                <img id="ImagemPath" class="img-poi" src="~/Content/Images/GaleriaPoi/Imagem/@Model.Poi.ImagemPath" />
             </div>
         </div>
     </div>
@@ -62,20 +63,20 @@
 <div class="row row-poi">
     <div id="mapa-margin" class="col-md-4">
         <div class="row">
-            @if (Model.categoria.genero.Equals("Masculino"))
+            @if (Model.Poi.categoria.genero.Equals("Masculino"))
             {
-                <h3 id="Genero">Descobrir cada pormenor deste @Model.categoria.nome</h3>
+                <h3 id="Genero">Descobrir cada pormenor deste @Model.Poi.categoria.nome</h3>
             }
             else
             {
-                <h3 id="Genero">Descobrir cada pormenor desta @Model.categoria.nome</h3>
+                <h3 id="Genero">Descobrir cada pormenor desta @Model.Poi.categoria.nome</h3>
             }
-
         </div>
+
         <div class="row row-scroll">
-           @foreach (var item in Model.elementos)
+           @foreach (var item in Model.Elementos)
            {
-            <a href="#" class="thumbnail">
+               <a href="@Url.Action("Poi", new {elementoId = item.ElementoID })" class="thumbnail">
                 <div class="col-md-4">
                     <!--MUDAR IMAGEM-->
                     <img id="ImagemEle1" class="img-thumbnail" src="~/Content/Images/GaleriaElemento/Imagem/@item.ImagemElemento" alt="Generic placeholder thumbnail" />
@@ -89,99 +90,212 @@
            }
          </div>
     </div>
+
     <div id="dataShow" class="col-md-8">
         <div class="row">
-            <h1 id="NomePoi">@Model.nome</h1>
+            <h1 id="NomePoi">@Model.Poi.nome</h1>
         </div>
         <div class="row">
+            @if (Model.ElementoSelecionado != null)
+            {
+                <!--SE FOR UM ELEMENTO-->
             <!--DESCRICAO-->
-            <div id="showDescricao" >
-                <h4 id="Descricao">@Model.descricao</h4>
-            </div>
+                <div id="showDescricaoElemento">
+                    <h2 id="Descricao">@Model.ElementoSelecionado.descricao</h2>
+                </div>
             <!--CAROUSEL-->
-            <div id="showCarousel" style="display: none;">
-                
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                        <li data-target="#myCarousel" data-slide-to="3"></li>
-                    </ol>
+                <div id="showCarouselElemento" style="display: none;">
+                    <div id="myCarouselElemento" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
 
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <img src="http://ffden-2.phys.uaf.edu/webproj/212_spring_2014/Jessica_Garvin/jessica_garvin/Images/carousel.jpg" alt="Chania" width="460" height="345">
+                            <li data-target="#myCarouselElemento" data-slide-to="0" class="active"></li>
+                            @foreach (var item in Model.ElementoSelecionado.galeriaElemento)
+                            {
+                                <li data-target="#myCarouselElemento" data-slide-to="@item.FilePathElementos.First().FilePathElementoID"></li>
+                            }
+                        </ol>
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img src="~/Content/Images/GaleriaElemento/Imagem/@Model.ElementoSelecionado.ImagemElemento" width="460" height="345">
+                            </div>
+                            @foreach (var item in Model.ElementoSelecionado.galeriaElemento)
+                            {
+                                <div class="item">
+                                    <img src="~/Content/Images/GaleriaElemento/@item.FilePathElementos.First().FileName" width="460" height="345">
+                                </div>
+                            }
                         </div>
-
-                        <div class="item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Carousel_at_Hyde_Park.jpg" alt="Chania" width="460" height="345">
-                        </div>
-
-                        <div class="item">
-                            <img src="https://teachingplus.files.wordpress.com/2013/09/carousel.jpg" alt="Flower" width="460" height="345">
-                        </div>
-
-                        <div class="item">
-                            <img src="http://janescarousel.com/assets/janes-carousel-events-slider-photo-shoots.jpg" alt="Flower" width="460" height="345">
-                        </div>
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarouselElemento" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarouselElemento" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
 
-                    <!-- Left and right controls -->
-                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                    <!--FIM CAROUSEL-->
                 </div>
-
-                <!--FIM CAROUSEL-->
-            </div>
             <!--VIDEO-->
-            <div id="showVideo" align="center" class="embed-responsive embed-responsive-16by9" style="display: none">
-                <video controls class="embed-responsive-item">
-                    <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
-                </video>
-            </div>
+                <div id="showVideoElemento" align="center" class="embed-responsive embed-responsive-16by9" style="display: none">
+                    @foreach (var item in Model.ElementoSelecionado.galeriaElemento)
+                    {
+                        if (item.FilePathElementos.First().FileType == FileType.Video)
+                        {
+                            <video id="myvidElemento" controls class="embed-responsive-item">
+                                <source src="~/Content/Videos/GaleriaElemento/@item.FilePathElementos.First().FileName" type=video/mp4>
+                            </video>
+                        }
+                    }
+                </div>
+                <div id="showAudioElemento" align="center" style="display:none">
+                    <div class="row">
+                        <h3>Por favor coloque os auriculares para ouvir a descrição.</h3>
+                    </div>
+                    <div class="row">
+                        <img src="~/Content/Audio/audio.png" alt="Audio" width="250" height="250" />
+                    </div>
+                    <div class="row">
+                        <article class="audio">
+                            @foreach (var item in Model.ElementoSelecionado.galeriaElemento)
+                            {
+                                if (item.FilePathElementos.First().FileType == FileType.Audio)
+                                {
+                                    <audio id="myaudioElemento" controls>
+                                        <source src="~/Content/Audio/GaleriaElemento/@item.FilePathElementos.First().FileName" type="audio/mp3" />
+                                        <p>Your browser does not support HTML 5 audio element</p>
+                                    </audio>
+                                }
+                            }
+                         </article>
+                    </div>
+                    <div class="row">
+                        <h3>Obrigado.</h3>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <!--DESCRICAO-->
+                <div id="showDescricao">
+                    <h2 id="Descricao">@Model.Poi.descricao</h2>
+                </div>
+            <!--CAROUSEL-->
+                <div id="showCarousel" style="display: none;">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            @foreach (var item in Model.Poi.galeriaPoi)
+                            {
+                                if (item.FilePaths.First().FileType == FileType.Imagem)
+                                {
+                                    <li data-target="#myCarousel" data-slide-to="@item.FilePaths.First().FilePathPoiID"></li>
+                                }
+                            }
+                        </ol>
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img src="~/Content/Images/GaleriaPoi/Imagem/@Model.Poi.ImagemPath" width="460" height="345">
+                            </div>
+                            @foreach (var item in Model.Poi.galeriaPoi)
+                            {
+                                <div class="item">
+                                    <img src="~/Content/Images/GaleriaPoi/@item.FilePaths.First().FileName" width="460" height="345">
+                                </div>
+                            }
+                        </div>
 
-            <div id="showAudio" align="center" style="display:none">
-                <div class="row">
-                    <h3>Por favor coloque os auriculares para ouvir a descrição.</h3>
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+                    <!--FIM CAROUSEL-->
                 </div>
-                <div class="row">
-                    <img src="~/Content/Audio/audio.png" alt="Audio" width="250" height="250"/>
+            <!--VIDEO-->
+                <div id="showVideo" align="center" class="embed-responsive embed-responsive-16by9" style="display: none">
+                    @foreach (var item in Model.Poi.galeriaPoi)
+                    {
+                        if (item.FilePaths.First().FileType == FileType.Video)
+                        {
+                            <video id="myvidElemento" controls class="embed-responsive-item">
+                                <source src="~/Content/Videos/GaleriaPoi/@item.FilePaths.First().FileName" type=video/mp4>
+                            </video>
+                        }
+                    }
                 </div>
-                <div class="row">
-                    <article class="audio">
-                        <audio controls>
-                            <source src="~/Content/Audio/BUSH.mp3" type="audio/mp3" />
-                            <p>Your browser does not support HTML 5 audio element</p>
-                        </audio>
-                    </article>
+
+                <div id="showAudio" align="center" style="display:none">
+                    <div class="row">
+                        <h3>Por favor coloque os auriculares para ouvir a descrição.</h3>
+                    </div>
+                    <div class="row">
+                        <img src="~/Content/Audio/audio.png" alt="Audio" width="250" height="250" />
+                    </div>
+                    <div class="row">
+                        <article class="audio">
+                            @foreach (var item in Model.Poi.galeriaPoi)
+                            {
+                                if (item.FilePaths.First().FileType == FileType.Audio)
+                                {
+                                    <audio id="myaudio" controls>
+                                        <source src="~/Content/Audio/GaleriaPoi/@item.FilePaths.First().FileName" type="audio/mp3" />
+                                        <p>Your browser does not support HTML 5 audio element</p>
+                                    </audio>
+                                }
+                            }
+                        </article>
+                    </div>
+                    <div class="row">
+                        <h3>Obrigado.</h3>
+                    </div>
                 </div>
-                <div class="row">
-                    <h3>Obrigado.</h3>
-                </div>
-            </div>
+            }
         </div>
         <div class="row bottom-poi">
-            <div class="col-md-3">
-                <button id="btnDescricao" class="btn btn-lg btn-success buttons-poi">Descrição <span class="glyphicon glyphicon-modal-window"></span></button>
-            </div>
-            <div class="col-md-3">
-                <button id="btnFotografias" class="btn btn-lg btn-success buttons-poi">Fotografias <span class="glyphicon glyphicon-camera"></span></button>
-            </div>
-            <div class="col-md-3">
-                <button id="btnAudio" class="btn btn-lg btn-success buttons-poi">Áudio <span class="glyphicon glyphicon-music"></span></button>
-            </div>
-            <div class="col-md-3">
-                <button id="btnVideo" class="btn btn-lg btn-success buttons-poi">Videos <span class="glyphicon glyphicon-facetime-video"></span></button>
-            </div>
+
+            @if (Model.ElementoSelecionado != null)
+            {
+                <div class="col-md-3">
+                    <button id="btnDescricaoElemento" onclick="pauseAudioElemento(), pauseVidElemento()" class="btn btn-lg btn-primary buttons-poi">Descrição <span class="glyphicon glyphicon-modal-window"></span></button>
+                </div>
+                <div class="col-md-3">
+                    <button id="btnFotografiasElemento" onclick="pauseAudioElemento(), pauseVidElemento()" class="btn btn-lg btn-primary buttons-poi">Fotografias <span class="glyphicon glyphicon-camera"></span></button>
+                </div>
+                <div class="col-md-3">
+                    <button id="btnAudioElemento" onclick="pauseVidElemento()" class="btn btn-lg btn-primary buttons-poi">Áudio <span class="glyphicon glyphicon-music"></span></button>
+                </div>
+                <div class="col-md-3">
+                    <button id="btnVideoElemento" onclick="pauseAudioElemento()" class="btn btn-lg btn-primary buttons-poi">Videos <span class="glyphicon glyphicon-facetime-video"></span></button>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-3">
+                    <button id="btnDescricao" onclick="pauseAudio(), pauseVid()" class="btn btn-lg btn-success buttons-poi">Descrição <span class="glyphicon glyphicon-modal-window"></span></button>
+                </div>
+                <div class="col-md-3">
+                    <button id="btnFotografias" onclick="pauseAudio(), pauseVid()" class="btn btn-lg btn-success buttons-poi">Fotografias <span class="glyphicon glyphicon-camera"></span></button>
+                </div>
+                <div class="col-md-3">
+                    <button id="btnAudio" onclick="pauseVid()" class="btn btn-lg btn-success buttons-poi">Áudio <span class="glyphicon glyphicon-music"></span></button>
+                </div>
+                <div class="col-md-3">
+                    <button id="btnVideo" onclick="pauseAudio()" class="btn btn-lg btn-success buttons-poi">Videos <span class="glyphicon glyphicon-facetime-video"></span></button>
+                </div>
+            }
         </div>
     </div>
 </div>
@@ -255,6 +369,101 @@
             $(this).addClass('active');
         });
         //FIM J QUERY BUTTONS
+
+        //JQUERY BUTTONS ELEMENTOS
+
+        $('#btnDescricaoElemento').click(function (e) {
+            $("#showDescricaoElemento").delay(100).fadeIn(100);
+            $("#showCarousel").fadeOut(100);
+            $("#showAudio").fadeOut(100);
+            $("#showVideo").fadeOut(100);
+            $('#btnFotografias').removeClass('active');
+            $('#btnAudio').removeClass('active');
+            $('#btnVideo').removeClass('active');
+            $("#showDescricao").fadeOut(100);
+            $("#showCarouselElemento").fadeOut(100);
+            $("#showAudioElemento").fadeOut(100);
+            $("#showVideoElemento").fadeOut(100);
+            $('#btnFotografiasElemento').removeClass('active');
+            $('#btnAudioElemento').removeClass('active');
+            $('#btnVideoElemento').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+
+        $('#btnFotografiasElemento').click(function (e) {
+            $("#showCarouselElemento").delay(100).fadeIn(100);
+            $("#showAudio").fadeOut(100);
+            $("#showDescricao").fadeOut(100);
+            $("#showVideo").fadeOut(100);
+            $('#btnAudio').removeClass('active');
+            $('#btnVideo').removeClass('active');
+            $('#btnDescricao').removeClass('active');
+            $("#showAudioElemento").fadeOut(100);
+            $("#showDescricaoElemento").fadeOut(100);
+            $("#showVideoElemento").fadeOut(100);
+            $('#btnAudioElemento').removeClass('active');
+            $('#btnVideoElemento').removeClass('active');
+            $('#btnDescricaoElemento').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+
+        $('#btnAudioElemento').click(function (e) {
+            $("#showAudioElemento").delay(100).fadeIn(100);
+            $("#showVideo").fadeOut(100);
+            $("#showCarousel").fadeOut(100);
+            $("#showDescricao").fadeOut(100);
+            $('#btnVideo').removeClass('active');
+            $('#btnDescricao').removeClass('active');
+            $('#btnFotografias').removeClass('active');
+            $("#showVideoElemento").fadeOut(100);
+            $("#showCarouselElemento").fadeOut(100);
+            $("#showDescricaoElemento").fadeOut(100);
+            $('#btnVideoElemento').removeClass('active');
+            $('#btnDescricaoElemento').removeClass('active');
+            $('#btnFotografiasElemento').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+
+        $('#btnVideoElemento').click(function (e) {
+            $("#showVideoElemento").delay(100).fadeIn(100);
+            $("#showCarousel").fadeOut(100);
+            $("#showDescricao").fadeOut(100);
+            $("#showAudio").fadeOut(100);
+            $('#btnDescricao').removeClass('active');
+            $('#btnFotografias').removeClass('active');
+            $('#btnAudio').removeClass('active');
+            $("#showCarouselElemento").fadeOut(100);
+            $("#showDescricaoElemento").fadeOut(100);
+            $("#showAudioElemento").fadeOut(100);
+            $('#btnDescricaoElemento').removeClass('active');
+            $('#btnFotografiasElemento').removeClass('active');
+            $('#btnAudioElemento').removeClass('active');
+            $(this).addClass('active');
+        });
+        //FIM jQUERY BUTTONS ELEMENTOS
+        //PAUSE DO AUDIO E VIDEO
+        var audioElemento = document.getElementById("myaudioElemento");
+        var audio = document.getElementById("myaudio");
+        var vidElemento = document.getElementById("myvidElemento");
+        var vid = document.getElementById("myvid");
+        
+        function pauseVidElemento() {
+            vidElemento.pause();
+        }
+        function pauseAudioElemento() {
+            audioElemento.pause();
+        }
+        function pauseVid() {
+            vid.pause();
+        }
+        function pauseAudio() {
+            audio.pause();
+        }
+
+        //FIM PAUSE DO AUDIO E VIDEO
         var mousetimeout;
         var screensaver_active = false;
         var idletime = 5;

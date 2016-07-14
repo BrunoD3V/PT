@@ -101,7 +101,8 @@ namespace PTurismo.Controllers
                 if (ModelState.IsValid)
                 {
                     string[] allowedImageExtensions = {".gif", ".png", ".jpeg", ".jpg"};
-                    string[] allowedVideoExtensions = {".mp4"};
+                    string[] allowedVideoExtensions = {".mp4", ".mp3", ".wav"};
+                    string[] allowedAudioExtensions = { ".mp4", ".mp3", ".wav" };
                     String fileExtension = Path.GetExtension(upload.FileName);
                     if (upload != null && upload.ContentLength > 0)
                     {
@@ -130,7 +131,21 @@ namespace PTurismo.Controllers
                                 };
                                 galeriaElemento.FilePathElementos = new List<FilePathElemento>();
                                 galeriaElemento.FilePathElementos.Add(file);
-                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Videos"), file.FileName));
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Videos/GaleriaElemento/"), file.FileName));
+                            }
+                        }
+                        for (int i = 0; i < allowedAudioExtensions.Length; i++)
+                        {
+                            if (fileExtension == allowedAudioExtensions[i])
+                            {
+                                var file = new FilePathElemento()
+                                {
+                                    FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
+                                    FileType = FileType.Audio
+                                };
+                                galeriaElemento.FilePathElementos = new List<FilePathElemento>();
+                                galeriaElemento.FilePathElementos.Add(file);
+                                upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Audio/GaleriaElemento/"), file.FileName));
                             }
                         }
                     }
@@ -187,7 +202,15 @@ namespace PTurismo.Controllers
                                 db.FilePathsEl.Remove(
                                     galeriaElementoToUpdate.FilePathElementos.First(f => f.FileType == FileType.Imagem));
                                 FileInfo file =
-                                    new FileInfo(Path.Combine(Server.MapPath("~/Content/Images"), currentFilePath));
+                                    new FileInfo(Path.Combine(Server.MapPath("~/Content/Images/GaleriaElemento/"), currentFilePath));
+                                file.Delete();
+                            }else if(galeriaElementoToUpdate.FilePathElementos.Any(f => f.FileType == FileType.Audio))
+                            {
+                                string currentFilePath = galeriaElementoToUpdate.FilePathElementos.First().FileName;
+                                db.FilePathsEl.Remove(
+                                    galeriaElementoToUpdate.FilePathElementos.First(f => f.FileType == FileType.Audio));
+                                FileInfo file =
+                                    new FileInfo(Path.Combine(Server.MapPath("~/Content/Images/GaleriaElemento/"), currentFilePath));
                                 file.Delete();
                             }
                             else
@@ -195,12 +218,13 @@ namespace PTurismo.Controllers
                                 string currentFilePath = galeriaElementoToUpdate.FilePathElementos.First().FileName;
                                 db.FilePathsEl.Remove(galeriaElementoToUpdate.FilePathElementos.First(f => f.FileType == FileType.Video));
                                 FileInfo file =
-                                    new FileInfo(Path.Combine(Server.MapPath("~/Content/Videos"), currentFilePath));
+                                    new FileInfo(Path.Combine(Server.MapPath("~/Content/Videos/GaleriaElemento/"), currentFilePath));
                                 file.Delete();
                             }
                             //Verifica se o novo ficheiro é de uma extenção válida e adiciona-o à lista de ficheiros e insere localmente na pasta correspondente
                             string[] allowedImageExtensions = {".png", ".jpeg", ".jpg"};
                             string[] allowedVideoExtensions = {".gif"};
+                            string[] allowedAudioExtensions = { ".mp4", ".mp3", ".wav" };
                             String fileExtension = Path.GetExtension(upload.FileName);
                             for (int i = 0; i < allowedImageExtensions.Length; i++)
                             {
@@ -212,7 +236,7 @@ namespace PTurismo.Controllers
                                         FileType = FileType.Imagem
                                     };
                                     galeriaElementoToUpdate.FilePathElementos.Add(file);
-                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images"), file.FileName));
+                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaElemento/"), file.FileName));
                                 }
                             }
                             for (int i = 0; i < allowedVideoExtensions.Length; i++)
@@ -226,7 +250,21 @@ namespace PTurismo.Controllers
                                     };
                                     galeriaElementoToUpdate.FilePathElementos = new List<FilePathElemento>();
                                     galeriaElementoToUpdate.FilePathElementos.Add(file);
-                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Videos"), file.FileName));
+                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Videos/GaleriaElemento"), file.FileName));
+                                }
+                            }
+                            for (int i = 0; i < allowedAudioExtensions.Length; i++)
+                            {
+                                if (fileExtension == allowedAudioExtensions[i])
+                                {
+                                    var file = new FilePathElemento()
+                                    {
+                                        FileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName),
+                                        FileType = FileType.Audio
+                                    };
+                                    galeriaElemento.FilePathElementos = new List<FilePathElemento>();
+                                    galeriaElemento.FilePathElementos.Add(file);
+                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Audio/GaleriaElemento/"), file.FileName));
                                 }
                             }
                         }

@@ -14,7 +14,6 @@
 
             <div class="form-horizontal">
                 <h4>Elemento</h4>
-                <a href="~/Controllers/ElementoesController.cs">~/Controllers/ElementoesController.cs</a>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -24,7 +23,6 @@
                         @Html.ValidationMessageFor(model => model.PoiID, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="form-group">
                     @Html.LabelFor(model => model.nome, "Nome:", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -42,7 +40,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.Label("Imagem de Apresentação:", new { @class = "control-label col-md-2" })
+                    @Html.Label("Media:", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <input type="file" id="File" name="upload" />
                     </div>
@@ -61,6 +59,7 @@
             @Html.ActionLink("Voltar à lista", "Index")
         </div>
     </div>
+
 </div>
 
 @section Scripts {

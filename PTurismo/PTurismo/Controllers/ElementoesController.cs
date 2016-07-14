@@ -172,7 +172,7 @@ namespace PTurismo.Controllers
                                     elementoToUpdate.ImagemElemento = FileName;
                                     elementoToUpdate.FileType = FileTypes;
                                     
-                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/GaleriaElemento/Imagem"), FileName));
+                                    upload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/GaleriaElemento/Imagem"), FileName));
                                 }
                             }
                         }
