@@ -160,7 +160,7 @@ namespace PTurismo.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var poiToUpdate = db.Poi.Find(id);
-            if(TryUpdateModel(poiToUpdate,"", new string[] { "nome", "latitude", "longitude", "imagem", "resumo", "categoriaID" }))
+            if(TryUpdateModel(poiToUpdate,"", new string[] { "nome", "latitude", "longitude", "descricao", "resumo", "categoriaID" }))
             {
                 try
                 {

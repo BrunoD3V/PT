@@ -238,12 +238,16 @@
                 <div id="showVideo" align="center" class="embed-responsive embed-responsive-16by9" style="display: none">
                     @foreach (var item in Model.Poi.galeriaPoi)
                     {
-                        if (item.FilePaths.First().FileType == FileType.Video)
+                        if (item.FilePaths.Count > 0)
                         {
-                            <video id="myvidElemento" controls class="embed-responsive-item">
-                                <source src="~/Content/Videos/GaleriaPoi/@item.FilePaths.First().FileName" type=video/mp4>
-                            </video>
+                            if (item.FilePaths.First().FileType == FileType.Video)
+                            {
+                                <video id="myvidElemento" controls class="embed-responsive-item">
+                                    <source src="~/Content/Videos/GaleriaPoi/@item.FilePaths.First().FileName" type=video/mp4>
+                                </video>
+                            }
                         }
+
                     }
                 </div>
 
@@ -258,12 +262,15 @@
                         <article class="audio">
                             @foreach (var item in Model.Poi.galeriaPoi)
                             {
-                                if (item.FilePaths.First().FileType == FileType.Audio)
+                                if (item.FilePaths.Count > 0)
                                 {
-                                    <audio id="myaudio" controls>
-                                        <source src="~/Content/Audio/GaleriaPoi/@item.FilePaths.First().FileName" type="audio/mp3" />
-                                        <p>Your browser does not support HTML 5 audio element</p>
-                                    </audio>
+                                    if (item.FilePaths.First().FileType == FileType.Audio)
+                                    {
+                                        <audio id="myaudio" controls>
+                                            <source src="~/Content/Audio/GaleriaPoi/@item.FilePaths.First().FileName" type="audio/mp3" />
+                                            <p>Your browser does not support HTML 5 audio element</p>
+                                        </audio>
+                                    }
                                 }
                             }
                         </article>
