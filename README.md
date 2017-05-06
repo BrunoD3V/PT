@@ -1,3 +1,5 @@
 # PT
 
 This app is intended to be a Digital Kiosk to run inside the Cathedral Church of Bragança. It was made as the final project of the Multimedia Technologies course of the Ba in Informática e Comunicações of IPB.
+
+The project was devolped in Net Core 1.0.
